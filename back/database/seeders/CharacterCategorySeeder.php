@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategorySeeder extends Seeder
+class CharacterCategorySeeder extends Seeder
 {
     public function run(): void
     {
@@ -62,7 +62,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $id => $name) {
-            DB::table('categories')->updateOrInsert([
+            DB::table('character_categories')->updateOrInsert([
                 'id' => $id,
             ], [
                 'name' => $name,
