@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             CharacterCategorySeeder::class,
             AttributeGroupSeeder::class,
             AttributeSubgroupSeeder::class,
+            AttributeSeeder::class,
             CharacterSeeder::class,
         ]);
     }
