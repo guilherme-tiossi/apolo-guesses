@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CharacterCategorySeeder::class,
+            AttributeGroupSeeder::class,
+            AttributeSubgroupSeeder::class,
             CharacterSeeder::class,
         ]);
     }
