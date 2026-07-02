@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AttributeSubgroupSeeder::class,
             AttributeSeeder::class,
             CharacterSeeder::class,
+            CharacterAttributeSeeder::class,
         ]);
     }
 }
