@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Core\Domain\Enums\AttributeSubgroup;
+use App\Core\Domain\Enums\InitialQuestion;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -36,6 +37,8 @@ class AttributeSeeder extends Seeder
                 ],
                 [
                     'portuguese_question' => $attribute['portuguese_question'],
+                    'is_initial_question' => $attribute['is_initial_question'],
+                    'internal_name' => $attribute['internal_name'],
                 ]
             );
         }
@@ -47,14 +50,39 @@ class AttributeSeeder extends Seeder
         string $portuguêseTemplate,
         array $traits
     ): array {
-        return array_map(
-            fn (array $trait) => [
+        return array_map(function (array $trait) use ($subgroup, $questionTemplate, $portuguêseTemplate) {
+            ['is_initial_question' => $isInitialQuestion, 'internal_name' => $internalName] = $this->parseTraitFlags($trait);
+
+            return [
                 'attribute_subgroup_id' => $subgroup->value,
                 'question' => sprintf($questionTemplate, $trait[0]),
                 'portuguese_question' => sprintf($portuguêseTemplate, $trait[1]),
-            ],
-            $traits
-        );
+                'is_initial_question' => $isInitialQuestion,
+                'internal_name' => $internalName,
+            ];
+        }, $traits);
+    }
+
+    private function parseTraitFlags(array $trait): array
+    {
+        $isInitialQuestion = false;
+        $internalName = null;
+
+        foreach (array_slice($trait, 2) as $flag) {
+            if ($flag instanceof InitialQuestion) {
+                $isInitialQuestion = true;
+                $internalName = $flag->value;
+            }
+
+            if (is_bool($flag)) {
+                $isInitialQuestion = $flag;
+            }
+        }
+
+        return [
+            'is_initial_question' => $isInitialQuestion,
+            'internal_name' => $internalName,
+        ];
     }
 
     private function appearance(): void
@@ -97,8 +125,8 @@ class AttributeSeeder extends Seeder
                 ['bodybuilder-like', 'de fisiculturista'],
             ]],
             [AttributeSubgroup::SKIN_COLOR, 'Does your character have %s skin?', 'Seu personagem tem pele %s?', [
-                ['fair', 'clara'],
-                ['dark', 'escura'],
+                ['fair', 'clara', InitialQuestion::SKIN_FAIR],
+                ['dark', 'escura', InitialQuestion::SKIN_DARK],
                 ['brown', 'morena'],
                 ['very pale', 'muito pálida'],
                 ['tan', 'bronzeada'],
@@ -145,7 +173,7 @@ class AttributeSeeder extends Seeder
                 ['iconic signature hairstyle', 'marcante e assinatura'],
             ]],
             [AttributeSubgroup::HAIR_TEXTURE, 'Is your character hair texture %s?', 'A textura do cabelo do seu personagem é %s?', [
-                ['straight', 'lisa'],
+                ['straight', 'lisa', InitialQuestion::HAIR_STRAIGHT],
                 ['wavy', 'ondulada'],
                 ['curly', 'cacheada'],
                 ['coily', 'crespa'],
@@ -259,18 +287,16 @@ class AttributeSeeder extends Seeder
             [AttributeSubgroup::AGE, 'Is your character %s?', 'Seu personagem %s?', [
                 ['a child', 'é criança'],
                 ['a teenager', 'é adolescente'],
-                ['in their twenties', 'está na casa dos vinte'],
-                ['in their thirties', 'está na casa dos trinta'],
-                ['in their forties', 'está na casa dos quarenta'],
-                ['in their fifties', 'está na casa dos cinquenta'],
+                ['an adult', 'é adulto', InitialQuestion::AGE_ADULT],
+                ['over forty', 'está acima dos quarenta'],
                 ['elderly', 'é idoso'],
                 ['ageless', 'parece sem idade'],
                 ['very young-looking', 'parece muito jovem'],
                 ['older than they look', 'parece mais novo do que é'],
             ]],
             [AttributeSubgroup::GENDER, 'Is your character %s?', 'Seu personagem %s?', [
-                ['male', 'é masculino'],
-                ['female', 'é feminino'],
+                ['male', 'é homem', InitialQuestion::GENDER_MALE],
+                ['female', 'é mulher', InitialQuestion::GENDER_FEMALE],
                 ['non-binary', 'é não binário'],
                 ['gender-fluid', 'é gênero fluido'],
                 ['androgynous', 'é andrógino'],
@@ -289,11 +315,10 @@ class AttributeSeeder extends Seeder
                 ['queer', 'é queer'],
                 ['demisexual', 'é demissexual'],
                 ['orientation openly addressed in story', 'tem orientação tratada abertamente na história'],
-                ['not romantically interested in others', 'não demonstra interesse romântico'],
                 ['known for significant romantic relationships', 'é conhecido por relacionamentos românticos marcantes'],
             ]],
             [AttributeSubgroup::NATIONALITY, 'Is your character %s?', 'Seu personagem %s?', [
-                ['Brazilian', 'é brasileiro'],
+                ['Brazilian', 'é brasileiro', InitialQuestion::NATIONALITY_BRAZILIAN],
                 ['American', 'é americano'],
                 ['Japanese', 'é japonês'],
                 ['British', 'é britânico'],
@@ -303,15 +328,16 @@ class AttributeSeeder extends Seeder
                 ['Spanish', 'é espanhol'],
                 ['from multiple national backgrounds', 'tem múltiplas nacionalidades'],
                 ['nationality central to their identity', 'tem nacionalidade central na identidade'],
+                ['fictional', 'fictício', InitialQuestion::NATIONALITY_FICTICIONAL],
             ]],
             [AttributeSubgroup::ETHNICITY, 'Is your character described as %s?', 'Seu personagem é descrito como %s?', [
-                ['Black', 'negro'],
-                ['White', 'branco'],
-                ['Asian', 'asiático'],
-                ['Latino', 'latino'],
-                ['Indigenous', 'indígena'],
+                ['black', 'negro'],
+                ['white', 'branco'],
+                ['asian', 'asiático'],
+                ['latino', 'latino'],
+                ['indigenous', 'indígena'],
                 ['mixed ethnicity', 'etnia mista'],
-                ['Middle Eastern', 'do oriente médio'],
+                ['middle eastern', 'do oriente médio'],
                 ['ethnicity discussed in story', 'etnia discutida na história'],
                 ['from a minority ethnic group', 'de um grupo étnico minoritário'],
                 ['ethnically ambiguous', 'etnicamente ambíguo'],
@@ -341,8 +367,8 @@ class AttributeSeeder extends Seeder
                 ['a legendary title bearer', 'portador de título lendário'],
             ]],
             [AttributeSubgroup::LIVING_STATUS, 'Is your character %s?', 'Seu personagem %s?', [
-                ['alive', 'está vivo'],
-                ['deceased', 'está morto'],
+                ['alive', 'está vivo', InitialQuestion::LIVING_ALIVE],
+                ['deceased', 'está morto', InitialQuestion::LIVING_DECEASED],
                 ['resurrected', 'já ressuscitou'],
                 ['undead', 'é morto-vivo'],
                 ['missing', 'está desaparecido'],
@@ -618,7 +644,7 @@ class AttributeSeeder extends Seeder
                 ['television', 'televisão'],
                 ['journalism', 'jornalismo'],
                 ['radio', 'radio'],
-                ['digital content', 'conteudo digital'],
+                ['digital content', 'conteudo digital', InitialQuestion::MEDIA_DIGITAL_CONTENT],
                 ['podcasts', 'podcasts'],
                 ['news reporting', 'reportagem'],
                 ['social platforms', 'plataformas sociais'],
@@ -707,7 +733,6 @@ class AttributeSeeder extends Seeder
                 ['play moba games professionally', 'joga moba profissionalmente'],
                 ['lead an esports team', 'lidera um time de esports'],
                 ['have esports championships', 'tem titulos em esports'],
-                ['be known by a gamer tag', 'é conhecido por nick gamer'],
                 ['be famous in gaming communities', 'é famoso em comunidades de games'],
             ]],
             [AttributeSubgroup::SPORT_ROLES, 'Is your character mainly a %s?', 'Seu personagem é principalmente %s?', [
