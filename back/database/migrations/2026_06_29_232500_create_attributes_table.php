@@ -13,6 +13,8 @@ return new class extends Migration
             $table->foreignId('attribute_subgroup_id')->constrained();
             $table->string('question');
             $table->string('portuguese_question');
+            $table->boolean('is_initial_question')->default(false);
+            $table->string('internal_name')->nullable()->unique();
             $table->unique(['attribute_subgroup_id', 'question']);
         });
     }
