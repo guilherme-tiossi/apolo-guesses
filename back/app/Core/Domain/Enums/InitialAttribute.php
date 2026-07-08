@@ -2,7 +2,9 @@
 
 namespace App\Core\Domain\Enums;
 
-enum InitialQuestion: string
+use App\Core\Domain\Attributes\Interfaces\Attribute;
+
+enum InitialAttribute: string implements Attribute
 {
     case SKIN_FAIR = 'skin_fair';
     case SKIN_DARK = 'skin_dark';

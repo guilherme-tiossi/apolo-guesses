@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AttributeGroupSeeder::class,
             AttributeSubgroupSeeder::class,
             AttributeSeeder::class,
+            AttributeOppositionSeeder::class,
             CharacterSeeder::class,
             CharacterAttributeSeeder::class,
         ]);
