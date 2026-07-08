@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Core\Domain\Enums\AttributeSubgroup;
-use App\Core\Domain\Enums\InitialQuestion;
+use App\Core\Domain\Enums\InitialAttribute;
+use App\Core\Domain\Enums\SecondaryAttribute;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,7 @@ class AttributeSeeder extends Seeder
                 [
                     'portuguese_question' => $attribute['portuguese_question'],
                     'is_initial_question' => $attribute['is_initial_question'],
+                    'is_secondary_question' => $attribute['is_secondary_question'],
                     'internal_name' => $attribute['internal_name'],
                 ]
             );
@@ -47,17 +49,22 @@ class AttributeSeeder extends Seeder
     private function template(
         AttributeSubgroup $subgroup,
         string $questionTemplate,
-        string $portuguêseTemplate,
+        string $portugueseTemplate,
         array $traits
     ): array {
-        return array_map(function (array $trait) use ($subgroup, $questionTemplate, $portuguêseTemplate) {
-            ['is_initial_question' => $isInitialQuestion, 'internal_name' => $internalName] = $this->parseTraitFlags($trait);
+        return array_map(function (array $trait) use ($subgroup, $questionTemplate, $portugueseTemplate) {
+            [
+                'is_initial_question' => $isInitialQuestion,
+                'is_secondary_question' => $isSecondaryQuestion,
+                'internal_name' => $internalName,
+            ] = $this->parseTraitFlags($trait);
 
             return [
                 'attribute_subgroup_id' => $subgroup->value,
                 'question' => sprintf($questionTemplate, $trait[0]),
-                'portuguese_question' => sprintf($portuguêseTemplate, $trait[1]),
+                'portuguese_question' => sprintf($portugueseTemplate, $trait[1]),
                 'is_initial_question' => $isInitialQuestion,
+                'is_secondary_question' => $isSecondaryQuestion,
                 'internal_name' => $internalName,
             ];
         }, $traits);
@@ -66,11 +73,17 @@ class AttributeSeeder extends Seeder
     private function parseTraitFlags(array $trait): array
     {
         $isInitialQuestion = false;
+        $isSecondaryQuestion = false;
         $internalName = null;
 
         foreach (array_slice($trait, 2) as $flag) {
-            if ($flag instanceof InitialQuestion) {
+            if ($flag instanceof InitialAttribute) {
                 $isInitialQuestion = true;
+                $internalName = $flag->value;
+            }
+
+            if ($flag instanceof SecondaryAttribute) {
+                $isSecondaryQuestion = true;
                 $internalName = $flag->value;
             }
 
@@ -81,6 +94,7 @@ class AttributeSeeder extends Seeder
 
         return [
             'is_initial_question' => $isInitialQuestion,
+            'is_secondary_question' => $isSecondaryQuestion,
             'internal_name' => $internalName,
         ];
     }
@@ -125,8 +139,8 @@ class AttributeSeeder extends Seeder
                 ['bodybuilder-like', 'de fisiculturista'],
             ]],
             [AttributeSubgroup::SKIN_COLOR, 'Does your character have %s skin?', 'Seu personagem tem pele %s?', [
-                ['fair', 'clara', InitialQuestion::SKIN_FAIR],
-                ['dark', 'escura', InitialQuestion::SKIN_DARK],
+                ['fair', 'clara', InitialAttribute::SKIN_FAIR],
+                ['dark', 'escura', InitialAttribute::SKIN_DARK],
                 ['brown', 'morena'],
                 ['very pale', 'muito pálida'],
                 ['tan', 'bronzeada'],
@@ -173,15 +187,11 @@ class AttributeSeeder extends Seeder
                 ['iconic signature hairstyle', 'marcante e assinatura'],
             ]],
             [AttributeSubgroup::HAIR_TEXTURE, 'Is your character hair texture %s?', 'A textura do cabelo do seu personagem é %s?', [
-                ['straight', 'lisa', InitialQuestion::HAIR_STRAIGHT],
-                ['wavy', 'ondulada'],
-                ['curly', 'cacheada'],
-                ['coily', 'crespa'],
+                ['straight', 'lisa', InitialAttribute::HAIR_STRAIGHT],
+                ['wavy', 'ondulada', SecondaryAttribute::HAIR_WAVY],
+                ['curly', 'cacheada', SecondaryAttribute::HAIR_CURLY],
+                ['coily', 'crespa', SecondaryAttribute::HAIR_COILY],
                 ['frizzy', 'arrepiada'],
-                ['silky', 'sedosa'],
-                ['thick', 'grossa'],
-                ['thin', 'fina'],
-                ['rough', 'aspera'],
                 ['visibly voluminous', 'bem volumosa'],
             ]],
             [AttributeSubgroup::FACIAL_HAIR, 'Does your character have %s?', 'Seu personagem tem %s?', [
@@ -271,10 +281,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -285,24 +295,21 @@ class AttributeSeeder extends Seeder
     {
         $groups = [
             [AttributeSubgroup::AGE, 'Is your character %s?', 'Seu personagem %s?', [
-                ['a child', 'é criança'],
-                ['a teenager', 'é adolescente'],
-                ['an adult', 'é adulto', InitialQuestion::AGE_ADULT],
-                ['over forty', 'está acima dos quarenta'],
-                ['elderly', 'é idoso'],
+                ['a child', 'é criança', SecondaryAttribute::AGE_CHILD],
+                ['a teenager', 'é adolescente', SecondaryAttribute::AGE_TEENAGER],
+                ['an adult', 'é adulto', InitialAttribute::AGE_ADULT],
+                ['over forty', 'está acima dos quarenta', SecondaryAttribute::AGE_OVER_FORTY],
+                ['elderly', 'é idoso', SecondaryAttribute::AGE_ELDERLY],
                 ['ageless', 'parece sem idade'],
-                ['very young-looking', 'parece muito jovem'],
-                ['older than they look', 'parece mais novo do que é'],
             ]],
             [AttributeSubgroup::GENDER, 'Is your character %s?', 'Seu personagem %s?', [
-                ['male', 'é homem', InitialQuestion::GENDER_MALE],
-                ['female', 'é mulher', InitialQuestion::GENDER_FEMALE],
+                ['male', 'é homem', InitialAttribute::GENDER_MALE],
+                ['female', 'é mulher', InitialAttribute::GENDER_FEMALE],
                 ['non-binary', 'é não binário'],
                 ['gender-fluid', 'é gênero fluido'],
                 ['androgynous', 'é andrógino'],
                 ['transgender', 'é transgênero'],
                 ['cisgender', 'é cisgênero'],
-                ['presented ambiguously', 'tem apresentação ambígua'],
                 ['openly discussing gender identity', 'fala abertamente sobre identidade de gênero'],
                 ['recognized by a specific gender identity in canon', 'é reconhecido por identidade de gênero específica no canon'],
             ]],
@@ -318,7 +325,7 @@ class AttributeSeeder extends Seeder
                 ['known for significant romantic relationships', 'é conhecido por relacionamentos românticos marcantes'],
             ]],
             [AttributeSubgroup::NATIONALITY, 'Is your character %s?', 'Seu personagem %s?', [
-                ['Brazilian', 'é brasileiro', InitialQuestion::NATIONALITY_BRAZILIAN],
+                ['Brazilian', 'é brasileiro', InitialAttribute::NATIONALITY_BRAZILIAN],
                 ['American', 'é americano'],
                 ['Japanese', 'é japonês'],
                 ['British', 'é britânico'],
@@ -328,7 +335,7 @@ class AttributeSeeder extends Seeder
                 ['Spanish', 'é espanhol'],
                 ['from multiple national backgrounds', 'tem múltiplas nacionalidades'],
                 ['nationality central to their identity', 'tem nacionalidade central na identidade'],
-                ['fictional', 'fictício', InitialQuestion::NATIONALITY_FICTICIONAL],
+                ['fictional', 'fictício', InitialAttribute::NATIONALITY_FICTICIONAL],
             ]],
             [AttributeSubgroup::ETHNICITY, 'Is your character described as %s?', 'Seu personagem é descrito como %s?', [
                 ['black', 'negro'],
@@ -367,8 +374,8 @@ class AttributeSeeder extends Seeder
                 ['a legendary title bearer', 'portador de título lendário'],
             ]],
             [AttributeSubgroup::LIVING_STATUS, 'Is your character %s?', 'Seu personagem %s?', [
-                ['alive', 'está vivo', InitialQuestion::LIVING_ALIVE],
-                ['deceased', 'está morto', InitialQuestion::LIVING_DECEASED],
+                ['alive', 'está vivo', InitialAttribute::LIVING_ALIVE],
+                ['deceased', 'está morto', InitialAttribute::LIVING_DECEASED],
                 ['resurrected', 'já ressuscitou'],
                 ['undead', 'é morto-vivo'],
                 ['missing', 'está desaparecido'],
@@ -390,13 +397,16 @@ class AttributeSeeder extends Seeder
                 ['in extraordinary circumstances', 'em circunstâncias extraordinárias'],
                 ['with a mysterious origin', 'com origem misteriosa'],
             ]],
+            [AttributeSubgroup::RELIGION, 'Is religion important to your character?', 'A religião é importante para o seu personagem?', [
+                ['', '', SecondaryAttribute::RELIGION_IMPORTANT], // validar
+            ]],
             [AttributeSubgroup::RELIGION, 'Does your character identify as %s?', 'Seu personagem se identifica como %s?', [
-                ['Christian', 'cristao'],
-                ['Muslim', 'muçulmano'],
-                ['Jewish', 'judeu'],
-                ['Buddhist', 'budista'],
-                ['atheist', 'ateu'],
-                ['agnostic', 'agnóstico'],
+                ['Christian', 'cristao', SecondaryAttribute::RELIGION_CHRISTIAN],
+                ['Muslim', 'muçulmano', SecondaryAttribute::RELIGION_MUSLIM],
+                ['Jewish', 'judeu', SecondaryAttribute::RELIGION_JEWISH],
+                ['Buddhist', 'budista', SecondaryAttribute::RELIGION_BUDDHIST],
+                ['atheist', 'ateu', SecondaryAttribute::RELIGION_ATHEIST],
+                ['agnostic', 'agnóstico', SecondaryAttribute::RELIGION_AGNOSTIC],
                 ['spiritual but not religious', 'espiritual mas não religioso'],
                 ['from a fictional religion', 'de religião fictícia'],
                 ['deeply religious', 'muito religioso'],
@@ -421,8 +431,8 @@ class AttributeSeeder extends Seeder
                 ['a rebel against authority', 'é rebelde contra autoridade'],
                 ['an activist', 'é ativista'],
                 ['a revolutionary', 'é revolucionário'],
-                ['a conservative figure', 'é figura conservadora'],
-                ['a progressive figure', 'é figura progressista'],
+                ['a conservative figure', 'é figura conservadora', SecondaryAttribute::POLITICAL_CONSERVATIVE],
+                ['a progressive figure', 'é figura progressista', SecondaryAttribute::POLITICAL_PROGRESSIVE],
                 ['publicly influential in politics', 'tem influência pública na política'],
                 ['involved in political controversy', 'está envolvido em controversia política'],
             ]],
@@ -441,10 +451,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -557,10 +567,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -644,7 +654,7 @@ class AttributeSeeder extends Seeder
                 ['television', 'televisão'],
                 ['journalism', 'jornalismo'],
                 ['radio', 'radio'],
-                ['digital content', 'conteudo digital', InitialQuestion::MEDIA_DIGITAL_CONTENT],
+                ['digital content', 'conteudo digital', InitialAttribute::MEDIA_DIGITAL_CONTENT],
                 ['podcasts', 'podcasts'],
                 ['news reporting', 'reportagem'],
                 ['social platforms', 'plataformas sociais'],
@@ -673,10 +683,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -748,10 +758,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -854,10 +864,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -960,10 +970,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1026,10 +1036,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1082,10 +1092,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1148,10 +1158,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1244,10 +1254,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1258,8 +1268,8 @@ class AttributeSeeder extends Seeder
     {
         $groups = [
             [AttributeSubgroup::ALIGNMENT, 'Is your character %s?', 'Seu personagem %s?', [
-                ['heroic', 'é heroico'],
-                ['villainous', 'é vilanesco'],
+                ['heroic', 'é heroico', SecondaryAttribute::ALIGNMENT_HEROIC],
+                ['villainous', 'é vilanesco', SecondaryAttribute::ALIGNMENT_VILLAINOUS],
                 ['anti-heroic', 'é anti-heroi'],
                 ['morally gray', 'é moralmente cinza'],
                 ['chaotic', 'é caótico'],
@@ -1340,10 +1350,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1446,10 +1456,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
@@ -1532,10 +1542,10 @@ class AttributeSeeder extends Seeder
         ];
 
         $attributes = [];
-        foreach ($groups as [$subgroup, $questionTemplate, $portuguêseTemplate, $traits]) {
+        foreach ($groups as [$subgroup, $questionTemplate, $portugueseTemplate, $traits]) {
             $attributes = array_merge(
                 $attributes,
-                $this->template($subgroup, $questionTemplate, $portuguêseTemplate, $traits)
+                $this->template($subgroup, $questionTemplate, $portugueseTemplate, $traits)
             );
         }
 
