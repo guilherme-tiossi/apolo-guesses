@@ -2,9 +2,9 @@
 
 namespace App\Core\Domain\Attributes\Services;
 
-use App\Core\Domain\Enums\AttributeSubgroup;
-use App\Core\Domain\Enums\InitialAttribute;
-use App\Core\Domain\Enums\SecondaryAttribute;
+use App\Core\Domain\Attributes\Enums\AttributeSubgroup;
+use App\Core\Domain\Attributes\Enums\InitialAttribute;
+use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Attributes\Interfaces\Attribute;
 
 class AttributeOppositionPolicy

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Enums\CharacterCategory;
+use App\Core\Domain\Characters\Enums\CharacterCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

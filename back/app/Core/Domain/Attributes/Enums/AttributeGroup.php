@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Enums;
+namespace App\Core\Domain\Attributes\Enums;
 
 enum AttributeGroup: int
 {
