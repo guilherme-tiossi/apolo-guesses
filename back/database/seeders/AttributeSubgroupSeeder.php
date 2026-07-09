@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Enums\AttributeSubgroup;
+use App\Core\Domain\Attributes\Enums\AttributeSubgroup;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

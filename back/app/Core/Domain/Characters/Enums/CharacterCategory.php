@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Enums;
+namespace App\Core\Domain\Characters\Enums;
 
 enum CharacterCategory: int
 {
