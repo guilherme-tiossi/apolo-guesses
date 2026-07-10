@@ -63,6 +63,7 @@ class AttributeOppositionPolicy
             }
         }
 
+        // tentar retornar entity quando possível
         return array_values(array_unique($opposites, SORT_REGULAR));
     }
 
