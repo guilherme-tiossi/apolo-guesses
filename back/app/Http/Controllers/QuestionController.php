@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Core\Application\Attributes\UseCases\GetInitialQuestion\GetInitialQuestion;
-use App\Core\Application\Attributes\UseCases\GetInitialQuestion\InputDto as InitialQuestionDto;
+use App\Core\Application\Attributes\UseCases\GetQuestion\GetQuestion;
+use App\Core\Application\Attributes\UseCases\GetQuestion\InputDto as QuestionDto;
 
 class QuestionController extends Controller
 {
     public function __construct(
-        private GetInitialQuestion $getInitialQuestion        
+        private GetQuestion $getQuestion        
     ) {
     }
 
-    public function getFirstQuestion(Request $request)
+    public function getQuestion(Request $request)
     {
-        $result = $this->getInitialQuestion->execute(new InitialQuestionDto(
-            userId: $request->temporary_user_id
+        $result = $this->getQuestion->execute(new QuestionDto(
+            temporaryUserId: $request->temporary_user_id
         ));
 
         return response()->json(['data' => [
