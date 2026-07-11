@@ -37,10 +37,18 @@ class PutAnswer
 
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
             ?? SecondaryAttribute::tryFrom($attribute->internal_name);
-        $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum);
+        $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum, $answerScore);
         
         foreach ($opposites as $oppositeEnum) {
             $oppositeAttribute = Attribute::where(['internal_name' => $oppositeEnum->value])->first();
+            $existingOppositeAnswer = TemporaryUserAnswer::where([
+                'temporary_user_id' => $input->temporaryUserId,
+                'attribute_id' => $oppositeAttribute->id,
+            ])->exists();
+
+            if ($existingOppositeAnswer) {
+                continue;
+            }
 
             TemporaryUserAnswer::create([
                 'temporary_user_id' => $input->temporaryUserId,
