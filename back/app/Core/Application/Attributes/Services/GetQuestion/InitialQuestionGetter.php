@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Application\Attributes\UseCases\GetInitialQuestion;
+namespace App\Core\Application\Attributes\Services\GetQuestion;
 
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Models\Attribute;
@@ -9,8 +9,8 @@ use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
 use App\Core\Application\TemporaryUser\Services\CreateTemporaryUser\CreateTemporaryUser;
 
-class GetInitialQuestion {
-
+class InitialQuestionGetter implements QuestionGetter
+{
     public function __construct(
         private CreateTemporaryUser $createTemporaryUser,
         private GetAnswers $getAnswers
@@ -32,20 +32,19 @@ class GetInitialQuestion {
             );
         }
 
-        if (count($previousAnswers) < count(InitialAttribute::cases())) {
-            foreach (InitialAttribute::cases() as $attributeEnum) {
-                if (!in_array($attributeEnum, $this->getAnsweredAttributeEnums($previousAnswers))) {
-                    $attribute = $this->getAttribute($attributeEnum);
-                    return new OutputDto(
-                        question: $attribute->portuguese_question,
-                        attributeId: $attribute->id,
-                        temporaryUserId: $userId
-                    );
-                }
+        foreach (InitialAttribute::cases() as $attributeEnum) {
+            if (!in_array($attributeEnum, $this->getAnsweredAttributeEnums($previousAnswers))) {
+                $attribute = $this->getAttribute($attributeEnum);
+                return new OutputDto(
+                    question: $attribute->portuguese_question,
+                    attributeId: $attribute->id,
+                    temporaryUserId: $userId
+                );
             }
         }
 
-        throw new Exception('Suporte apenas para questões iniciais por enquanto', 500);
+        // appexception no futuro
+        throw new Exception('Nenhum atributo encontrado :(', 404);
     }
 
     private function getAttribute(InitialAttribute $attribute): Attribute
