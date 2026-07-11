@@ -15,6 +15,7 @@ class CharacterAttributeSeeder extends Seeder
         $this->ayrtonSenna();
         $this->rebecaAndrade();
         $this->anaMariaBraga();
+        $this->silvioSantos();
     }
 
     private function seedCharacter(string $characterName, array $attributes): void
@@ -174,4 +175,63 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
         ]);
     }
+
+    private function silvioSantos(): void
+    {
+        $this->seedCharacter('Silvio Santos', [
+            'Is your character Brazilian?' => 2,
+            'Is your character male?' => 2,
+            'Is your character deceased?' => 2,
+            'Is your character elderly?' => 2,
+            'Is your character over forty?' => 2,
+            'Is your character described as white?' => 2,
+            'Does your character have fair skin?' => 1.5,
+            'Was your character born in Brazil?' => 2,
+            'Does your character speak Portuguese?' => 2,
+            'Does your character speak with a strong accent?' => 1.5,
+            'Does your character have children?' => 2,
+            'Does your character identify as Jewish?' => 1.5,
+            'Does your character work in entertainment?' => 2,
+            'Does your character work in television?' => 2,
+            'Is your character known in talk shows?' => 2,
+            'Is your character known in prime-time shows?' => 2,
+            'Is your character known in reality shows?' => 1.5,
+            'Does your character own a company?' => 2,
+            'Does your character focus on sales?' => 2,
+            'Does your character build global brands?' => 1.5,
+            'Does your character manage large teams?' => 2,
+            'Is your character warm and friendly?' => 2,
+            'Does your character make jokes often?' => 2,
+            'Does your character laugh loudly?' => 2,
+            'Is your character street-smart?' => 2,
+            'Is your character strategic?' => 1.5,
+            'Does your character inspire others?' => 2,
+            'Does your character lead a team?' => 2,
+            'Does your character have followers?' => 2,
+            'Does your character live a luxurious lifestyle?' => 2,
+            'Does your character have an iconic catchphrase?' => 2,
+            'Does your character have a humorous recurring line?' => 2,
+            'Does your character have speech style with memorable lines?' => 2,
+            'Is your character known for a unique laugh?' => 2,
+            'Is your character known for a recognizable voice?' => 2,
+            'Is your character known for an unmistakable attitude?' => 2,
+            'Is your character known by a famous nickname?' => 2,
+            'Is your character known by a nickname used more than real name?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character won industry awards?' => 1.5,
+            'Has your character received public recognition?' => 2,
+            'Has your character received media recognition?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Did your character have cultural impact?' => 2,
+            'Did your character have national impact?' => 2,
+            'Is your character associated with contemporary history?' => 2,
+            'Was your character involved in a cultural milestone?' => 2,
+            'Is your character linked to Brazil?' => 2,
+            'Is your character associated with South America?' => 2,
+            'Is your character known for memes?' => 1.5,
+            'Is your character associated with polarizing opinions?' => 1,
+        ]);
+    }
 }
+ 
