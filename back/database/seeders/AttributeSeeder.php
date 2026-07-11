@@ -188,9 +188,9 @@ class AttributeSeeder extends Seeder
             ]],
             [AttributeSubgroup::HAIR_TEXTURE, 'Is your character hair texture %s?', 'A textura do cabelo do seu personagem é %s?', [
                 ['straight', 'lisa', InitialAttribute::HAIR_STRAIGHT],
-                ['wavy', 'ondulada', SecondaryAttribute::HAIR_WAVY],
-                ['curly', 'cacheada', SecondaryAttribute::HAIR_CURLY],
-                ['coily', 'crespa', SecondaryAttribute::HAIR_COILY],
+                ['wavy', 'ondulada', InitialAttribute::HAIR_WAVY],
+                ['curly', 'cacheada', InitialAttribute::HAIR_CURLY],
+                ['coily', 'crespa', InitialAttribute::HAIR_COILY],
                 ['frizzy', 'arrepiada'],
                 ['visibly voluminous', 'bem volumosa'],
             ]],
@@ -295,11 +295,11 @@ class AttributeSeeder extends Seeder
     {
         $groups = [
             [AttributeSubgroup::AGE, 'Is your character %s?', 'Seu personagem %s?', [
-                ['a child', 'é criança', SecondaryAttribute::AGE_CHILD],
-                ['a teenager', 'é adolescente', SecondaryAttribute::AGE_TEENAGER],
+                ['a child', 'é criança', InitialAttribute::AGE_CHILD],
+                ['a teenager', 'é adolescente', InitialAttribute::AGE_TEENAGER],
                 ['an adult', 'é adulto', InitialAttribute::AGE_ADULT],
-                ['over forty', 'está acima dos quarenta', SecondaryAttribute::AGE_OVER_FORTY],
-                ['elderly', 'é idoso', SecondaryAttribute::AGE_ELDERLY],
+                ['over forty', 'está acima dos quarenta', InitialAttribute::AGE_OVER_FORTY],
+                ['elderly', 'é idoso', InitialAttribute::AGE_ELDERLY],
                 ['ageless', 'parece sem idade'],
             ]],
             [AttributeSubgroup::GENDER, 'Is your character %s?', 'Seu personagem %s?', [
@@ -335,7 +335,7 @@ class AttributeSeeder extends Seeder
                 ['Spanish', 'é espanhol'],
                 ['from multiple national backgrounds', 'tem múltiplas nacionalidades'],
                 ['nationality central to their identity', 'tem nacionalidade central na identidade'],
-                ['fictional', 'fictício', InitialAttribute::NATIONALITY_FICTICIONAL],
+                ['fictional', 'é fictício', InitialAttribute::NATIONALITY_FICTICIONAL],
             ]],
             [AttributeSubgroup::ETHNICITY, 'Is your character described as %s?', 'Seu personagem é descrito como %s?', [
                 ['black', 'negro'],
