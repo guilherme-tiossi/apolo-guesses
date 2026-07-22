@@ -9,7 +9,7 @@ class Answer
     public function __construct(
         public string $userId,
         public Attribute $attribute,
-        public bool $value
+        public float $value
     ) {
     }
 }
