@@ -8,6 +8,7 @@ use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Models\TemporaryUserAnswer;
 
+// possivelmente trocar para service
 class GetAnswers
 {    
     public function execute(InputDto $input): OutputDto
@@ -21,6 +22,7 @@ class GetAnswers
         $answers = array_map(function($answer) use ($input) {
             $bruteAttribute = $answer['attribute'];
             $attribute = new Attribute(
+                    id: $bruteAttribute['id'],
                     question: $bruteAttribute['question'],
                     portugueseQuestion: $bruteAttribute['portuguese_question'],
                     enum: $bruteAttribute['is_initial_question']
