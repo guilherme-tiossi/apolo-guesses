@@ -2,12 +2,33 @@
 
 namespace Database\Seeders;
 
+use App\Core\Domain\Attributes\Enums\InitialAttribute;
+use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
 class CharacterAttributeSeeder extends Seeder
 {
+    private const REQUIRED_INITIAL_GROUPS = [
+        'skin' => [InitialAttribute::SKIN_FAIR, InitialAttribute::SKIN_DARK],
+        'hair' => [
+            InitialAttribute::HAIR_STRAIGHT,
+            InitialAttribute::HAIR_WAVY,
+            InitialAttribute::HAIR_CURLY,
+            InitialAttribute::HAIR_COILY,
+        ],
+        'age' => [
+            InitialAttribute::AGE_ADULT,
+            InitialAttribute::AGE_CHILD,
+            InitialAttribute::AGE_TEENAGER,
+            InitialAttribute::AGE_OVER_FORTY,
+            InitialAttribute::AGE_ELDERLY,
+        ],
+        'gender' => [InitialAttribute::GENDER_MALE, InitialAttribute::GENDER_FEMALE],
+        'living' => [InitialAttribute::LIVING_ALIVE, InitialAttribute::LIVING_DECEASED],
+    ];
+
     public function run(): void
     {
         $this->pele();
@@ -18,20 +39,83 @@ class CharacterAttributeSeeder extends Seeder
         $this->silvioSantos();
     }
 
+    /**
+     * @param  array<int|string, array{0: InitialAttribute|SecondaryAttribute, 1: float|int}|float|int>  $attributes
+     */
     private function seedCharacter(string $characterName, array $attributes): void
     {
         $characterId = $this->characterId($characterName);
+        $initialNames = [];
 
-        foreach ($attributes as $question => $score) {
+        foreach ($attributes as $key => $value) {
+            if (is_int($key)) {
+                if (!is_array($value) || count($value) !== 2) {
+                    throw new RuntimeException(
+                        "Invalid enum attribute entry for {$characterName}. Expected [Enum, score]."
+                    );
+                }
+
+                [$attribute, $score] = $value;
+
+                if (!$attribute instanceof InitialAttribute && !$attribute instanceof SecondaryAttribute) {
+                    throw new RuntimeException(
+                        "Invalid enum attribute for {$characterName}. Expected InitialAttribute|SecondaryAttribute."
+                    );
+                }
+
+                if ($attribute instanceof InitialAttribute) {
+                    $initialNames[] = $attribute->value;
+                }
+
+                DB::table('character_attributes')->updateOrInsert(
+                    [
+                        'character_id' => $characterId,
+                        'attribute_id' => $this->attributeIdByInternalName($attribute->value),
+                    ],
+                    [
+                        'score' => $score,
+                    ]
+                );
+
+                continue;
+            }
+
             DB::table('character_attributes')->updateOrInsert(
                 [
                     'character_id' => $characterId,
-                    'attribute_id' => $this->attributeId($question),
+                    'attribute_id' => $this->attributeIdByQuestion($key),
                 ],
                 [
-                    'score' => $score,
+                    'score' => $value,
                 ]
             );
+        }
+
+        $this->assertRequiredInitialAttributes($characterName, $initialNames);
+    }
+
+    private function assertRequiredInitialAttributes(string $characterName, array $initialNames): void
+    {
+        foreach (self::REQUIRED_INITIAL_GROUPS as $group => $options) {
+            $covered = false;
+
+            foreach ($options as $option) {
+                if (in_array($option->value, $initialNames, true)) {
+                    $covered = true;
+                    break;
+                }
+            }
+
+            if (!$covered) {
+                $expected = implode(', ', array_map(
+                    static fn (InitialAttribute $attribute): string => $attribute->value,
+                    $options
+                ));
+
+                throw new RuntimeException(
+                    "Character {$characterName} is missing required InitialAttribute group [{$group}]. Expected one of: {$expected}"
+                );
+            }
         }
     }
 
@@ -46,7 +130,7 @@ class CharacterAttributeSeeder extends Seeder
         return $id;
     }
 
-    private function attributeId(string $question): int
+    private function attributeIdByQuestion(string $question): int
     {
         $id = DB::table('attributes')->where('question', $question)->value('id');
 
@@ -57,13 +141,31 @@ class CharacterAttributeSeeder extends Seeder
         return $id;
     }
 
+    private function attributeIdByInternalName(string $internalName): int
+    {
+        $id = DB::table('attributes')->where('internal_name', $internalName)->value('id');
+
+        if ($id === null) {
+            throw new RuntimeException("Attribute not found by internal_name: {$internalName}");
+        }
+
+        return $id;
+    }
+
     private function pele(): void
     {
         $this->seedCharacter('Pelé', [
-            'Does your character have dark skin?' => 2,
-            'Is your character Brazilian?' => 2,
-            'Is your character male?' => 2,
-            'Is your character deceased?' => 2,
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::HAIR_CURLY, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+            [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
+            [SecondaryAttribute::RELIGION_IMPORTANT, 1],
+
             'Is your character described as black?' => 2,
             'Does your character have a athletic build?' => 2,
             'Is your character a athlete?' => 2,
@@ -86,10 +188,18 @@ class CharacterAttributeSeeder extends Seeder
     private function muhammadAli(): void
     {
         $this->seedCharacter('Muhammad Ali', [
-            'Does your character have dark skin?' => 2,
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::HAIR_COILY, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+            [SecondaryAttribute::RELIGION_MUSLIM, 2],
+            [SecondaryAttribute::RELIGION_IMPORTANT, 2],
+            [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
+
             'Is your character American?' => 2,
-            'Is your character male?' => 2,
-            'Is your character deceased?' => 2,
             'Is your character described as black?' => 2,
             'Does your character have a muscular build?' => 2,
             'Is your character a athlete?' => 2,
@@ -111,9 +221,15 @@ class CharacterAttributeSeeder extends Seeder
     private function ayrtonSenna(): void
     {
         $this->seedCharacter('Ayrton Senna', [
-            'Is your character Brazilian?' => 2,
-            'Is your character male?' => 2,
-            'Is your character deceased?' => 2,
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::HAIR_WAVY, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+            [SecondaryAttribute::RELIGION_CHRISTIAN, 2],
+            [SecondaryAttribute::RELIGION_IMPORTANT, 2],
+
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with motorsports?' => 2,
@@ -135,12 +251,16 @@ class CharacterAttributeSeeder extends Seeder
     private function rebecaAndrade(): void
     {
         $this->seedCharacter('Rebeca Andrade', [
-            'Is your character Brazilian?' => 2,
-            'Is your character female?' => 2,
-            'Is your character alive?' => 2,
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::HAIR_CURLY, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+            [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
+
             'Is your character described as black?' => 2,
             'Does your character have a athletic build?' => 2,
-            'Is your character an adult?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with olympic events?' => 2,
@@ -157,10 +277,16 @@ class CharacterAttributeSeeder extends Seeder
     private function anaMariaBraga(): void
     {
         $this->seedCharacter('Ana Maria Braga', [
-            'Is your character Brazilian?' => 2,
-            'Is your character female?' => 2,
-            'Is your character alive?' => 2,
-            'Is your character elderly?' => 2,
+            [InitialAttribute::SKIN_FAIR, 1.5],
+            [InitialAttribute::HAIR_STRAIGHT, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+            [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
+
             'Does your character have brown skin?' => 1,
             'Does your character work in entertainment?' => 2,
             'Does your character work in television?' => 2,
@@ -179,18 +305,23 @@ class CharacterAttributeSeeder extends Seeder
     private function silvioSantos(): void
     {
         $this->seedCharacter('Silvio Santos', [
-            'Is your character Brazilian?' => 2,
-            'Is your character male?' => 2,
-            'Is your character deceased?' => 2,
-            'Is your character elderly?' => 2,
-            'Is your character over forty?' => 2,
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::HAIR_STRAIGHT, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+            [SecondaryAttribute::RELIGION_JEWISH, 2],
+            [SecondaryAttribute::RELIGION_IMPORTANT, 1.5],
+            [SecondaryAttribute::POLITICAL_CONSERVATIVE, 1.5],
+
             'Is your character described as white?' => 2,
-            'Does your character have fair skin?' => 1.5,
             'Was your character born in Brazil?' => 2,
             'Does your character speak Portuguese?' => 2,
             'Does your character speak with a strong accent?' => 1.5,
             'Does your character have children?' => 2,
-            'Does your character identify as Jewish?' => 1.5,
             'Does your character work in entertainment?' => 2,
             'Does your character work in television?' => 2,
             'Is your character known in talk shows?' => 2,
@@ -234,4 +365,3 @@ class CharacterAttributeSeeder extends Seeder
         ]);
     }
 }
- 

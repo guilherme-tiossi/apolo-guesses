@@ -654,7 +654,7 @@ class AttributeSeeder extends Seeder
                 ['television', 'televisão'],
                 ['journalism', 'jornalismo'],
                 ['radio', 'radio'],
-                ['digital content', 'conteudo digital', InitialAttribute::MEDIA_DIGITAL_CONTENT],
+                ['online digital content', 'conteudo digital online', InitialAttribute::MEDIA_DIGITAL_CONTENT],
                 ['podcasts', 'podcasts'],
                 ['news reporting', 'reportagem'],
                 ['social platforms', 'plataformas sociais'],
