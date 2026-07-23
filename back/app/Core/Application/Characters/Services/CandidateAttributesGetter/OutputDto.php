@@ -6,7 +6,8 @@ readonly class OutputDto
 {
     public function __construct(
         /** @var array[] */ // tipar melhor depois
-        public array $candidatesAttributes
+        public array $candidatesAttributes,
+        public int $candidatesCount
     ) {
     }
 }

@@ -15,11 +15,17 @@ class AnswerController extends Controller
 
     public function answerQuestion(Request $request)
     {
-        $this->putAnswer->execute(new PutAnswerDto(
+        $response = $this->putAnswer->execute(new PutAnswerDto(
             temporaryUserId: $request->user_id,
             attributeId: $request->attribute_id,
             answerScore: $request->answer_score
         ));
+
+        if ($response->characterName ?? false) {
+            return response()->json([
+                'possible_character' => $response->characterName
+            ], 201);
+        }
 
         return response()->json([], 201);
     }
