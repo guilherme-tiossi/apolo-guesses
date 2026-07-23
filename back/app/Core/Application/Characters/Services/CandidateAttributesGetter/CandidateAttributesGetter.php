@@ -26,7 +26,8 @@ class CandidateAttributesGetter
 
         if (!empty($candidatesAttributes)) {
             return new OutputDto(
-                candidatesAttributes: $candidatesAttributes
+                candidatesAttributes: $candidatesAttributes['characterAttributeData'],
+                candidatesCount: $candidatesAttributes['candidates']
             );
         }
 
@@ -34,7 +35,8 @@ class CandidateAttributesGetter
 
         if (!empty($candidatesAttributes)) {
             return new OutputDto(
-                candidatesAttributes: $candidatesAttributes
+                candidatesAttributes: $candidatesAttributes['characterAttributeData'],
+                candidatesCount: $candidatesAttributes['candidates']
             );
         }
 
@@ -81,6 +83,9 @@ class CandidateAttributesGetter
                 'character_attributes.attribute_id as attribute_id'
             ])->toArray();
 
-        return $characterAttributeData;
+        return [
+            'characterAttributeData' => $characterAttributeData,
+            'candidates' => $subQueryCharacters->count()
+        ];
     }
 }

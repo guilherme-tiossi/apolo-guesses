@@ -8,12 +8,20 @@ use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Attributes\Services\AttributeOppositionPolicy;
 use App\Models\Attribute;
 use App\Models\TemporaryUserAnswer;
+use App\Core\Application\Characters\Services\CandidateAttributesGetter\InputDto as CandidateAttributesGetterDto;
+use App\Core\Application\Characters\Services\CandidateAttributesGetter\CandidateAttributesGetter;
+use App\Models\Character;
 
 class PutAnswer
 {
+    public function __construct(
+        private CandidateAttributesGetter $candidateAttributesGetter
+    ) {
+    }
+
     private const MAX_ANSWER_SCORE = 2;
 
-    public function execute(InputDto $input): void
+    public function execute(InputDto $input): ?OutputDto
     {
         $answerScore = $input->answerScore;
         $answerPositive = $answerScore >= 1.50;
@@ -26,13 +34,16 @@ class PutAnswer
         ]);
 
         if (!$answerNegative && !$answerPositive) {
-            return;
+            return null;
         }
 
         // transformar em repositório se fizer sentido
         $attribute = Attribute::where(['id' => $input->attributeId])->first();
+
         if (!$attribute->internal_name) {
-            return;
+            $characterName = $this->tryToGetCharacter($input->temporaryUserId);
+            return $characterName ? new OutputDto(
+                characterName: $characterName) : null;
         }
 
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
@@ -56,5 +67,23 @@ class PutAnswer
                 'answer_score' => self::MAX_ANSWER_SCORE - $answerScore // if is_blonde = 1.75, is_redhead must equal 0.25
             ]);
         }
+
+        $characterName = $this->tryToGetCharacter($input->temporaryUserId);
+        return $characterName ? new OutputDto(
+            characterName: $characterName) : null;
+    }
+
+    private function tryToGetCharacter(int $userId): ?string
+    {
+        $characterAttributeData = $this->candidateAttributesGetter->execute(new CandidateAttributesGetterDto(
+            temporaryUserId: $userId
+        ));
+
+        if ($characterAttributeData->candidatesCount == 1) {
+            $character = Character::find($characterAttributeData->candidatesAttributes[0]->character_id);
+            return $character->name;
+        }
+
+        return null;
     }
 }
