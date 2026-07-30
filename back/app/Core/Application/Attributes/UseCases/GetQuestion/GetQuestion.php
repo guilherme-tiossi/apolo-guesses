@@ -17,11 +17,11 @@ class GetQuestion
     public function execute(InputDto $dto): OutputDto
     {
         $questionGetter = $this->questionGetterFactory->create(new QuestionGetterInputDto(
-            temporaryUserId: $dto->temporaryUserId
+            playerId: $dto->playerId
         ));
 
         return $questionGetter->execute(new GetQuestionInputDto(
-            userId: $dto->temporaryUserId
+            userId: $dto->playerId
         ));
     }
 }

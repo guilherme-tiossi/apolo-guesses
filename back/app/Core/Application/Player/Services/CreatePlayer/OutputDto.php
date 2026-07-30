@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Application\TemporaryUser\Services\CreateTemporaryUser;
+namespace App\Core\Application\Player\Services\CreatePlayer;
 
 readonly class OutputDto
 {

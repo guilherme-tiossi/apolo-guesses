@@ -21,7 +21,7 @@ class SmartQuestionGetter implements QuestionGetter
         }
 
         $characterAttributeData = $this->candidateAttributesGetter->execute(new CandidateAttributesGetterDto(
-            temporaryUserId: $dto->userId
+            playerId: $dto->userId
         ))->candidatesAttributes;
 
         if (empty($characterAttributeData)) {
@@ -33,7 +33,7 @@ class SmartQuestionGetter implements QuestionGetter
         return new OutputDto(
             question: $controversialAttribute->portuguese_question,
             attributeId: $controversialAttribute->id,
-            temporaryUserId: $dto->userId
+            playerId: $dto->userId
         );
     }
 

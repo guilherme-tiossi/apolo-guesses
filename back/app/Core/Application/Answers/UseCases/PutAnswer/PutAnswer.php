@@ -7,7 +7,7 @@ use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Attributes\Services\AttributeOppositionPolicy;
 use App\Models\Attribute;
-use App\Models\TemporaryUserAnswer;
+use App\Models\PlayerAnswer;
 use App\Core\Application\Characters\Services\CandidateAttributesGetter\InputDto as CandidateAttributesGetterDto;
 use App\Core\Application\Characters\Services\CandidateAttributesGetter\CandidateAttributesGetter;
 use App\Models\Character;
@@ -27,8 +27,18 @@ class PutAnswer
         $answerPositive = $answerScore >= 1.50;
         $answerNegative = $answerScore <= 0.50;
 
-        TemporaryUserAnswer::create([
-            'temporary_user_id' => $input->temporaryUserId,
+        $existingAnswer = PlayerAnswer::where([
+            'player_id' => $input->playerId,
+            'attribute_id' => $input->attributeId,
+            'answer_score' => $answerScore
+        ])->exists();
+
+        if ($existingAnswer) {
+            return null;
+        }
+
+        PlayerAnswer::create([
+            'player_id' => $input->playerId,
             'attribute_id' => $input->attributeId,
             'answer_score' => $answerScore
         ]);
@@ -41,7 +51,7 @@ class PutAnswer
         $attribute = Attribute::where(['id' => $input->attributeId])->first();
 
         if (!$attribute->internal_name) {
-            $characterName = $this->tryToGetCharacter($input->temporaryUserId);
+            $characterName = $this->tryToGetCharacter($input->playerId);
             return $characterName ? new OutputDto(
                 characterName: $characterName) : null;
         }
@@ -52,8 +62,8 @@ class PutAnswer
         
         foreach ($opposites as $oppositeEnum) {
             $oppositeAttribute = Attribute::where(['internal_name' => $oppositeEnum->value])->first();
-            $existingOppositeAnswer = TemporaryUserAnswer::where([
-                'temporary_user_id' => $input->temporaryUserId,
+            $existingOppositeAnswer = PlayerAnswer::where([
+                'player_id' => $input->playerId,
                 'attribute_id' => $oppositeAttribute->id,
             ])->exists();
 
@@ -61,14 +71,14 @@ class PutAnswer
                 continue;
             }
 
-            TemporaryUserAnswer::create([
-                'temporary_user_id' => $input->temporaryUserId,
+            PlayerAnswer::create([
+                'player_id' => $input->playerId,
                 'attribute_id' => $oppositeAttribute->id,
                 'answer_score' => self::MAX_ANSWER_SCORE - $answerScore // if is_blonde = 1.75, is_redhead must equal 0.25
             ]);
         }
 
-        $characterName = $this->tryToGetCharacter($input->temporaryUserId);
+        $characterName = $this->tryToGetCharacter($input->playerId);
         return $characterName ? new OutputDto(
             characterName: $characterName) : null;
     }
@@ -76,7 +86,7 @@ class PutAnswer
     private function tryToGetCharacter(int $userId): ?string
     {
         $characterAttributeData = $this->candidateAttributesGetter->execute(new CandidateAttributesGetterDto(
-            temporaryUserId: $userId
+            playerId: $userId
         ));
 
         if ($characterAttributeData->candidatesCount == 1) {

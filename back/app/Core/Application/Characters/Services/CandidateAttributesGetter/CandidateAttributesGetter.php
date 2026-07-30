@@ -19,12 +19,12 @@ class CandidateAttributesGetter
     public function execute(InputDto $dto): OutputDto
     {
         $answers = $this->getAnswers->execute(new GetAnswersDto(
-            userId: $dto->temporaryUserId
+            userId: $dto->playerId
         ))->answers;
 
         $candidatesAttributes = $this->getCandidatesData($answers);
 
-        if (!empty($candidatesAttributes)) {
+        if (!empty($candidatesAttributes['characterAttributeData'])) {
             return new OutputDto(
                 candidatesAttributes: $candidatesAttributes['characterAttributeData'],
                 candidatesCount: $candidatesAttributes['candidates']
@@ -33,7 +33,7 @@ class CandidateAttributesGetter
 
         $candidatesAttributes = $this->getCandidatesData($answers, true);
 
-        if (!empty($candidatesAttributes)) {
+        if (!empty($candidatesAttributes['characterAttributeData'])) {
             return new OutputDto(
                 candidatesAttributes: $candidatesAttributes['characterAttributeData'],
                 candidatesCount: $candidatesAttributes['candidates']
@@ -73,7 +73,7 @@ class CandidateAttributesGetter
             })
             ->groupBy('character_id')
             ->havingRaw('COUNT(DISTINCT attribute_id) = ?', [count($filters)]);
-
+        
         $characterAttributeData = DB::table('characters')
             ->join('character_attributes', 'character_attributes.character_id', '=', 'characters.id')
             ->whereNotIn('attribute_id', $answeredAttributeIds)

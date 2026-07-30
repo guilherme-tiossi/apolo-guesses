@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('temporary_user_answers', function (Blueprint $table) {
+        Schema::create('player_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('temporary_user_id')->constrained();
+            $table->foreignId('player_id')->constrained();
             $table->foreignId('attribute_id')->constrained();
             $table->float('answer_score');
         });
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('temporary_user_answers');
+        Schema::dropIfExists('player_answers');
     }
 };

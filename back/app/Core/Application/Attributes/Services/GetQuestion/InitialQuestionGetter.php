@@ -7,19 +7,19 @@ use App\Models\Attribute;
 use Exception;
 use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
-use App\Core\Application\TemporaryUser\Services\CreateTemporaryUser\CreateTemporaryUser;
+use App\Core\Application\Player\Services\CreatePlayer\CreatePlayer;
 
 class InitialQuestionGetter implements QuestionGetter
 {
     public function __construct(
-        private CreateTemporaryUser $createTemporaryUser,
+        private CreatePlayer $createPlayer,
         private GetAnswers $getAnswers
     ) {
     }
 
     public function execute(InputDto $dto): OutputDto
     {
-        $userId = $dto->userId ?? $this->createTemporaryUser->execute()->userId;
+        $userId = $dto->userId ?? $this->createPlayer->execute()->userId;
         $previousAnswers = $this->getAnswers->execute(new GetAnswersDto(userId: $userId))->answers;
 
         if (empty($previousAnswers)) {
@@ -28,7 +28,7 @@ class InitialQuestionGetter implements QuestionGetter
             return new OutputDto(
                 question: $attribute->portuguese_question,
                 attributeId: $attribute->id,
-                temporaryUserId: $userId
+                playerId: $userId
             );
         }
 
@@ -38,7 +38,7 @@ class InitialQuestionGetter implements QuestionGetter
                 return new OutputDto(
                     question: $attribute->portuguese_question,
                     attributeId: $attribute->id,
-                    temporaryUserId: $userId
+                    playerId: $userId
                 );
             }
         }

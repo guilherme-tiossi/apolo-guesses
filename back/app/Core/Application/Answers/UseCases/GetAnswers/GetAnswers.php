@@ -6,7 +6,7 @@ use App\Core\Domain\Answers\Entities\Answer;
 use App\Core\Domain\Attributes\Entities\Attribute;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
-use App\Models\TemporaryUserAnswer;
+use App\Models\PlayerAnswer;
 
 // possivelmente trocar para service
 class GetAnswers
@@ -14,8 +14,8 @@ class GetAnswers
     public function execute(InputDto $input): OutputDto
     {
         // usar algum repositório no futuro
-        $bruteAnswers = TemporaryUserAnswer::with('attribute')
-            ->where('temporary_user_id', $input->userId)
+        $bruteAnswers = PlayerAnswer::with('attribute')
+            ->where('player_id', $input->userId)
             ->get()
             ->toArray();
 

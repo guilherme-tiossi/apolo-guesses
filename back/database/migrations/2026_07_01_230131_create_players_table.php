@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('temporary_users', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->integer('possible_characters_count');
         });
@@ -17,6 +17,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('temporary_users');
+        Schema::dropIfExists('players');
     }
 };

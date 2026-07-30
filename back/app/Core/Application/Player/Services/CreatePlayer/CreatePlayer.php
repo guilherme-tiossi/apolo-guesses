@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Core\Application\TemporaryUser\Services\CreateTemporaryUser;
+namespace App\Core\Application\Player\Services\CreatePlayer;
 
-use App\Models\TemporaryUser;
+use App\Models\Player;
 use Illuminate\Support\Facades\DB;
 
-class CreateTemporaryUser
+class CreatePlayer
 {
     public function execute(): OutputDto
     {
-        $temporaryUser = TemporaryUser::create([
+        $player = Player::create([
             'possible_characters_count' => DB::select('select count(*) from characters')[0]->count
         ]);
 
         return new OutputDto(
-            userId: $temporaryUser->id
+            userId: $player->id
         );
     }
 }

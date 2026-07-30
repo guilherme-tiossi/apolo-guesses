@@ -287,7 +287,6 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
-            'Does your character have brown skin?' => 1,
             'Does your character work in entertainment?' => 2,
             'Does your character work in television?' => 2,
             'Is your character known in talk shows?' => 2,

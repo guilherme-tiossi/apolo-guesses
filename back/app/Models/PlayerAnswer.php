@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['temporary_user_id', 'attribute_id', 'answer_score'])]
-class TemporaryUserAnswer extends Model
+#[Fillable(['player_id', 'attribute_id', 'answer_score'])]
+class PlayerAnswer extends Model
 {
     public $timestamps = false;
 

@@ -7,7 +7,7 @@ use App\Core\Application\Attributes\Services\GetQuestion\SmartQuestionGetter;
 use App\Core\Application\Attributes\Services\GetQuestion\QuestionGetter;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
-use App\Models\TemporaryUserAnswer;
+use App\Models\PlayerAnswer;
 
 class QuestionGetterFactory
 {
@@ -19,8 +19,8 @@ class QuestionGetterFactory
 
     public function create(InputDto $input): QuestionGetter
     {
-        $answeredQuestions = TemporaryUserAnswer::where([
-            'temporary_user_id' => $input->temporaryUserId
+        $answeredQuestions = PlayerAnswer::where([
+            'player_id' => $input->playerId
         ])->count();
 
         $totalInitialAttributes = count(InitialAttribute::cases()); // + count(SecondaryAttribute::cases());

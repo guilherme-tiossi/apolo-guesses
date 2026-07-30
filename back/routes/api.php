@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuestionController;
 
-Route::get('/question', [QuestionController::class, 'getQuestion']);
-Route::post('/answer-question', [AnswerController::class, 'answerQuestion']);
+Route::post('/game', [GameController::class, 'play']);
