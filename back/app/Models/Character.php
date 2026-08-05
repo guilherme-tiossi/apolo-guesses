@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'picture', 'character_category_id'])]
+#[Fillable([
+    'name',
+    'picture',
+    'character_category_id',
+    'signature_question',
+    'signature_portuguese_question',
+])]
 class Character extends Model
 {
     public function characterCategory(): BelongsTo
