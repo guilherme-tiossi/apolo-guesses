@@ -12,7 +12,7 @@ class CharacterAttribute extends Model
     // passar isso pra um service talvez
     public static function charactersByAnswers(
         array $answers,
-        ?bool $excludingNegativeAnswers = true
+        ?bool $excludingNegativeAnswers = false
     ): Builder {
         $positiveAttributes = [];
         $negativeAttributes = [];

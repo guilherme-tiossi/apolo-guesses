@@ -19,8 +19,8 @@ class InitialQuestionGetter implements QuestionGetter
 
     public function execute(InputDto $dto): OutputDto
     {
-        $userId = $dto->userId ?? $this->createPlayer->execute()->userId;
-        $previousAnswers = $this->getAnswers->execute(new GetAnswersDto(userId: $userId))->answers;
+        $playerId = $dto->playerId ?? $this->createPlayer->execute()->playerId;
+        $previousAnswers = $this->getAnswers->execute(new GetAnswersDto(playerId: $playerId))->answers;
 
         if (empty($previousAnswers)) {
             $attributeEnum = random_int(1,2) % 2 == 0 ? InitialAttribute::GENDER_FEMALE : InitialAttribute::GENDER_MALE;
@@ -28,7 +28,7 @@ class InitialQuestionGetter implements QuestionGetter
             return new OutputDto(
                 question: $attribute->portuguese_question,
                 attributeId: $attribute->id,
-                playerId: $userId
+                playerId: $playerId
             );
         }
 
@@ -38,7 +38,7 @@ class InitialQuestionGetter implements QuestionGetter
                 return new OutputDto(
                     question: $attribute->portuguese_question,
                     attributeId: $attribute->id,
-                    playerId: $userId
+                    playerId: $playerId
                 );
             }
         }

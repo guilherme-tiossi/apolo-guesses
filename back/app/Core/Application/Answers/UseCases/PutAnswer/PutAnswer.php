@@ -8,14 +8,17 @@ use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Attributes\Services\AttributeOppositionPolicy;
 use App\Models\Attribute;
 use App\Models\PlayerAnswer;
-use App\Core\Application\Characters\Services\CandidateAttributesGetter\InputDto as CandidateAttributesGetterDto;
-use App\Core\Application\Characters\Services\CandidateAttributesGetter\CandidateAttributesGetter;
+use App\Core\Application\Characters\Services\CandidateDataGetter\InputDto as CandidateDataGetterDto;
+use App\Core\Application\Characters\Services\CandidateDataGetter\CandidateDataGetter;
 use App\Models\Character;
+use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
+use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 
 class PutAnswer
 {
     public function __construct(
-        private CandidateAttributesGetter $candidateAttributesGetter
+        private GetAnswers $getAnswers,
+        private CandidateDataGetter $candidateDataGetter
     ) {
     }
 
@@ -47,7 +50,6 @@ class PutAnswer
             return null;
         }
 
-        // transformar em repositório se fizer sentido
         $attribute = Attribute::where(['id' => $input->attributeId])->first();
 
         if (!$attribute->internal_name) {
@@ -83,14 +85,19 @@ class PutAnswer
             characterName: $characterName) : null;
     }
 
-    private function tryToGetCharacter(int $userId): ?string
+    private function tryToGetCharacter(int $playerId): ?string
     {
-        $characterAttributeData = $this->candidateAttributesGetter->execute(new CandidateAttributesGetterDto(
-            playerId: $userId
+        $answers = $this->getAnswers->execute(new GetAnswersDto(
+            playerId: $playerId
+        ))->answers;
+
+        $characterAttributeData = $this->candidateDataGetter->execute(new CandidateDataGetterDto(
+            playerId: $playerId,
+            answers: $answers
         ));
 
         if ($characterAttributeData->candidatesCount == 1) {
-            $character = Character::find($characterAttributeData->candidatesAttributes[0]->character_id);
+            $character = Character::find($characterAttributeData->candidatesAttributes[0]->characterId);
             return $character->name;
         }
 

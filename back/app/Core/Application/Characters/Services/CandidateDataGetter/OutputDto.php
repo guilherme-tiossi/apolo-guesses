@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Application\Characters\Services\CandidateAttributesGetter;
+namespace App\Core\Application\Characters\Services\CandidateDataGetter;
 
 readonly class OutputDto
 {
     public function __construct(
-        /** @var array[] */ // tipar melhor depois
+        /** @var CharacterAttributeDto[] */
         public array $candidatesAttributes,
         public int $candidatesCount
     ) {
