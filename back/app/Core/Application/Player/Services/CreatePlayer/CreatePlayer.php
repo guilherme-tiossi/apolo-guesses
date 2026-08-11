@@ -14,7 +14,7 @@ class CreatePlayer
         ]);
 
         return new OutputDto(
-            userId: $player->id
+            playerId: $player->id
         );
     }
 }

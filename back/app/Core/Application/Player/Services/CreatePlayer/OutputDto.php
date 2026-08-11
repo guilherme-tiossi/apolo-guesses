@@ -5,7 +5,7 @@ namespace App\Core\Application\Player\Services\CreatePlayer;
 readonly class OutputDto
 {
     public function __construct(
-        public int $userId
+        public int $playerId
     ) {
     }
 }

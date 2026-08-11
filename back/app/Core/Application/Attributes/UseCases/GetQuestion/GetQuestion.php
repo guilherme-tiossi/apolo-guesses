@@ -21,7 +21,7 @@ class GetQuestion
         ));
 
         return $questionGetter->execute(new GetQuestionInputDto(
-            userId: $dto->playerId
+            playerId: $dto->playerId
         ));
     }
 }

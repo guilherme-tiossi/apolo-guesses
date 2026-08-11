@@ -12,12 +12,6 @@ class CharacterAttributeSeeder extends Seeder
 {
     private const REQUIRED_INITIAL_GROUPS = [
         'skin' => [InitialAttribute::SKIN_FAIR, InitialAttribute::SKIN_DARK],
-        'hair' => [
-            InitialAttribute::HAIR_STRAIGHT,
-            InitialAttribute::HAIR_WAVY,
-            InitialAttribute::HAIR_CURLY,
-            InitialAttribute::HAIR_COILY,
-        ],
         'age' => [
             InitialAttribute::AGE_ADULT,
             InitialAttribute::AGE_CHILD,
@@ -114,10 +108,10 @@ class CharacterAttributeSeeder extends Seeder
         }
 
         $this->assertRequiredInitialAttributes($characterName, $initialNames);
-        $this->seedSignatureQuestion($characterName, $characterId, $signatureQuestion);
+        $this->seedSignatureQuestion($characterId, $signatureQuestion);
     }
 
-    private function seedSignatureQuestion(string $characterName, int $characterId, array $signatureQuestion): void
+    private function seedSignatureQuestion(int $characterId, array $signatureQuestion): void
     {
         DB::table('characters')->where('id', $characterId)->update([
             'signature_question' => $signatureQuestion['question'],
@@ -195,7 +189,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Pelé', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_CURLY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -203,10 +196,9 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
-            [SecondaryAttribute::RELIGION_IMPORTANT, 1],
 
             'Is your character described as black?' => 2,
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -215,7 +207,6 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character be known for dribbling?' => 2,
             'Does your character have football as main identity?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won major international awards?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
@@ -231,7 +222,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Muhammad Ali', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_COILY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -241,9 +231,10 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::RELIGION_IMPORTANT, 2],
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
 
+            'Is your character hair texture coily?' => 2,
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
-            'Does your character have a muscular build?' => 2,
+            'Does your character look muscular?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character compete in boxing?' => 2,
@@ -267,18 +258,16 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ayrton Senna', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_WAVY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
             [SecondaryAttribute::RELIGION_CHRISTIAN, 2],
-            [SecondaryAttribute::RELIGION_IMPORTANT, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with motorsports?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Is your character impulsive?' => 1.5,
             'Does your character take command in crisis?' => 2,
             'Does your character inspire others?' => 2,
@@ -300,7 +289,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rebeca Andrade', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_CURLY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -308,12 +296,11 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
             'Is your character described as black?' => 2,
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with olympic events?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character won national awards?' => 2,
             'Is your character known by world champion title?' => 2,
@@ -329,7 +316,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ana Maria Braga', [
             [InitialAttribute::SKIN_FAIR, 1.5],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -338,11 +324,11 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
+            'Is your character hair texture straight?' => 2,
             'Does your character work in entertainment?' => 2,
-            'Does your character work in television?' => 2,
+            'Does your character work mainly in television?' => 2,
             'Is your character known in talk shows?' => 2,
             'Is your character known in prime-time shows?' => 1.5,
-            'Was your character born in Brazil?' => 2,
             'Is your character warm and friendly?' => 2,
             'Does your character make jokes often?' => 1.5,
             'Does your character like cooking at home?' => 2,
@@ -359,7 +345,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Silvio Santos', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -367,16 +352,15 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
             [SecondaryAttribute::RELIGION_JEWISH, 2],
-            [SecondaryAttribute::RELIGION_IMPORTANT, 1.5],
             [SecondaryAttribute::POLITICAL_CONSERVATIVE, 1.5],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character described as white?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Does your character speak Portuguese?' => 2,
             'Does your character speak with a strong accent?' => 1.5,
             'Does your character have children?' => 2,
             'Does your character work in entertainment?' => 2,
-            'Does your character work in television?' => 2,
+            'Does your character work mainly in television?' => 2,
             'Is your character known in talk shows?' => 2,
             'Is your character known in prime-time shows?' => 2,
             'Is your character known in reality shows?' => 1.5,
@@ -426,13 +410,13 @@ class CharacterAttributeSeeder extends Seeder
         $this->seedCharacter('Neymar', [
             [InitialAttribute::SKIN_FAIR, 1],
             [InitialAttribute::SKIN_DARK, 1],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            // conteudo digital
 
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -441,7 +425,6 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character play in international tournaments?' => 2,
             'Does your character have football as main identity?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -455,7 +438,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ronaldinho Gaúcho', [
             [InitialAttribute::SKIN_DARK, 1.5],
-            [InitialAttribute::HAIR_CURLY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
@@ -463,7 +445,7 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Is your character described as black?' => 1,
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -471,7 +453,6 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character play in international tournaments?' => 2,
             'Does your character have football as main identity?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won major international awards?' => 2,
@@ -488,7 +469,6 @@ class CharacterAttributeSeeder extends Seeder
         $this->seedCharacter('Romário', [
             [InitialAttribute::SKIN_FAIR, 1],
             [InitialAttribute::SKIN_DARK, 1],
-            [InitialAttribute::HAIR_CURLY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -496,7 +476,7 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -505,7 +485,6 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character play in international tournaments?' => 2,
             'Does your character have football as main identity?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Is your character known by world champion title?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
@@ -520,13 +499,13 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Cristiano Ronaldo', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
-            'Does your character have a athletic build?' => 2,
+            'Is your character hair texture straight?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -550,13 +529,13 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Lionel Messi', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
-            'Does your character have a athletic build?' => 2,
+            'Is your character hair texture straight?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -581,14 +560,14 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Vini Jr.', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_COILY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
+            'Is your character hair texture coily?' => 2,
             'Is your character described as black?' => 2,
-            'Does your character have a athletic build?' => 2,
+            'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -597,7 +576,6 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character play in international tournaments?' => 2,
             'Does your character have football as main identity?' => 2,
             'Is your character mainly a player?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -611,7 +589,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Mike Tyson', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_COILY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -619,9 +596,10 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
             [SecondaryAttribute::RELIGION_MUSLIM, 1.5],
 
+            'Is your character hair texture coily?' => 2,
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
-            'Does your character have a muscular build?' => 2,
+            'Does your character look muscular?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character compete in boxing?' => 2,
@@ -643,17 +621,16 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Virgínia Fonseca', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
             [InitialAttribute::MEDIA_DIGITAL_CONTENT, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Does your character work in entertainment?' => 2,
-            'Does your character work in online digital content?' => 2,
-            'Does your character work in social platforms?' => 2,
-            'Was your character born in Brazil?' => 2,
+            'Does your character work mainly in online digital content?' => 2,
+            'Does your character work mainly in social platforms?' => 2,
             'Does your character have followers?' => 2,
             'Is your character known for large follower counts?' => 2,
             'Is your character known for short videos?' => 2,
@@ -669,7 +646,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Roberto Carlos', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -678,13 +654,13 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a singer?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character active in music?' => 2,
             'Is your character linked to pop music?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character linked to chart-topping songs?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won national awards?' => 2,
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -699,7 +675,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Caetano Veloso', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_WAVY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -714,7 +689,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character linked to songwriting?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character associated with writing as profession?' => 1.5,
-            'Was your character born in Brazil?' => 2,
             'Has your character won national awards?' => 2,
             'Has your character received public recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
@@ -729,7 +703,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Michael Jackson', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
@@ -759,22 +732,20 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Anitta', [
             [InitialAttribute::SKIN_FAIR, 1.5],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
             [InitialAttribute::MEDIA_DIGITAL_CONTENT, 1.5],
 
-            'Does your character have brown skin?' => 1,
+            'Is your character hair texture straight?' => 2,
             'Is your character a singer?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character active in music?' => 2,
             'Is your character linked to pop music?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character linked to chart-topping songs?' => 2,
-            'Does your character work in online digital content?' => 1.5,
-            'Was your character born in Brazil?' => 2,
+            'Does your character work mainly in online digital content?' => 1.5,
             'Has your character won national awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -788,7 +759,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Chico Buarque', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_WAVY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -804,7 +774,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character linked to songwriting?' => 2,
             'Is your character associated with novels?' => 2,
             'Is your character associated with writing as profession?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character won national awards?' => 2,
             'Has your character received public recognition?' => 2,
             'Did your character have cultural impact?' => 2,
@@ -818,7 +787,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Getúlio Vargas', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -826,11 +794,11 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a politician?' => 2,
             'Does your character work in public administration?' => 2,
-            'Does your character serve in government office?' => 2,
+            'Does your character serve/served in government office?' => 2,
             'Is your character politically active?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Did your character act as a ruler?' => 2,
             'Did your character have national impact?' => 2,
             'Did your character have long-term historical impact?' => 2,
@@ -847,7 +815,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Jair Bolsonaro', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -857,11 +824,11 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
             [SecondaryAttribute::POLITICAL_CONSERVATIVE, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a politician?' => 2,
             'Does your character work in public administration?' => 2,
-            'Does your character serve in government office?' => 2,
+            'Does your character serve/served in government office?' => 2,
             'Is your character politically active?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character associated with political controversy?' => 2,
@@ -877,7 +844,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Luiz Inácio Lula da Silva', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -887,11 +853,11 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a politician?' => 2,
             'Does your character work in public administration?' => 2,
-            'Does your character serve in government office?' => 2,
+            'Does your character serve/served in government office?' => 2,
             'Is your character politically active?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Does your character inspire others?' => 2,
             'Has your character won national awards?' => 1.5,
             'Has your character received public recognition?' => 2,
@@ -909,7 +875,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Fernando Henrique Cardoso', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -918,15 +883,15 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character a politician?' => 2,
             'Is your character a teacher?' => 1.5,
             'Does your character have a university degree?' => 2,
             'Does your character work in public administration?' => 2,
-            'Does your character serve in government office?' => 2,
+            'Does your character serve/served in government office?' => 2,
             'Is your character politically active?' => 2,
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Has your character received public recognition?' => 2,
             'Has your character received institutional recognition?' => 2,
             'Did your character have national impact?' => 2,
@@ -941,7 +906,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Dom Pedro II', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -949,8 +913,8 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character known as a king or queen?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Did your character act as a ruler?' => 2,
             'Is your character book-smart?' => 2,
             'Is your character associated with modern history?' => 2,
@@ -970,14 +934,13 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Zumbi dos Palmares', [
             [InitialAttribute::SKIN_DARK, 2],
-            [InitialAttribute::HAIR_COILY, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture coily?' => 2,
             'Is your character described as black?' => 2,
-            'Was your character born in Brazil?' => 2,
             'Did your character act as a ruler?' => 1.5,
             'Did your character act as a revolutionary?' => 2,
             'Was your character involved in a social movement?' => 2,
@@ -997,14 +960,12 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Princesa Isabel', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
-            'Was your character born in Brazil?' => 2,
-            'Was your character born in a royal family?' => 2,
+            'Is your character hair texture straight?' => 2,
             'Did your character act as a ruler?' => 1.5,
             'Was your character involved in a social movement?' => 2,
             'Was your character involved in a political transition?' => 1.5,
@@ -1022,12 +983,12 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Napoleão Bonaparte', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character French?' => 2,
             'Is your character known as a king or queen?' => 1.5,
             'Did your character act as a ruler?' => 2,
@@ -1049,12 +1010,12 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Sócrates', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
             'Is your character known for solving complex problems?' => 2,
@@ -1073,12 +1034,12 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Platão', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
             'Is your character a teacher?' => 2,
@@ -1097,12 +1058,12 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Friedrich Nietzsche', [
             [InitialAttribute::SKIN_FAIR, 2],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
+            'Is your character hair texture straight?' => 2,
             'Is your character German?' => 2,
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
@@ -1121,7 +1082,6 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Machado de Assis', [
             [InitialAttribute::SKIN_FAIR, 1.5],
-            [InitialAttribute::HAIR_STRAIGHT, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -1134,7 +1094,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character associated with novels?' => 2,
             'Is your character associated with writing as profession?' => 2,
             'Is your character associated with best-selling books?' => 1.5,
-            'Was your character born in Brazil?' => 2,
             'Is your character book-smart?' => 2,
             'Did your character have national impact?' => 2,
             'Did your character have cultural impact?' => 2,

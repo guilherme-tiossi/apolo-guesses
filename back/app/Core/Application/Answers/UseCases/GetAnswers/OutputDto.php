@@ -3,8 +3,6 @@
 namespace App\Core\Application\Answers\UseCases\GetAnswers;
 
 use App\Core\Domain\Answers\Entities\Answer;
-use App\Core\Domain\Attributes\Entities\Attribute;
-
 
 readonly class OutputDto
 {

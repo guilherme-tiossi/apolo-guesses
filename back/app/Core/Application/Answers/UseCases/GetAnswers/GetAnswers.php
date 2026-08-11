@@ -8,14 +8,12 @@ use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Models\PlayerAnswer;
 
-// possivelmente trocar para service
 class GetAnswers
 {    
     public function execute(InputDto $input): OutputDto
     {
-        // usar algum repositório no futuro
         $bruteAnswers = PlayerAnswer::with('attribute')
-            ->where('player_id', $input->userId)
+            ->where('player_id', $input->playerId)
             ->get()
             ->toArray();
 
@@ -33,7 +31,7 @@ class GetAnswers
                 );
 
             return new Answer(
-                userId: $input->userId,
+                playerId: $input->playerId,
                 attribute: $attribute,
                 value: $answer['answer_score']
             );
