@@ -6,6 +6,8 @@ use App\Core\Application\Answers\UseCases\PutAnswer\PutAnswer;
 use App\Core\Application\Answers\UseCases\PutAnswer\InputDto as PutAnswerInputDto;
 use App\Core\Application\Attributes\UseCases\GetQuestion\GetQuestion;
 use App\Core\Application\Attributes\UseCases\GetQuestion\InputDto as QuestionGetterInputDto;
+use App\Models\Character;
+use App\Models\Attribute;
 use Exception;
 
 class Play
@@ -37,9 +39,26 @@ class Play
             answerScore: $input->answerScore
         ));
 
+        // temporário... melhorar!
+        $attribute = Attribute::find($input->attributeId);       
+        if ($attribute->character_id) {
+            if ($input->answerScore > 1) {
+                $character = Character::find($answerResult->characterId);
+                return new OutputDto(
+                    characterName: $character->name,
+                    playerId: $input->playerId
+                );
+            } else {
+                throw new Exception("Personagem não encontrado!", 400);
+            }
+        }
+
         if ($answerResult) {
+            $character = Character::find($answerResult->characterId);
+            $attribute = Attribute::where('character_id', $character->id)->first();
             return new OutputDto(
-                characterName: $answerResult->characterName,
+                question: $attribute->portuguese_question,
+                attributeId: $attribute->id,
                 playerId: $input->playerId
             );
         }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->boolean('is_secondary_question')->default(false);
             $table->string('internal_name')->nullable()->unique();
             $table->unique(['attribute_subgroup_id', 'question']);
+            $table->foreignId('character_id')->nullable();
         });
     }
 

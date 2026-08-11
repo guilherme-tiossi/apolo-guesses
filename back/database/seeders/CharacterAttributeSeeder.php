@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Core\Domain\Attributes\Enums\AttributeSubgroup;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use Illuminate\Database\Seeder;
@@ -113,10 +114,35 @@ class CharacterAttributeSeeder extends Seeder
 
     private function seedSignatureQuestion(int $characterId, array $signatureQuestion): void
     {
-        DB::table('characters')->where('id', $characterId)->update([
-            'signature_question' => $signatureQuestion['question'],
-            'signature_portuguese_question' => $signatureQuestion['portuguese_question'],
-        ]);
+        if ($signatureQuestion === []) {
+            return;
+        }
+
+        DB::table('attributes')->updateOrInsert(
+            ['character_id' => $characterId],
+            [
+                'attribute_subgroup_id' => AttributeSubgroup::SIGNATURE_TRAITS->value,
+                'question' => $signatureQuestion['question'],
+                'portuguese_question' => $signatureQuestion['portuguese_question'],
+                'is_initial_question' => false,
+                'is_secondary_question' => false,
+                'internal_name' => null,
+            ]
+        );
+
+        $attributeId = DB::table('attributes')
+            ->where('character_id', $characterId)
+            ->value('id');
+
+        DB::table('character_attributes')->updateOrInsert(
+            [
+                'character_id' => $characterId,
+                'attribute_id' => $attributeId,
+            ],
+            [
+                'score' => 2,
+            ]
+        );
     }
 
     private function assertRequiredInitialAttributes(string $characterName, array $initialNames): void
@@ -637,8 +663,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Has your character received public recognition?' => 2,
         ], $this->signature(
-            'Did your character build a major career as a digital influencer from Minas Gerais?',
-            'Seu personagem construiu grande carreira como influenciadora digital mineira?'
+            'Was your character investigated for its involvement with bets?',
+            'Seu personagem esteve envolvido na CPI das bets?'
         ));
     }
 

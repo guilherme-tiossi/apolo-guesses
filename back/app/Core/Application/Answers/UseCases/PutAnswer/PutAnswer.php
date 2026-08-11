@@ -53,9 +53,9 @@ class PutAnswer
         $attribute = Attribute::where(['id' => $input->attributeId])->first();
 
         if (!$attribute->internal_name) {
-            $characterName = $this->tryToGetCharacter($input->playerId);
-            return $characterName ? new OutputDto(
-                characterName: $characterName) : null;
+            $characterId = $this->tryToGetCharacter($input->playerId);
+            return $characterId ? new OutputDto(
+                characterId: $characterId) : null;
         }
 
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
@@ -80,9 +80,9 @@ class PutAnswer
             ]);
         }
 
-        $characterName = $this->tryToGetCharacter($input->playerId);
-        return $characterName ? new OutputDto(
-            characterName: $characterName) : null;
+        $characterId = $this->tryToGetCharacter($input->playerId);
+        return $characterId ? new OutputDto(
+            characterId: $characterId) : null;
     }
 
     private function tryToGetCharacter(int $playerId): ?string
@@ -98,7 +98,7 @@ class PutAnswer
 
         if ($characterAttributeData->candidatesCount == 1) {
             $character = Character::find($characterAttributeData->candidatesAttributes[0]->characterId);
-            return $character->name;
+            return $character->id;
         }
 
         return null;
