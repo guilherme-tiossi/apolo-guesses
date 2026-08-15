@@ -57,6 +57,37 @@ class CharacterAttributeSeeder extends Seeder
         $this->rebecaAndrade();
         $this->anaMariaBraga();
         $this->silvioSantos();
+        $this->elisRegina();
+        $this->mariliaMendonca();
+        $this->fernandaMontenegro();
+        $this->marieCurie();
+        $this->clariceLispector();
+        $this->dilmaRousseff();
+        $this->rainhaElizabethII();
+        $this->giseleBundchen();
+        $this->iveteSangalo();
+        $this->brunaMarquezine();
+        $this->reginaCase();
+        $this->chaves();
+        $this->monica();
+        $this->homerSimpson();
+        $this->mickeyMouse();
+        $this->bobEsponja();
+        $this->capitaoNascimento();
+        $this->zePequeno();
+        $this->michaelJordan();
+        $this->albertEinstein();
+        $this->lewisHamilton();
+        $this->rafaelNadal();
+        $this->stevenSpielberg();
+        $this->elonMusk();
+        $this->pabloPicasso();
+        $this->conorMcGregor();
+        $this->rivaldo();
+        $this->oscarSchmidt();
+        $this->gabrielMedina();
+        $this->jorgeAmado();
+        $this->marcosPontes();
     }
 
     private function seedCharacter(string $characterName, array $attributes, array $signatureQuestion = []): void
@@ -225,14 +256,10 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character described as black?' => 2,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
             'Does your character score many goals?' => 2,
             'Does your character play in international tournaments?' => 2,
             'Does your character be known for dribbling?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Has your character won major international awards?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
@@ -261,18 +288,13 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
             'Does your character look muscular?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character compete in boxing?' => 2,
             'Does your character compete in high-level combat tournaments?' => 2,
-            'Is your character mainly a player?' => 2,
             'Has your character won major international awards?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
-            'Does your character have an iconic catchphrase?' => 2,
-            'Is your character associated with political controversy?' => 1.5,
             'Does your character inspire others?' => 2,
         ], $this->signature(
             'Did your character refuse to be drafted into the Vietnam War?',
@@ -291,9 +313,8 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::RELIGION_CHRISTIAN, 2],
 
             'Is your character hair texture straight?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Is your character associated with motorsports?' => 2,
+            'Did your character die in tragic circumstances?' => 2,
             'Does your character take command in crisis?' => 2,
             'Does your character inspire others?' => 2,
             'Does your character hold a speed record?' => 2,
@@ -303,7 +324,6 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
-            'Is your character mainly a player?' => 2,
         ], $this->signature(
             'Did your character die at the Imola circuit?',
             'Seu personagem morreu no circuito de Imola?'
@@ -322,10 +342,7 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character described as black?' => 2,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Is your character associated with olympic events?' => 2,
-            'Is your character mainly a player?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character won national awards?' => 2,
             'Is your character known by world champion title?' => 2,
@@ -391,7 +408,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known in reality shows?' => 1.5,
             'Does your character own a company?' => 2,
             'Does your character focus on sales?' => 2,
-            'Does your character build global brands?' => 1.5,
             'Does your character manage large teams?' => 2,
             'Is your character warm and friendly?' => 2,
             'Does your character make jokes often?' => 2,
@@ -402,17 +418,10 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character lead a team?' => 2,
             'Does your character have followers?' => 2,
             'Does your character live a luxurious lifestyle?' => 2,
-            'Does your character have an iconic catchphrase?' => 2,
-            'Does your character have a humorous recurring line?' => 2,
-            'Does your character have speech style with memorable lines?' => 2,
-            'Is your character known for a unique laugh?' => 2,
-            'Is your character known for a recognizable voice?' => 2,
-            'Is your character known for an unmistakable attitude?' => 2,
             'Is your character known by a famous nickname?' => 2,
             'Is your character known by a nickname used more than real name?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won national awards?' => 2,
-            'Has your character won industry awards?' => 1.5,
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
@@ -440,14 +449,9 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
-            'Does your character play as a forward?' => 2,
             'Does your character be known for dribbling?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -469,13 +473,9 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character described as black?' => 1,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
             'Does your character be known for dribbling?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won major international awards?' => 2,
@@ -500,14 +500,9 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
-            'Does your character play as a forward?' => 2,
             'Does your character score many goals?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Is your character known by world champion title?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
@@ -529,14 +524,9 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character hair texture straight?' => 2,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
-            'Does your character play as a forward?' => 2,
             'Does your character score many goals?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won major international awards?' => 2,
@@ -559,15 +549,10 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character hair texture straight?' => 2,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
-            'Does your character play as a forward?' => 2,
             'Does your character score many goals?' => 2,
             'Does your character be known for dribbling?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Is your character known by world champion title?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won major international awards?' => 2,
@@ -591,14 +576,9 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character hair texture coily?' => 2,
             'Is your character described as black?' => 2,
             'Does your character look lean?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
-            'Does your character play as a forward?' => 2,
             'Does your character be known for dribbling?' => 2,
             'Does your character play in international tournaments?' => 2,
-            'Does your character have football as main identity?' => 2,
-            'Is your character mainly a player?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
@@ -623,11 +603,8 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
             'Does your character look muscular?' => 2,
-            'Is your character a athlete?' => 2,
-            'Does your character work in sports?' => 2,
             'Does your character compete in boxing?' => 2,
             'Does your character compete in high-level combat tournaments?' => 2,
-            'Is your character mainly a player?' => 2,
             'Is your character aggressive?' => 2,
             'Is your character known by world champion title?' => 2,
             'Has your character won major international awards?' => 2,
@@ -679,9 +656,7 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character hair texture straight?' => 2,
             'Is your character a singer?' => 2,
-            'Does your character work in entertainment?' => 2,
-            'Is your character active in music?' => 2,
-            'Is your character linked to pop music?' => 2,
+            'Is your character linked to MPB?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character linked to chart-topping songs?' => 2,
             'Has your character won national awards?' => 2,
@@ -707,13 +682,11 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
             'Is your character a singer?' => 2,
-            'Does your character work in entertainment?' => 2,
-            'Is your character active in music?' => 2,
+            'Is your character linked to MPB?' => 2,
             'Is your character linked to songwriting?' => 2,
             'Is your character linked to live performances?' => 2,
-            'Is your character associated with writing as profession?' => 1.5,
+            'Was your character involved in political exile?' => 2,
             'Has your character won national awards?' => 2,
-            'Has your character received public recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have cultural impact?' => 2,
         ], $this->signature(
@@ -725,8 +698,8 @@ class CharacterAttributeSeeder extends Seeder
     private function michaelJackson(): void
     {
         $this->seedCharacter('Michael Jackson', [
-            // rever isso aqui
-            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::SKIN_FAIR, 1],
+            [InitialAttribute::SKIN_DARK, 1],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
@@ -734,18 +707,16 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
             'Is your character a singer?' => 2,
-            'Does your character work in entertainment?' => 2,
-            'Is your character active in music?' => 2,
             'Is your character linked to pop music?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character linked to chart-topping songs?' => 2,
+            'Did your character die in tragic circumstances?' => 2,
             'Is your character known for award-winning performances?' => 2,
             'Is your character known by legend title?' => 2,
             'Has your character won major international awards?' => 2,
             'Has your character received international recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have global impact?' => 2,
-            'Is your character known for a specific pose?' => 2,
         ], $this->signature(
             'Did your character release the album Thriller?',
             'Seu personagem lançou o álbum Thriller?'
@@ -764,8 +735,6 @@ class CharacterAttributeSeeder extends Seeder
 
             'Is your character hair texture straight?' => 2,
             'Is your character a singer?' => 2,
-            'Does your character work in entertainment?' => 2,
-            'Is your character active in music?' => 2,
             'Is your character linked to pop music?' => 2,
             'Is your character linked to live performances?' => 2,
             'Is your character linked to chart-topping songs?' => 2,
@@ -792,14 +761,13 @@ class CharacterAttributeSeeder extends Seeder
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
             'Is your character a singer?' => 2,
-            'Does your character work in entertainment?' => 2,
-            'Is your character active in music?' => 2,
-            'Is your character active in literature?' => 2,
+            'Is your character linked to MPB?' => 2,
             'Is your character linked to songwriting?' => 2,
+            'Is your character active in theater?' => 2,
+            'Is your character active in literature?' => 2,
             'Is your character associated with novels?' => 2,
-            'Is your character associated with writing as profession?' => 2,
+            'Was your character involved in political exile?' => 1.5,
             'Has your character won national awards?' => 2,
-            'Has your character received public recognition?' => 2,
             'Did your character have cultural impact?' => 2,
         ], $this->signature(
             'Did your character write the song Construção?',
@@ -855,7 +823,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character politically active?' => 2,
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
-            'Is your character associated with political controversy?' => 2,
             'Is your character associated with polarizing opinions?' => 2,
             'Is your character linked to Brazil?' => 2,
         ], $this->signature(
@@ -887,7 +854,6 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
-            'Is your character associated with political controversy?' => 1.5,
             'Is your character linked to Brazil?' => 2,
         ], $this->signature(
             'Does your character have nine fingers?',
@@ -917,7 +883,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
             'Has your character received public recognition?' => 2,
-            'Has your character received institutional recognition?' => 2,
             'Did your character have national impact?' => 2,
             'Is your character linked to Brazil?' => 2,
         ], $this->signature(
@@ -1042,7 +1007,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character hair texture straight?' => 2,
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
-            'Is your character known for solving complex problems?' => 2,
             'Is your character associated with ancient history?' => 2,
             'Did your character have global impact?' => 2,
             'Did your character have long-term historical impact?' => 2,
@@ -1067,7 +1031,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character analytical?' => 2,
             'Is your character book-smart?' => 2,
             'Is your character a teacher?' => 2,
-            'Is your character known for solving complex problems?' => 2,
             'Is your character associated with ancient history?' => 2,
             'Did your character have global impact?' => 2,
             'Did your character have long-term historical impact?' => 2,
@@ -1116,17 +1079,708 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character described as black?' => 1.5,
             'Is your character active in literature?' => 2,
             'Is your character associated with novels?' => 2,
+            'Is your character associated with short stories?' => 2,
             'Is your character associated with writing as profession?' => 2,
-            'Is your character associated with best-selling books?' => 1.5,
+            'Is your character associated with modern history?' => 2,
             'Is your character book-smart?' => 2,
             'Did your character have national impact?' => 2,
-            'Did your character have cultural impact?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character known by legend title?' => 2,
             'Is your character linked to Brazil?' => 2,
         ], $this->signature(
             'Was your character the first president of the Brazilian Academy of Letters?',
             'Seu personagem foi o primeiro presidente da Academia Brasileira de Letras?'
+        ));
+    }
+
+    private function elisRegina(): void
+    {
+        $this->seedCharacter('Elis Regina', [
+            [InitialAttribute::SKIN_FAIR, 1.5],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character a singer?' => 2,
+            'Is your character linked to MPB?' => 2,
+            'Is your character linked to bossa nova?' => 2,
+            'Is your character linked to live performances?' => 2,
+            'Did your character die in tragic circumstances?' => 2,
+            'Has your character won national awards?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character record the song Arrastão?',
+            'Seu personagem gravou a música Arrastão?'
+        ));
+    }
+
+    private function mariliaMendonca(): void
+    {
+        $this->seedCharacter('Marília Mendonça', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character a singer?' => 2,
+            'Is your character linked to sertanejo music?' => 2,
+            'Is your character linked to songwriting?' => 2,
+            'Is your character linked to live performances?' => 2,
+            'Did your character die in tragic circumstances?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character received media recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Was your character one of the main names of sertanejo music?',
+            'Seu personagem foi um dos principais nomes do sertanejo?'
+        ));
+    }
+
+    private function fernandaMontenegro(): void
+    {
+        $this->seedCharacter('Fernanda Montenegro', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character a actor?' => 2,
+            'Does your character work in entertainment?' => 2,
+            'Is your character known for drama movies?' => 2,
+            'Is your character known for award-winning performances?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character received international recognition?' => 2,
+            'Is your character known by legend title?' => 2,
+        ], $this->signature(
+            'Was your character nominated for an Oscar for Central Station?',
+            'Seu personagem foi indicada ao Oscar por Central do Brasil?'
+        ));
+    }
+
+    private function marieCurie(): void
+    {
+        $this->seedCharacter('Marie Curie', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character French?' => 2,
+            'Is your character a scientist?' => 2,
+            'Is your character analytical?' => 2,
+            'Is your character book-smart?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Did your character have global impact?' => 2,
+            'Is your character associated with Europe?' => 2,
+        ], $this->signature(
+            'Did your character win two Nobel Prizes?',
+            'Seu personagem ganhou dois Prêmios Nobel?'
+        ));
+    }
+
+    private function clariceLispector(): void
+    {
+        $this->seedCharacter('Clarice Lispector', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character active in literature?' => 2,
+            'Is your character associated with experimental prose?' => 2,
+            'Is your character associated with modernist literature?' => 2,
+            'Is your character associated with short stories?' => 2,
+            'Is your character associated with writing as profession?' => 2,
+            'Is your character book-smart?' => 2,
+            'Did your character have cultural impact?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character write The Passion According to G.H.?',
+            'Seu personagem escreveu A Paixão Segundo G.H.?'
+        ));
+    }
+
+    private function dilmaRousseff(): void
+    {
+        $this->seedCharacter('Dilma Rousseff', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+            [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
+
+            'Is your character a politician?' => 2,
+            'Does your character work in public administration?' => 2,
+            'Does your character serve/served in government office?' => 2,
+            'Is your character politically active?' => 2,
+            'Is your character associated with controversies?' => 2,
+            'Is your character associated with polarizing opinions?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Was your character impeached as president of Brazil?',
+            'Seu personagem sofreu impeachment como presidente do Brasil?'
+        ));
+    }
+
+    private function rainhaElizabethII(): void
+    {
+        $this->seedCharacter('Rainha Elizabeth II', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character British?' => 2,
+            'Is your character known as a king or queen?' => 2,
+            'Did your character act as a ruler?' => 2,
+            'Did your character have global impact?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Is your character associated with Europe?' => 2,
+        ], $this->signature(
+            'Did your character reign for more than 70 years?',
+            'Seu personagem reinou por mais de 70 anos?'
+        ));
+    }
+
+    private function giseleBundchen(): void
+    {
+        $this->seedCharacter('Gisele Bündchen', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character very tall?' => 2,
+            'Does your character look lean?' => 2,
+            'Does your character usually wear a elegant style?' => 2,
+            'Does your character work in entertainment?' => 2,
+            'Has your character received international recognition?' => 2,
+            'Has your character received media recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+            'Is your character linked to United States?' => 2,
+        ], $this->signature(
+            'Was your character one of the highest-paid models in the world?',
+            'Seu personagem foi uma das modelos mais bem pagas do mundo?'
+        ));
+    }
+
+    private function iveteSangalo(): void
+    {
+        $this->seedCharacter('Ivete Sangalo', [
+            [InitialAttribute::SKIN_FAIR, 1.5],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character a singer?' => 2,
+            'Is your character linked to axé music?' => 2,
+            'Is your character linked to pop music?' => 2,
+            'Is your character linked to live performances?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character received public recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Is your character famous for performing in Carnival in Salvador?',
+            'Seu personagem é famosa por se apresentar no Carnaval de Salvador?'
+        ));
+    }
+
+    private function brunaMarquezine(): void
+    {
+        $this->seedCharacter('Bruna Marquezine', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+            [InitialAttribute::MEDIA_DIGITAL_CONTENT, 1.5],
+
+            'Is your character a actor?' => 2,
+            'Does your character work in entertainment?' => 2,
+            'Is your character known in tv series?' => 2,
+            'Does your character work mainly in social platforms?' => 2,
+            'Is your character known for large follower counts?' => 2,
+            'Has your character received media recognition?' => 2,
+        ], $this->signature(
+            'Was your character the lead in the novela Deus Salve o Rei?',
+            'Seu personagem foi protagonista da novela Deus Salve o Rei?'
+        ));
+    }
+
+    private function reginaCase(): void
+    {
+        $this->seedCharacter('Regina Casé', [
+            [InitialAttribute::SKIN_FAIR, 1.5],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character a actor?' => 2,
+            'Does your character work in entertainment?' => 2,
+            'Is your character known in tv series?' => 2,
+            'Is your character warm and friendly?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character received public recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character host the TV show Esquenta?',
+            'Seu personagem apresentou o programa Esquenta?'
+        ));
+    }
+
+    private function chaves(): void
+    {
+        $this->seedCharacter('Chaves', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_CHILD, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character speak Spanish?' => 2,
+            'Is your character primarily a protagonist?' => 2,
+            'Is your character warm and friendly?' => 2,
+            'Is your character known in tv series?' => 2,
+            'Is your character known by a famous nickname?' => 2,
+        ], $this->signature(
+            'Does your character live in a barrel?',
+            'Seu personagem mora em um barril?'
+        ));
+    }
+
+    private function monica(): void
+    {
+        $this->seedCharacter('Mônica', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_CHILD, 2],
+            [InitialAttribute::GENDER_FEMALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character primarily a protagonist?' => 2,
+            [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
+            'Is your character aggressive?' => 1.5,
+            'Is your character known by a famous nickname?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Does your character have super strength in her comics?',
+            'Seu personagem tem superforça nos quadrinhos?'
+        ));
+    }
+
+    private function homerSimpson(): void
+    {
+        $this->seedCharacter('Homer Simpson', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character look fat?' => 2,
+            'Does your character speak English?' => 2,
+            'Is your character primarily a protagonist?' => 2,
+            'Is your character known in tv series?' => 2,
+            'Does your character make jokes often?' => 2,
+            'Is your character known for memes?' => 2,
+            'Is your character linked to United States?' => 2,
+        ], $this->signature(
+            'Does your character work at a nuclear power plant?',
+            'Seu personagem trabalha em uma usina nuclear?'
+        ));
+    }
+
+    private function mickeyMouse(): void
+    {
+        $this->seedCharacter('Mickey Mouse', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have no hair?' => 2,
+            'Is your character primarily a protagonist?' => 2,
+            [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
+            'Is your character known by a nickname used more than real name?' => 2,
+            'Did your character have global impact?' => 2,
+            'Is your character linked to United States?' => 2,
+        ], $this->signature(
+            'Is your character the mascot of Disney?',
+            'Seu personagem é o mascote da Disney?'
+        ));
+    }
+
+    private function bobEsponja(): void
+    {
+        $this->seedCharacter('Bob Esponja', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character primarily a protagonist?' => 2,
+            [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
+            'Is your character warm and friendly?' => 2,
+            'Does your character make jokes often?' => 2,
+            'Is your character known in tv series?' => 2,
+            'Is your character known for memes?' => 2,
+        ], $this->signature(
+            'Does your character work at the Krusty Krab?',
+            'Seu personagem trabalha no Siri Cascudo?'
+        ));
+    }
+
+    private function capitaoNascimento(): void
+    {
+        $this->seedCharacter('Capitão Nascimento', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+            [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
+
+            'Is your character primarily a protagonist?' => 2,
+            'Is your character known for action movies?' => 2,
+            'Is your character aggressive?' => 1.5,
+            'Does your character take command in crisis?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character say "Operação acabou"?',
+            'Seu personagem disse "Operação acabou"?'
+        ));
+    }
+
+    private function zePequeno(): void
+    {
+        $this->seedCharacter('Zé Pequeno', [
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+            [SecondaryAttribute::ALIGNMENT_VILLAINOUS, 2],
+
+            'Is your character described as black?' => 2,
+            'Is your character primarily a antagonist?' => 2,
+            'Is your character morally gray?' => 2,
+            'Is your character aggressive?' => 2,
+            'Is your character known for drama movies?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Is your character the villain of City of God?',
+            'Seu personagem é o vilão de Cidade de Deus?'
+        ));
+    }
+
+    private function michaelJordan(): void
+    {
+        $this->seedCharacter('Michael Jordan', [
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character American?' => 2,
+            'Is your character very tall?' => 2,
+            'Does your character look muscular?' => 2,
+            'Does your character play basketball professionally?' => 2,
+            'Does your character win basketball championships?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character received international recognition?' => 2,
+        ], $this->signature(
+            'Did your character win six NBA championships?',
+            'Seu personagem ganhou seis campeonatos da NBA?'
+        ));
+    }
+
+    private function albertEinstein(): void
+    {
+        $this->seedCharacter('Albert Einstein', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character German?' => 2,
+            'Is your character a scientist?' => 2,
+            'Is your character analytical?' => 2,
+            'Is your character book-smart?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Did your character have global impact?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+        ], $this->signature(
+            'Did your character develop the theory of relativity?',
+            'Seu personagem desenvolveu a teoria da relatividade?'
+        ));
+    }
+
+    private function lewisHamilton(): void
+    {
+        $this->seedCharacter('Lewis Hamilton', [
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character British?' => 2,
+            'Is your character described as black?' => 2,
+            'Is your character associated with motorsports?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Has your character received international recognition?' => 2,
+        ], $this->signature(
+            'Has your character won seven Formula 1 world titles?',
+            'Seu personagem ganhou sete títulos mundiais de Fórmula 1?'
+        ));
+    }
+
+    private function rafaelNadal(): void
+    {
+        $this->seedCharacter('Rafael Nadal', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character speak Spanish?' => 2,
+            'Is your character associated with tennis?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Is your character associated with Europe?' => 2,
+        ], $this->signature(
+            'Has your character won the most French Open titles in history?',
+            'Seu personagem venceu o maior número de Roland Garros na história?'
+        ));
+    }
+
+    private function stevenSpielberg(): void
+    {
+        $this->seedCharacter('Steven Spielberg', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character American?' => 2,
+            'Does your character work in entertainment?' => 2,
+            'Is your character active in cinema?' => 2,
+            'Is your character known for award-winning performances?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Did your character have cultural impact?' => 2,
+            'Is your character known by legend title?' => 2,
+        ], $this->signature(
+            'Did your character direct Jurassic Park?',
+            'Seu personagem dirigiu Jurassic Park?'
+        ));
+    }
+
+    private function elonMusk(): void
+    {
+        $this->seedCharacter('Elon Musk', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character American?' => 2,
+            'Does your character work in technology?' => 2,
+            'Does your character own a company?' => 2,
+            'Is your character strategic?' => 2,
+            'Does your character live a luxurious lifestyle?' => 2,
+            'Is your character associated with controversies?' => 2,
+            'Is your character associated with polarizing opinions?' => 2,
+            'Has your character received media recognition?' => 2,
+        ], $this->signature(
+            'Is your character the CEO of Tesla?',
+            'Seu personagem é CEO da Tesla?'
+        ));
+    }
+
+    private function pabloPicasso(): void
+    {
+        $this->seedCharacter('Pablo Picasso', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character speak Spanish?' => 2,
+            'Is your character linked to France?' => 2,
+            'Is your character impulsive?' => 1.5,
+            'Did your character have cultural impact?' => 2,
+            'Did your character have global impact?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Is your character associated with Europe?' => 2,
+        ], $this->signature(
+            'Did your character co-found the Cubist movement?',
+            'Seu personagem cofundou o movimento cubista?'
+        ));
+    }
+
+    private function conorMcGregor(): void
+    {
+        $this->seedCharacter('Conor McGregor', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character speak English?' => 2,
+            'Does your character compete in mma?' => 2,
+            'Does your character compete in high-level combat tournaments?' => 2,
+            'Is your character aggressive?' => 2,
+            'Is your character impulsive?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Is your character associated with controversies?' => 2,
+            'Has your character received media recognition?' => 2,
+        ], $this->signature(
+            'Did your character hold UFC titles in two weight classes simultaneously?',
+            'Seu personagem foi campeão simultâneo em duas categorias do UFC?'
+        ));
+    }
+
+    private function rivaldo(): void
+    {
+        $this->seedCharacter('Rivaldo', [
+            [InitialAttribute::SKIN_DARK, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character described as black?' => 2,
+            'Does your character look lean?' => 2,
+            'Does your character play football professionally?' => 2,
+            'Does your character score many goals?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Has your character won major international awards?' => 2,
+        ], $this->signature(
+            'Did your character win the Ballon d\'Or in 2002?',
+            'Seu personagem ganhou a Bola de Ouro em 2002?'
+        ));
+    }
+
+    private function oscarSchmidt(): void
+    {
+        $this->seedCharacter('Oscar Schmidt', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character very tall?' => 2,
+            'Does your character play basketball professionally?' => 2,
+            'Is your character associated with olympic events?' => 2,
+            'Has your character won national awards?' => 2,
+            'Is your character known by legend title?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character score 55 points in a single Olympic game?',
+            'Seu personagem marcou 55 pontos em um jogo olímpico?'
+        ));
+    }
+
+    private function gabrielMedina(): void
+    {
+        $this->seedCharacter('Gabriel Medina', [
+            [InitialAttribute::SKIN_FAIR, 1.5],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character look lean?' => 2,
+            'Is your character associated with surfing?' => 2,
+            'Is your character known by world champion title?' => 2,
+            'Has your character won major international awards?' => 2,
+            'Has your character received media recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Has your character won multiple world surfing titles?',
+            'Seu personagem ganhou múltiplos títulos mundiais de surfe?'
+        ));
+    }
+
+    private function jorgeAmado(): void
+    {
+        $this->seedCharacter('Jorge Amado', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::AGE_ELDERLY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Is your character active in literature?' => 2,
+            'Is your character associated with novels?' => 2,
+            'Is your character associated with magical realism?' => 2,
+            'Is your character associated with writing as profession?' => 2,
+            'Did your character have national impact?' => 2,
+            'Did your character have cultural impact?' => 2,
+            'Has your character received a historic level of recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Did your character write Dona Flor and Her Two Husbands?',
+            'Seu personagem escreveu Dona Flor e Seus Dois Maridos?'
+        ));
+    }
+
+    private function marcosPontes(): void
+    {
+        $this->seedCharacter('Marcos Pontes', [
+            [InitialAttribute::SKIN_FAIR, 2],
+            [InitialAttribute::AGE_ADULT, 2],
+            [InitialAttribute::AGE_OVER_FORTY, 2],
+            [InitialAttribute::GENDER_MALE, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
+            [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Is your character a scientist?' => 2,
+            'Does your character have formal military training?' => 2,
+            'Is your character analytical?' => 2,
+            'Has your character won national awards?' => 2,
+            'Has your character received public recognition?' => 2,
+            'Is your character linked to Brazil?' => 2,
+        ], $this->signature(
+            'Was your character the first Brazilian in space?',
+            'Seu personagem foi o primeiro brasileiro no espaço?'
         ));
     }
 }
