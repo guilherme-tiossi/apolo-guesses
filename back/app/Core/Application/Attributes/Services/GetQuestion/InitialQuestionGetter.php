@@ -7,13 +7,16 @@ use App\Models\Attribute;
 use Exception;
 use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
+use App\Core\Application\Attributes\Services\GetBlacklistedAttributes\GetBlacklistedAttributes;
+use App\Core\Application\Attributes\Services\GetBlacklistedAttributes\InputDto as BlacklistedAttributesDto;
 use App\Core\Application\Player\Services\CreatePlayer\CreatePlayer;
 
 class InitialQuestionGetter implements QuestionGetter
 {
     public function __construct(
         private CreatePlayer $createPlayer,
-        private GetAnswers $getAnswers
+        private GetAnswers $getAnswers,
+        private GetBlacklistedAttributes $getBlacklistedAttributes
     ) {
     }
 
@@ -32,15 +35,23 @@ class InitialQuestionGetter implements QuestionGetter
             );
         }
 
+        $blacklistedAttributesByEnum = $this->getBlacklistedAttributesByEnum($playerId);
+
         foreach (InitialAttribute::cases() as $attributeEnum) {
-            if (!in_array($attributeEnum, $this->getAnsweredAttributeEnums($previousAnswers))) {
-                $attribute = $this->getAttribute($attributeEnum);
-                return new OutputDto(
-                    question: $attribute->portuguese_question,
-                    attributeId: $attribute->id,
-                    playerId: $playerId
-                );
+            if (in_array($attributeEnum, $this->getAnsweredAttributeEnums($previousAnswers))) {
+                continue;
             }
+
+            if (!empty($blacklistedAttributesByEnum[$attributeEnum->value])) {
+                continue;
+            }
+
+            $attribute = $this->getAttribute($attributeEnum);
+            return new OutputDto(
+                question: $attribute->portuguese_question,
+                attributeId: $attribute->id,
+                playerId: $playerId
+            );
         }
 
         // appexception no futuro
@@ -63,5 +74,21 @@ class InitialQuestionGetter implements QuestionGetter
         }
 
         return $attributes;
+    }
+
+    private function getBlacklistedAttributesByEnum(int $playerId): array
+    {
+        $blacklistedAttributes = $this->getBlacklistedAttributes->execute(
+            new BlacklistedAttributesDto(
+                playerId: $playerId
+            )
+        )->attributes;
+
+        $blacklistedAttributesByEnum = [];
+        foreach ($blacklistedAttributes as $attribute) {
+            $blacklistedAttributesByEnum[$attribute->enum->value] = true;
+        }
+
+        return $blacklistedAttributesByEnum;
     }
 }

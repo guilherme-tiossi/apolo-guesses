@@ -294,7 +294,6 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with motorsports?' => 2,
-            'Is your character impulsive?' => 1.5,
             'Does your character take command in crisis?' => 2,
             'Does your character inspire others?' => 2,
             'Does your character hold a speed record?' => 2,
@@ -440,8 +439,6 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
-            // conteudo digital
-
             'Does your character look lean?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
@@ -728,6 +725,7 @@ class CharacterAttributeSeeder extends Seeder
     private function michaelJackson(): void
     {
         $this->seedCharacter('Michael Jackson', [
+            // rever isso aqui
             [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],

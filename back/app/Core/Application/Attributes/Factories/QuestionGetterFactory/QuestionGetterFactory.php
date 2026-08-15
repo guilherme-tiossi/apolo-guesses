@@ -6,8 +6,8 @@ use App\Core\Application\Attributes\Services\GetQuestion\InitialQuestionGetter;
 use App\Core\Application\Attributes\Services\GetQuestion\SmartQuestionGetter;
 use App\Core\Application\Attributes\Services\GetQuestion\QuestionGetter;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
-use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Models\PlayerAnswer;
+use App\Models\PlayerAttributeBlacklist;
 
 class QuestionGetterFactory
 {
@@ -23,9 +23,13 @@ class QuestionGetterFactory
             'player_id' => $input->playerId
         ])->count();
 
-        $totalInitialAttributes = count(InitialAttribute::cases()); // + count(SecondaryAttribute::cases());
+        $skippedQuestions = PlayerAttributeBlacklist::where([
+            'player_id' => $input->playerId
+        ])->count();
 
-        if ($answeredQuestions >= $totalInitialAttributes) {
+        $totalInitialAttributes = count(InitialAttribute::cases());
+
+        if (($answeredQuestions + $skippedQuestions) >= $totalInitialAttributes) {
             return $this->smartQuestionGetter;
         }
 

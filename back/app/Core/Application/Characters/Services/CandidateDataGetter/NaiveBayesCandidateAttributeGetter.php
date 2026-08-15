@@ -4,6 +4,7 @@ namespace App\Core\Application\Characters\Services\CandidateDataGetter;
 
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Models\CharacterAttribute;
+use Illuminate\Support\Facades\DB;
 
 class NaiveBayesCandidateAttributeGetter
 {
@@ -34,11 +35,18 @@ class NaiveBayesCandidateAttributeGetter
 
         $candidateAttributes = [];
         foreach ($candidates as $candidate) {
-            $attributes = CharacterAttribute::where('character_id', $candidate['character_id'])->get();
+            $attributes = count($candidates) > 1 ?
+                DB::table('character_attributes')
+                    ->join('attributes', 'attributes.id', '=', 'character_attributes.attribute_id')
+                    ->where('character_attributes.character_id', $candidate['character_id'])
+                    ->where('attributes.character_id', null)
+                    ->get(['character_attributes.attribute_id', 'character_attributes.character_id']) :
+                CharacterAttribute::where('character_id', $candidate['character_id'])->get();
+
             foreach ($attributes as $attribute) {
                 $candidateAttributes[] = new CandidateAttributeDto(
-                    characterId: $attribute['character_id'],
-                    attributeId: $attribute['attribute_id']
+                    characterId: $attribute->character_id,
+                    attributeId: $attribute->attribute_id
                 );
             }
         }
@@ -73,8 +81,10 @@ class NaiveBayesCandidateAttributeGetter
                 : $negativeAnswersByAttributeId[$answer->attribute->id] = $answer;
         }
 
-        $baseCandidates = CharacterAttribute::charactersByAnswers($answers)->get()->toArray()
-            ?? CharacterAttribute::charactersByAnswers($answers, false)->get()->toArray();
+        $baseCandidates = CharacterAttribute::charactersByAnswers($answers)->get()->toArray() ?: 
+            CharacterAttribute::charactersByAnswers($answers, true)->get()->toArray();
+
+        // se não acha talvez pegar só com atributos iniciais
 
         unset($answers);
 

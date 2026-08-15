@@ -13,6 +13,8 @@ use App\Core\Application\Characters\Services\CandidateDataGetter\CandidateDataGe
 use App\Models\Character;
 use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
 use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
+use App\Core\Domain\Attributes\Services\AttributeIgnorancePolicy;
+use App\Models\PlayerAttributeBlacklist;
 
 class PutAnswer
 {
@@ -77,6 +79,17 @@ class PutAnswer
                 'player_id' => $input->playerId,
                 'attribute_id' => $oppositeAttribute->id,
                 'answer_score' => self::MAX_ANSWER_SCORE - $answerScore // if is_blonde = 1.75, is_redhead must equal 0.25
+            ]);
+        }
+
+        $redundantAttributes = AttributeIgnorancePolicy::shouldIgnore($attributeEnum, $answerScore);
+
+        foreach ($redundantAttributes as $redundantEnum) {
+            $redundantAttribute = Attribute::where(['internal_name' => $redundantEnum->value])->first();
+
+            PlayerAttributeBlacklist::create([
+                'player_id' => $input->playerId,
+                'attribute_id' => $redundantAttribute->id,
             ]);
         }
 

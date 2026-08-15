@@ -38,12 +38,19 @@ class FilterCandidateAttributeGetter
         }
 
         $subQueryCharacters = CharacterAttribute::charactersByAnswers($answers);
+        $qtyCandidates = $subQueryCharacters->count();
 
-        $characterAttributeData = DB::table('characters')
+        $characterAttributeQuery = DB::table('characters')
             ->join('character_attributes', 'character_attributes.character_id', '=', 'characters.id')
+            ->join('attributes', 'attributes.id', '=', 'character_attributes.attribute_id')
             ->whereNotIn('attribute_id', $answeredAttributeIds)
-            ->whereIn('characters.id', $subQueryCharacters)
-            ->get([
+            ->whereIn('characters.id', $subQueryCharacters);
+        
+        if ($qtyCandidates > 1) {
+            $characterAttributeQuery->where('attributes.character_id', null);
+        }
+
+        $characterAttributeData = $characterAttributeQuery->get([
                 'characters.id as character_id',
                 'character_attributes.attribute_id'
             ])->toArray();
