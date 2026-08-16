@@ -37,7 +37,6 @@ class AttributeIgnorancePolicy
     public static function shouldIgnore(Attribute $attribute, float $answerScore): array
     {
         if (!empty(self::SHOULD_IGNORE_WHEN_POSITIVE[$attribute->value]) && $answerScore >= 1.25) {
-            dd('uai so');
             return self::SHOULD_IGNORE_WHEN_POSITIVE[$attribute->value];
         }
 

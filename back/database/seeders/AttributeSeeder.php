@@ -478,6 +478,12 @@ class AttributeSeeder extends Seeder
                 ['France', 'França'],
                 ['Germany', 'Alemanha'],
             ]],
+            [AttributeSubgroup::REGION, 'Is your character %s?', 'Seu personagem é %s?', [
+                ['carioca', 'carioca'],
+                ['baiano', 'baiano'],
+                ['paulista', 'paulista'],
+                ['gaúcho', 'gaúcho'],
+            ]],
         ]);
     }
 
