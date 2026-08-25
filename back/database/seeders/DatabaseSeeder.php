@@ -12,9 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CharacterCategorySeeder::class,
-            AttributeGroupSeeder::class,
-            AttributeSubgroupSeeder::class,
+            CategorySeeder::class,
+            SubcategorySeeder::class,
             AttributeSeeder::class,
             AttributeOppositionSeeder::class,
             CharacterSeeder::class,

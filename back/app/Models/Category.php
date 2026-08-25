@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name'])]
-class CharacterCategory extends Model
+class Category extends Model
 {
+    public $timestamps = false;
+
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class);
+    }
+
+    public function subcategories(): HasMany
+    {
+        return $this->hasMany(Subcategory::class);
     }
 }

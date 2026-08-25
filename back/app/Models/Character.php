@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[Fillable([
     'name',
     'picture',
-    'character_category_id',
+    'category_id',
 ])]
 class Character extends Model
 {
-    public function characterCategory(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(CharacterCategory::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function attributes(): HasMany

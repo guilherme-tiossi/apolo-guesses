@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Characters\Enums\CharacterCategory;
+use App\Core\Domain\Shared\Enums\CharacterCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CharacterCategorySeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     public function run(): void
     {
         foreach (CharacterCategory::cases() as $category) {
-            DB::table('character_categories')->updateOrInsert([
+            DB::table('categories')->updateOrInsert([
                 'id' => $category->value,
             ], [
                 'name' => $category->label(),

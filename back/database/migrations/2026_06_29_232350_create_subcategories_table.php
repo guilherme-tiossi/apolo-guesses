@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('attribute_subgroups', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained();
             $table->string('name');
-            $table->foreignId('attribute_group_id')->constrained();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('attribute_subgroups');
+        Schema::dropIfExists('subcategories');
     }
 };

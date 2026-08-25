@@ -10,14 +10,15 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('attribute_subgroup_id')->constrained();
+            $table->foreignId('category_id')->nullable()->constrained();
+            $table->foreignId('subcategory_id')->nullable()->constrained();
             $table->string('question');
             $table->string('portuguese_question');
             $table->boolean('is_initial_question')->default(false);
             $table->boolean('is_secondary_question')->default(false);
             $table->string('internal_name')->nullable()->unique();
-            $table->unique(['attribute_subgroup_id', 'question']);
             $table->foreignId('character_id')->nullable();
+            $table->unique(['question']);
         });
     }
 

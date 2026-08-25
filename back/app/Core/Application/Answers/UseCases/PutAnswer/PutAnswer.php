@@ -29,8 +29,6 @@ class PutAnswer
     public function execute(InputDto $input): ?OutputDto
     {
         $answerScore = $input->answerScore;
-        $answerPositive = $answerScore >= 1.50;
-        $answerNegative = $answerScore <= 0.50;
 
         $existingAnswer = PlayerAnswer::where([
             'player_id' => $input->playerId,
@@ -48,10 +46,6 @@ class PutAnswer
             'answer_score' => $answerScore
         ]);
 
-        if (!$answerNegative && !$answerPositive) {
-            return null;
-        }
-
         $attribute = Attribute::where(['id' => $input->attributeId])->first();
 
         if (!$attribute->internal_name) {
@@ -63,7 +57,7 @@ class PutAnswer
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
             ?? SecondaryAttribute::tryFrom($attribute->internal_name);
         $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum, $answerScore);
-        
+
         foreach ($opposites as $oppositeEnum) {
             $oppositeAttribute = Attribute::where(['internal_name' => $oppositeEnum->value])->first();
             $existingOppositeAnswer = PlayerAnswer::where([

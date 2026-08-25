@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Attributes\Enums\AttributeSubgroup;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use Illuminate\Database\Seeder;
@@ -12,7 +11,6 @@ use RuntimeException;
 class CharacterAttributeSeeder extends Seeder
 {
     private const REQUIRED_INITIAL_GROUPS = [
-        'skin' => [InitialAttribute::SKIN_FAIR, InitialAttribute::SKIN_DARK],
         'age' => [
             InitialAttribute::AGE_ADULT,
             InitialAttribute::AGE_CHILD,
@@ -152,7 +150,8 @@ class CharacterAttributeSeeder extends Seeder
         DB::table('attributes')->updateOrInsert(
             ['character_id' => $characterId],
             [
-                'attribute_subgroup_id' => AttributeSubgroup::SIGNATURE_TRAITS->value,
+                'category_id' => null,
+                'subcategory_id' => null,
                 'question' => $signatureQuestion['question'],
                 'portuguese_question' => $signatureQuestion['portuguese_question'],
                 'is_initial_question' => false,
@@ -245,13 +244,13 @@ class CharacterAttributeSeeder extends Seeder
     private function pele(): void
     {
         $this->seedCharacter('Pelé', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+            'Does your character have dark skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
             'Is your character described as black?' => 2,
@@ -278,12 +277,12 @@ class CharacterAttributeSeeder extends Seeder
     private function muhammadAli(): void
     {
         $this->seedCharacter('Muhammad Ali', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+            'Does your character have dark skin?' => 2,
             [SecondaryAttribute::RELIGION_MUSLIM, 2],
             [SecondaryAttribute::RELIGION_IMPORTANT, 2],
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
@@ -313,11 +312,12 @@ class CharacterAttributeSeeder extends Seeder
     private function ayrtonSenna(): void
     {
         $this->seedCharacter('Ayrton Senna', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 2],
 
             'Is your character hair texture straight?' => 2,
@@ -347,11 +347,11 @@ class CharacterAttributeSeeder extends Seeder
     private function rebecaAndrade(): void
     {
         $this->seedCharacter('Rebeca Andrade', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
             'Is your character described as black?' => 2,
@@ -377,13 +377,15 @@ class CharacterAttributeSeeder extends Seeder
     private function anaMariaBraga(): void
     {
         $this->seedCharacter('Ana Maria Braga', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
             'Is your character hair texture straight?' => 2,
@@ -409,13 +411,14 @@ class CharacterAttributeSeeder extends Seeder
     private function silvioSantos(): void
     {
         $this->seedCharacter('Silvio Santos', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::RELIGION_JEWISH, 2],
             [SecondaryAttribute::POLITICAL_CONSERVATIVE, 1.5],
 
@@ -466,13 +469,14 @@ class CharacterAttributeSeeder extends Seeder
     private function neymar(): void
     {
         $this->seedCharacter('Neymar', [
-            [InitialAttribute::SKIN_FAIR, 1],
-            [InitialAttribute::SKIN_DARK, 1],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
             'Does your character look lean?' => 2,
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -492,12 +496,14 @@ class CharacterAttributeSeeder extends Seeder
     private function ronaldinhoGaucho(): void
     {
         $this->seedCharacter('Ronaldinho Gaúcho', [
-            [InitialAttribute::SKIN_DARK, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
 
             'Is your character described as black?' => 1,
             'Does your character look lean?' => 2,
@@ -524,8 +530,6 @@ class CharacterAttributeSeeder extends Seeder
     private function romario(): void
     {
         $this->seedCharacter('Romário', [
-            [InitialAttribute::SKIN_FAIR, 1],
-            [InitialAttribute::SKIN_DARK, 1],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -534,6 +538,9 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character look lean?' => 2,
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character play football professionally?' => 2,
@@ -554,11 +561,12 @@ class CharacterAttributeSeeder extends Seeder
     private function cristianoRonaldo(): void
     {
         $this->seedCharacter('Cristiano Ronaldo', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Does your character look lean?' => 2,
@@ -584,11 +592,12 @@ class CharacterAttributeSeeder extends Seeder
     private function lionelMessi(): void
     {
         $this->seedCharacter('Lionel Messi', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Does your character look lean?' => 2,
@@ -615,11 +624,11 @@ class CharacterAttributeSeeder extends Seeder
     private function viniJr(): void
     {
         $this->seedCharacter('Vini Jr.', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
 
             'Is your character hair texture coily?' => 2,
             'Is your character described as black?' => 2,
@@ -645,12 +654,12 @@ class CharacterAttributeSeeder extends Seeder
     private function mikeTyson(): void
     {
         $this->seedCharacter('Mike Tyson', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
             [SecondaryAttribute::RELIGION_MUSLIM, 1.5],
 
             'Is your character hair texture coily?' => 2,
@@ -678,12 +687,12 @@ class CharacterAttributeSeeder extends Seeder
     private function virginiaFonseca(): void
     {
         $this->seedCharacter('Virgínia Fonseca', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
-            [InitialAttribute::MEDIA_DIGITAL_CONTENT, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -706,13 +715,14 @@ class CharacterAttributeSeeder extends Seeder
     private function robertoCarlos(): void
     {
         $this->seedCharacter('Roberto Carlos', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
 
             'Is your character hair texture straight?' => 2,
@@ -728,23 +738,23 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character known by legend title?' => 1.5,
             'Is your character linked to Brazil?' => 2,
-            'Is your character paulista?' => 2,
         ], $this->signature(
-            'Is your character famous for a bending free kick against France in 1997?',
-            'Seu personagem é famoso por um gol de falta curva contra a França em 1997?'
+            'Did your character record the song Detalhes?',
+            'Seu personagem gravou a música Detalhes?'
         ));
     }
 
     private function caetanoVeloso(): void
     {
         $this->seedCharacter('Caetano Veloso', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
             'Does your character speak Portuguese?' => 2,
@@ -773,11 +783,12 @@ class CharacterAttributeSeeder extends Seeder
     private function michaelJackson(): void
     {
         $this->seedCharacter('Michael Jackson', [
-            [InitialAttribute::SKIN_FAIR, 1],
-            [InitialAttribute::SKIN_DARK, 1],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 0.5,
+            'Does your character have dark skin?' => 1.5,
 
             'Is your character American?' => 2,
             'Is your character described as black?' => 2,
@@ -803,12 +814,13 @@ class CharacterAttributeSeeder extends Seeder
     private function anitta(): void
     {
         $this->seedCharacter('Anitta', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
-            [InitialAttribute::MEDIA_DIGITAL_CONTENT, 1.5],
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
 
             'Is your character hair texture straight?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -833,13 +845,14 @@ class CharacterAttributeSeeder extends Seeder
     private function chicoBuarque(): void
     {
         $this->seedCharacter('Chico Buarque', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
             'Does your character speak Portuguese?' => 2,
@@ -870,13 +883,14 @@ class CharacterAttributeSeeder extends Seeder
     private function getulioVargas(): void
     {
         $this->seedCharacter('Getúlio Vargas', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -901,13 +915,14 @@ class CharacterAttributeSeeder extends Seeder
     private function jairBolsonaro(): void
     {
         $this->seedCharacter('Jair Bolsonaro', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
             [SecondaryAttribute::POLITICAL_CONSERVATIVE, 2],
 
@@ -933,13 +948,14 @@ class CharacterAttributeSeeder extends Seeder
     private function lula(): void
     {
         $this->seedCharacter('Luiz Inácio Lula da Silva', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::RELIGION_CHRISTIAN, 1.5],
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
 
@@ -967,13 +983,14 @@ class CharacterAttributeSeeder extends Seeder
     private function fernandoHenriqueCardoso(): void
     {
         $this->seedCharacter('Fernando Henrique Cardoso', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 1.5],
 
             'Is your character hair texture straight?' => 2,
@@ -1002,13 +1019,14 @@ class CharacterAttributeSeeder extends Seeder
     private function domPedroII(): void
     {
         $this->seedCharacter('Dom Pedro II', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character known as a king or queen?' => 2,
@@ -1031,11 +1049,11 @@ class CharacterAttributeSeeder extends Seeder
     private function zumbiDosPalmares(): void
     {
         $this->seedCharacter('Zumbi dos Palmares', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+            'Does your character have dark skin?' => 2,
 
             'Is your character hair texture coily?' => 2,
             'Is your character described as black?' => 2,
@@ -1059,11 +1077,12 @@ class CharacterAttributeSeeder extends Seeder
     private function princesaIsabel(): void
     {
         $this->seedCharacter('Princesa Isabel', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character known as a king or queen?' => 1.5,
@@ -1086,11 +1105,12 @@ class CharacterAttributeSeeder extends Seeder
     private function napoleaoBonaparte(): void
     {
         $this->seedCharacter('Napoleão Bonaparte', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character French?' => 2,
@@ -1113,11 +1133,12 @@ class CharacterAttributeSeeder extends Seeder
     private function socrates(): void
     {
         $this->seedCharacter('Sócrates', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character analytical?' => 2,
@@ -1138,11 +1159,12 @@ class CharacterAttributeSeeder extends Seeder
     private function platao(): void
     {
         $this->seedCharacter('Platão', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character analytical?' => 2,
@@ -1164,11 +1186,12 @@ class CharacterAttributeSeeder extends Seeder
     private function nietzsche(): void
     {
         $this->seedCharacter('Friedrich Nietzsche', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character hair texture straight?' => 2,
             'Is your character German?' => 2,
@@ -1192,13 +1215,15 @@ class CharacterAttributeSeeder extends Seeder
     private function machadoDeAssis(): void
     {
         $this->seedCharacter('Machado de Assis', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
 
             'Is your character described as black?' => 1.5,
             'Does your character speak Portuguese?' => 2,
@@ -1224,11 +1249,12 @@ class CharacterAttributeSeeder extends Seeder
     private function elisRegina(): void
     {
         $this->seedCharacter('Elis Regina', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character a singer?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -1254,11 +1280,12 @@ class CharacterAttributeSeeder extends Seeder
     private function mariliaMendonca(): void
     {
         $this->seedCharacter('Marília Mendonça', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character a singer?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -1282,7 +1309,6 @@ class CharacterAttributeSeeder extends Seeder
     private function fernandaMontenegro(): void
     {
         $this->seedCharacter('Fernanda Montenegro', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -1291,6 +1317,8 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character a actor?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character active in cinema?' => 2,
@@ -1312,10 +1340,11 @@ class CharacterAttributeSeeder extends Seeder
     private function marieCurie(): void
     {
         $this->seedCharacter('Marie Curie', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character French?' => 2,
             'Is your character a scientist?' => 2,
@@ -1336,13 +1365,14 @@ class CharacterAttributeSeeder extends Seeder
     private function clariceLispector(): void
     {
         $this->seedCharacter('Clarice Lispector', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character active in literature?' => 2,
             'Is your character associated with experimental prose?' => 2,
             'Is your character associated with modernist literature?' => 2,
@@ -1363,12 +1393,13 @@ class CharacterAttributeSeeder extends Seeder
     private function dilmaRousseff(): void
     {
         $this->seedCharacter('Dilma Rousseff', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::POLITICAL_PROGRESSIVE, 2],
 
             'Does your character speak Portuguese?' => 2,
@@ -1393,12 +1424,13 @@ class CharacterAttributeSeeder extends Seeder
     private function rainhaElizabethII(): void
     {
         $this->seedCharacter('Rainha Elizabeth II', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character British?' => 2,
             'Is your character known as a king or queen?' => 2,
@@ -1421,11 +1453,12 @@ class CharacterAttributeSeeder extends Seeder
     private function giseleBundchen(): void
     {
         $this->seedCharacter('Gisele Bündchen', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character very tall?' => 2,
             'Does your character look lean?' => 2,
@@ -1449,12 +1482,14 @@ class CharacterAttributeSeeder extends Seeder
     private function iveteSangalo(): void
     {
         $this->seedCharacter('Ivete Sangalo', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
 
             'Is your character a singer?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -1479,14 +1514,14 @@ class CharacterAttributeSeeder extends Seeder
     private function brunaMarquezine(): void
     {
         $this->seedCharacter('Bruna Marquezine', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
-            [InitialAttribute::MEDIA_DIGITAL_CONTENT, 1.5],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character a actor?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character active in cinema?' => 1.5,
@@ -1507,7 +1542,6 @@ class CharacterAttributeSeeder extends Seeder
     private function reginaCase(): void
     {
         $this->seedCharacter('Regina Casé', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
@@ -1515,6 +1549,9 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
             'Is your character a actor?' => 2,
             'Does your character work in entertainment?' => 2,
             'Does your character work mainly in television?' => 2,
@@ -1536,7 +1573,6 @@ class CharacterAttributeSeeder extends Seeder
     private function chaves(): void
     {
         $this->seedCharacter('Chaves', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_CHILD, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
@@ -1544,6 +1580,8 @@ class CharacterAttributeSeeder extends Seeder
 
             'Does your character speak Spanish?' => 2,
             'Does your character work in entertainment?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character primarily a protagonist?' => 2,
             'Is your character warm and friendly?' => 2,
             'Does your character make jokes often?' => 2,
@@ -1559,13 +1597,14 @@ class CharacterAttributeSeeder extends Seeder
     private function monica(): void
     {
         $this->seedCharacter('Mônica', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_CHILD, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Is your character primarily a protagonist?' => 2,
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
             'Does your character work in entertainment?' => 2,
             'Is your character warm and friendly?' => 2,
@@ -1583,7 +1622,6 @@ class CharacterAttributeSeeder extends Seeder
     private function homerSimpson(): void
     {
         $this->seedCharacter('Homer Simpson', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
@@ -1592,6 +1630,8 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character look fat?' => 2,
             'Does your character speak English?' => 2,
             'Does your character work in entertainment?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character primarily a protagonist?' => 2,
             'Is your character known in tv series?' => 2,
             'Does your character make jokes often?' => 2,
@@ -1608,7 +1648,6 @@ class CharacterAttributeSeeder extends Seeder
     private function mickeyMouse(): void
     {
         $this->seedCharacter('Mickey Mouse', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
@@ -1617,6 +1656,8 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character have no hair?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character primarily a protagonist?' => 2,
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
             'Is your character warm and friendly?' => 2,
             'Is your character known in tv series?' => 2,
@@ -1634,7 +1675,6 @@ class CharacterAttributeSeeder extends Seeder
     private function bobEsponja(): void
     {
         $this->seedCharacter('Bob Esponja', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
@@ -1643,6 +1683,8 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character speak English?' => 2,
             'Does your character work in entertainment?' => 2,
             'Is your character primarily a protagonist?' => 2,
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
             'Is your character warm and friendly?' => 2,
             'Does your character make jokes often?' => 2,
@@ -1659,11 +1701,12 @@ class CharacterAttributeSeeder extends Seeder
     private function capitaoNascimento(): void
     {
         $this->seedCharacter('Capitão Nascimento', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
 
             'Is your character a actor?' => 2,
@@ -1685,11 +1728,11 @@ class CharacterAttributeSeeder extends Seeder
     private function zePequeno(): void
     {
         $this->seedCharacter('Zé Pequeno', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+            'Does your character have dark skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_VILLAINOUS, 2],
 
             'Is your character described as black?' => 2,
@@ -1712,11 +1755,11 @@ class CharacterAttributeSeeder extends Seeder
     private function michaelJordan(): void
     {
         $this->seedCharacter('Michael Jordan', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
 
             'Is your character American?' => 2,
             'Is your character very tall?' => 2,
@@ -1741,11 +1784,12 @@ class CharacterAttributeSeeder extends Seeder
     private function albertEinstein(): void
     {
         $this->seedCharacter('Albert Einstein', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character German?' => 2,
             'Is your character a scientist?' => 2,
@@ -1767,10 +1811,10 @@ class CharacterAttributeSeeder extends Seeder
     private function lewisHamilton(): void
     {
         $this->seedCharacter('Lewis Hamilton', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
 
             'Is your character British?' => 2,
             'Is your character described as black?' => 2,
@@ -1793,13 +1837,14 @@ class CharacterAttributeSeeder extends Seeder
     private function rafaelNadal(): void
     {
         $this->seedCharacter('Rafael Nadal', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character speak Spanish?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with tennis?' => 2,
@@ -1819,11 +1864,12 @@ class CharacterAttributeSeeder extends Seeder
     private function stevenSpielberg(): void
     {
         $this->seedCharacter('Steven Spielberg', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character American?' => 2,
             'Does your character work in entertainment?' => 2,
@@ -1846,11 +1892,12 @@ class CharacterAttributeSeeder extends Seeder
     private function elonMusk(): void
     {
         $this->seedCharacter('Elon Musk', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character American?' => 2,
             'Does your character work in technology?' => 2,
@@ -1874,13 +1921,14 @@ class CharacterAttributeSeeder extends Seeder
     private function pabloPicasso(): void
     {
         $this->seedCharacter('Pablo Picasso', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
             'Does your character speak Spanish?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character linked to France?' => 2,
             'Is your character active in literature?' => 1,
             'Is your character impulsive?' => 1.5,
@@ -1899,12 +1947,13 @@ class CharacterAttributeSeeder extends Seeder
     private function conorMcGregor(): void
     {
         $this->seedCharacter('Conor McGregor', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character speak English?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Does your character compete in mma?' => 2,
@@ -1925,12 +1974,12 @@ class CharacterAttributeSeeder extends Seeder
     private function rivaldo(): void
     {
         $this->seedCharacter('Rivaldo', [
-            [InitialAttribute::SKIN_DARK, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+            'Does your character have dark skin?' => 2,
 
             'Is your character described as black?' => 2,
             'Does your character look lean?' => 2,
@@ -1955,13 +2004,14 @@ class CharacterAttributeSeeder extends Seeder
     private function oscarSchmidt(): void
     {
         $this->seedCharacter('Oscar Schmidt', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
+
+            'Does your character have fair skin?' => 2,
 
             'Is your character very tall?' => 2,
             'Does your character speak Portuguese?' => 2,
@@ -1984,7 +2034,6 @@ class CharacterAttributeSeeder extends Seeder
     private function gabrielMedina(): void
     {
         $this->seedCharacter('Gabriel Medina', [
-            [InitialAttribute::SKIN_FAIR, 1.5],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1992,6 +2041,9 @@ class CharacterAttributeSeeder extends Seeder
 
             'Does your character look lean?' => 2,
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 1,
+            'Does your character have dark skin?' => 1,
             'Is your character a athlete?' => 2,
             'Does your character work in sports?' => 2,
             'Is your character associated with surfing?' => 2,
@@ -2011,7 +2063,6 @@ class CharacterAttributeSeeder extends Seeder
     private function jorgeAmado(): void
     {
         $this->seedCharacter('Jorge Amado', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::AGE_ELDERLY, 2],
@@ -2020,6 +2071,8 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_DECEASED, 2],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character active in literature?' => 2,
             'Is your character associated with novels?' => 2,
             'Is your character associated with magical realism?' => 2,
@@ -2040,7 +2093,6 @@ class CharacterAttributeSeeder extends Seeder
     private function marcosPontes(): void
     {
         $this->seedCharacter('Marcos Pontes', [
-            [InitialAttribute::SKIN_FAIR, 2],
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::AGE_OVER_FORTY, 2],
             [InitialAttribute::GENDER_MALE, 2],
@@ -2048,6 +2100,8 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::LIVING_ALIVE, 2],
 
             'Does your character speak Portuguese?' => 2,
+
+            'Does your character have fair skin?' => 2,
             'Is your character a scientist?' => 2,
             'Does your character have formal military training?' => 2,
             'Is your character analytical?' => 2,

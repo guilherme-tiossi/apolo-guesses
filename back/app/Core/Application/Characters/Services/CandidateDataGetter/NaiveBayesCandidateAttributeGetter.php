@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class NaiveBayesCandidateAttributeGetter
 {
-    private const SENSITIVE_ATTRIBUTES = [
-        InitialAttribute::SKIN_DARK,
-        InitialAttribute::SKIN_FAIR,
-    ];
-
     public function __construct(
     ) {
     }
@@ -64,15 +59,6 @@ class NaiveBayesCandidateAttributeGetter
         $negativeAnswersByAttributeId = [];
         foreach ($answers as $key => $answer) {
             if ($answer->value == 1) {
-                continue;
-            }
-
-            if (
-                in_array($answer->attribute->enum ?? null, self::SENSITIVE_ATTRIBUTES) &&
-                $answer->value != 2 &&
-                $answer->value != 0
-            ) {
-                unset($answers[$key]);
                 continue;
             }
 
