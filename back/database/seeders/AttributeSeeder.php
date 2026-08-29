@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Core\Domain\Attributes\Enums\CategoryAttribute;
+use App\Core\Domain\Attributes\Enums\SubcategoryAttribute;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Shared\Enums\CharacterCategory;
@@ -13,6 +15,8 @@ class AttributeSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->categoryAreas();
+        $this->subcategoryAreas();
         $this->appearance();
         $this->identity();
         $this->personality();
@@ -24,6 +28,74 @@ class AttributeSeeder extends Seeder
         $this->geography();
         $this->fiction();
         $this->miscellaneous();
+        $this->linkCategoryAttributes();
+        $this->linkSubcategoryAttributes();
+    }
+
+    private function categoryAreas(): void
+    {
+        $attributes = [];
+
+        foreach (CharacterCategory::cases() as $category) {
+            $attributes[] = [
+                'category_id' => $category->value,
+                'subcategory_id' => null,
+                'question' => $category->questionEn(),
+                'portuguese_question' => $category->questionPt(),
+                'is_initial_question' => false,
+                'is_secondary_question' => false,
+                'internal_name' => $category->attribute()->value,
+            ];
+        }
+
+        $this->seed($attributes);
+    }
+
+    private function linkCategoryAttributes(): void
+    {
+        foreach (CharacterCategory::cases() as $category) {
+            $attributeId = DB::table('attributes')
+                ->where('internal_name', CategoryAttribute::fromCategory($category)->value)
+                ->value('id');
+
+            DB::table('categories')
+                ->where('id', $category->value)
+                ->update(['attribute_id' => $attributeId]);
+        }
+    }
+
+    private function subcategoryAreas(): void
+    {
+        $attributes = [];
+
+        foreach (CharacterSubcategory::cases() as $subcategory) {
+            $isReligion = $subcategory === CharacterSubcategory::RELIGION;
+
+            $attributes[] = [
+                'category_id' => $subcategory->category()->value,
+                'subcategory_id' => $subcategory->value,
+                'question' => $subcategory->questionEn(),
+                'portuguese_question' => $subcategory->questionPt(),
+                'is_initial_question' => false,
+                'is_secondary_question' => $isReligion,
+                'internal_name' => $subcategory->attribute()->value,
+            ];
+        }
+
+        $this->seed($attributes);
+    }
+
+    private function linkSubcategoryAttributes(): void
+    {
+        foreach (CharacterSubcategory::cases() as $subcategory) {
+            $attributeId = DB::table('attributes')
+                ->where('internal_name', SubcategoryAttribute::fromSubcategory($subcategory)->value)
+                ->value('id');
+
+            DB::table('subcategories')
+                ->where('id', $subcategory->value)
+                ->update(['attribute_id' => $attributeId]);
+        }
     }
 
     private function seed(array $attributes): void
@@ -222,9 +294,6 @@ class AttributeSeeder extends Seeder
             [null, null, 'Did your character die in %s?', 'Seu personagem morreu em %s?', [
                 ['tragic circumstances', 'circunstâncias trágicas'],
             ]],
-            [CharacterCategory::RELIGION, CharacterSubcategory::RELIGION, 'Is religion one of the defining traits of your character?', 'A religião é um dos aspectos principais de seu personagem?', [
-                ['', '', SecondaryAttribute::RELIGION_IMPORTANT],
-            ]],
             [CharacterCategory::RELIGION, CharacterSubcategory::RELIGION, 'Does your character identify as %s?', 'Seu personagem se identifica como %s?', [
                 ['Christian', 'cristao', SecondaryAttribute::RELIGION_CHRISTIAN],
                 ['Muslim', 'muçulmano', SecondaryAttribute::RELIGION_MUSLIM],
@@ -299,39 +368,12 @@ class AttributeSeeder extends Seeder
                 ['lawyer', 'advogado'],
                 ['teacher', 'professor'],
             ]],
-            [CharacterCategory::ART, CharacterSubcategory::TV_AND_FILMS, 'Is your character a %s?', 'Seu personagem é %s?', [
-                ['actor', 'ator'],
-            ]],
             [CharacterCategory::ART, CharacterSubcategory::MUSIC, 'Is your character a %s?', 'Seu personagem é %s?', [
                 ['singer', 'cantor'],
-            ]],
-            [CharacterCategory::POLITICS_AND_MILITARY, CharacterSubcategory::POLITICS, 'Is your character a %s?', 'Seu personagem é %s?', [
-                ['politician', 'político'],
-            ]],
-            [CharacterCategory::SCIENCE_AND_TECHNOLOGY, CharacterSubcategory::SCIENCE, 'Is your character a %s?', 'Seu personagem é %s?', [
-                ['scientist', 'cientista'],
-            ]],
-            [CharacterCategory::SPORT, null, 'Does your character work in %s?', 'Seu personagem trabalha com %s?', [
-                ['sports', 'esportes'],
-            ]],
-            [CharacterCategory::ART, null, 'Does your character work in %s?', 'Seu personagem trabalha com %s?', [
-                ['entertainment', 'entretenimento'],
-            ]],
-            [CharacterCategory::SCIENCE_AND_TECHNOLOGY, CharacterSubcategory::TECHNOLOGY, 'Does your character work in %s?', 'Seu personagem trabalha com %s?', [
-                ['technology', 'tecnologia'],
-            ]],
-            [CharacterCategory::POLITICS_AND_MILITARY, CharacterSubcategory::POLITICS, 'Does your character work in %s?', 'Seu personagem trabalha com %s?', [
-                ['public administration', 'administração pública'],
-            ]],
-            [CharacterCategory::ART, CharacterSubcategory::MUSIC, 'Is your character active in %s?', 'Seu personagem atua em %s?', [
-                ['music', 'música'],
             ]],
             [CharacterCategory::ART, CharacterSubcategory::TV_AND_FILMS, 'Is your character active in %s?', 'Seu personagem atua em %s?', [
                 ['cinema', 'cinema'],
                 ['theater', 'teatro'],
-            ]],
-            [CharacterCategory::ART, CharacterSubcategory::WRITING, 'Is your character active in %s?', 'Seu personagem atua em %s?', [
-                ['literature', 'literatura'],
             ]],
             [null, null, 'Does your character %s?', 'Seu personagem %s?', [
                 ['own a company', 'é dono de empresa'],
@@ -342,24 +384,13 @@ class AttributeSeeder extends Seeder
                 ['cinema production', 'produção cinematográfica'],
             ]],
             [CharacterCategory::TELEVISION, CharacterSubcategory::TV_PRESENTATION, 'Is your character a %s?', 'Seu personagem é %s?', [
-                ['TV host', 'apresentador de TV'],
                 ['TV personality', 'personalidade da TV'],
             ]],
             [CharacterCategory::TELEVISION, CharacterSubcategory::TV_PRESENTATION, 'Does your character work mainly in %s?', 'Seu personagem trabalha principalmente com %s?', [
-                ['television', 'televisão'],
                 ['journalism', 'jornalismo'],
             ]],
             [CharacterCategory::FINANCE, CharacterSubcategory::FINANCE, 'Is your character a %s?', 'Seu personagem é %s?', [
-                ['investor', 'investidor'],
                 ['business leader', 'lider empresarial'],
-            ]],
-            [CharacterCategory::FINANCE, CharacterSubcategory::FINANCE, 'Does your character work mainly in %s?', 'Seu personagem trabalha principalmente com %s?', [
-                ['finance', 'finanças'],
-                ['investments', 'investimentos'],
-            ]],
-            [CharacterCategory::SOCIAL_MEDIA, CharacterSubcategory::SOCIAL_MEDIA, 'Does your character work mainly in %s?', 'Seu personagem trabalha principalmente com %s?', [
-                ['online digital content', 'conteudo digital online'],
-                ['social platforms', 'plataformas sociais'],
             ]],
             [CharacterCategory::POLITICS_AND_MILITARY, CharacterSubcategory::POLITICS, 'Does your character serve/served in %s?', 'Seu personagem atua/atuou em %s?', [
                 ['government office', 'cargo publico'],
@@ -372,7 +403,6 @@ class AttributeSeeder extends Seeder
     {
         $this->seedGroups([
             [CharacterCategory::SPORT, CharacterSubcategory::FOOTBALL, 'Does your character %s?', 'Seu personagem %s?', [
-                ['play football professionally', 'joga futebol profissionalmente'],
                 ['score many goals', 'marca muitos gols'],
                 ['play in international tournaments', 'joga torneios internacionais'],
                 ['be known for dribbling', 'é conhecido por dribles'],
@@ -386,13 +416,9 @@ class AttributeSeeder extends Seeder
                 ['olympic events', 'eventos olimpicos'],
                 ['surfing', 'surfe'],
             ]],
-            [CharacterCategory::SPORT, CharacterSubcategory::MOTORSPORTS, 'Is your character associated with %s?', 'Seu personagem está associado a %s?', [
-                ['motorsports', 'automobilismo'],
-            ]],
             [CharacterCategory::SPORT, CharacterSubcategory::COMBAT, 'Does your character compete in %s?', 'Seu personagem compete em %s?', [
                 ['boxing', 'boxe'],
                 ['mma', 'mma'],
-                ['high-level combat tournaments', 'torneios de combate de alto nivel'],
             ]],
             [CharacterCategory::SPORT, CharacterSubcategory::OTHER_SPORTS, 'Does your character %s?', 'Seu personagem %s?', [
                 ['compete in esports', 'compete em esports'],
@@ -423,6 +449,13 @@ class AttributeSeeder extends Seeder
             [$art, CharacterSubcategory::MUSIC, 'Is your character linked to %s?', 'Seu personagem está ligado a %s?', [
                 ['pop music', 'música pop'],
                 ['rock music', 'música rock'],
+                ['folk music', 'música folk'],
+                ['indie music', 'música indie'],
+                ['alternative rock', 'rock alternativo'],
+                ['electronic music', 'música eletrônica'],
+                ['hip hop music', 'hip hop'],
+                ['R&B music', 'R&B'],
+                ['punk rock', 'punk rock'],
                 ['live performances', 'apresentações ao vivo'],
                 ['songwriting', 'composicao musical'],
                 ['chart-topping songs', 'musicas de topo das paradas'],
@@ -442,12 +475,8 @@ class AttributeSeeder extends Seeder
                 ['magical realism', 'realismo mágico'],
                 ['short stories', 'contos'],
             ]],
-            [$art, CharacterSubcategory::POETRY, 'Is your character associated with %s?', 'Seu personagem está associado a %s?', [
-                ['poetry', 'poesia'],
-            ]],
             [$social, CharacterSubcategory::SOCIAL_MEDIA, 'Is your character known for %s?', 'Seu personagem é conhecido por %s?', [
                 ['short videos', 'videos curtos'],
-                ['large follower counts', 'grande numero de seguidores'],
                 ['memes', 'memes'],
             ]],
         ]);
@@ -499,9 +528,6 @@ class AttributeSeeder extends Seeder
                 ['a ruler', 'governante'],
                 ['a revolutionary', 'revolucionário'],
             ]],
-            [$politics, CharacterSubcategory::MILITARY, 'Did your character act as %s?', 'Seu personagem atuou como %s?', [
-                ['a military leader', 'lider militar'],
-            ]],
             [null, null, 'Did your character have %s impact?', 'Seu personagem teve impacto %s?', [
                 ['global', 'global'],
                 ['national', 'nacional'],
@@ -524,6 +550,12 @@ class AttributeSeeder extends Seeder
             [null, null, 'Is your character linked to %s?', 'Seu personagem está ligado a %s?', [
                 ['Brazil', 'Brasil'],
                 ['United States', 'Estados Unidos'],
+                ['United Kingdom', 'Reino Unido'],
+                ['Argentina', 'Argentina'],
+                ['Canada', 'Canadá'],
+                ['Iceland', 'Islândia'],
+                ['Egypt', 'Egito'],
+                ['Cuba', 'Cuba'],
                 ['Japan', 'Japão'],
                 ['France', 'França'],
                 ['Germany', 'Alemanha'],
