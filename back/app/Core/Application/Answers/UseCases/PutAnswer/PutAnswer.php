@@ -56,6 +56,11 @@ class PutAnswer
 
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
             ?? SecondaryAttribute::tryFrom($attribute->internal_name);
+
+        if (!$attributeEnum) {
+            return null;
+        }
+
         $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum, $answerScore);
 
         foreach ($opposites as $oppositeEnum) {
