@@ -611,6 +611,21 @@ class AttributeSeeder extends Seeder
             [null, null, 'Does your character like %s?', 'Seu personagem gosta de %s?', [
                 ['cooking at home', 'cozinhar em casa'],
             ]],
+            [null, null, 'Did your character become famous in the %s?', 'Seu personagem ficou famoso na década de %s?', [
+                ['1900s', '1900'],
+                ['1910s', '1910'],
+                ['1920s', '1920'],
+                ['1930s', '1930'],
+                ['1940s', '1940'],
+                ['1950s', '1950'],
+                ['1960s', '1960'],
+                ['1970s', '1970'],
+                ['1980s', '1980'],
+                ['1990s', '1990'],
+                ['2000s', '2000'],
+                ['2010s', '2010'],
+                ['2020s', '2020'],
+            ]],
         ]);
     }
 }

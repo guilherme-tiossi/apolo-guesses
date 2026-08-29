@@ -23,6 +23,7 @@ class CharacterAttributeSeeder extends Seeder
         'living' => [InitialAttribute::LIVING_ALIVE, InitialAttribute::LIVING_DECEASED],
     ];
 
+
     public function run(): void
     {
         $this->pele();
@@ -107,6 +108,7 @@ class CharacterAttributeSeeder extends Seeder
         $this->batman();
         $this->olavoDeCarvalho();
     }
+
 
     private function seedCharacter(string $characterName, array $attributes, array $signatureQuestion = []): void
     {
@@ -290,6 +292,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have global impact?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1950s?' => 1.5,
+            'Did your character become famous in the 1960s?' => 1.25,
         ], $this->signature(
             'Did your character win three FIFA World Cups?',
             'Seu personagem ganhou três Copas do Mundo?'
@@ -324,6 +328,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Does your character inspire others?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1960s?' => 2,
         ], $this->signature(
             'Did your character refuse to be drafted into the Vietnam War?',
             'Seu personagem se recusou a ser convocado para a Guerra do Vietnã?'
@@ -358,6 +363,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have national impact?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 1980s?' => 1.5,
+            'Did your character become famous in the 1990s?' => 1.25,
         ], $this->signature(
             'Did your character die at the Imola circuit?',
             'Seu personagem morreu no circuito de Imola?'
@@ -387,6 +394,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2020s?' => 2,
         ], $this->signature(
             'Did your character win Olympic gold in artistic gymnastics for Brazil?',
             'Seu personagem ganhou ouro olímpico em ginástica artística pelo Brasil?'
@@ -419,6 +427,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 1980s?' => 1.25,
         ], $this->signature(
             'Does your character host the TV show Mais Você?',
             'Seu personagem apresenta o programa Mais Você?'
@@ -475,6 +485,9 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character carioca?' => 2,
             'Is your character known for memes?' => 1.5,
             'Is your character associated with polarizing opinions?' => 1,
+            'Did your character become famous in the 1980s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
+            'Did your character become famous in the 1960s?' => 1.25,
         ], $this->signature(
             'Does your character own the SBT television network?',
             'Seu personagem é dono da emissora SBT?'
@@ -501,6 +514,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2020s?' => 1.25,
         ], $this->signature(
             'Did your character join Paris Saint-Germain for a world-record transfer fee?',
             'Seu personagem foi para o Paris Saint-Germain por uma transferência recorde?'
@@ -534,6 +549,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character gaúcho?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 1990s?' => 1.25,
         ], $this->signature(
             'Did your character win the Ballon d\'Or in 2005?',
             'Seu personagem ganhou a Bola de Ouro em 2005?'
@@ -564,6 +581,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Did your character claim to have scored more than one thousand career goals?',
             'Seu personagem afirmou ter marcado mais de mil gols na carreira?'
@@ -594,6 +612,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 2010s?' => 1.25,
         ], $this->signature(
             'Is your character famous for a "Siuu" celebration?',
             'Seu personagem é famoso por comemoração "Siuu"?'
@@ -625,6 +645,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character associated with South America?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 2010s?' => 1.25,
         ], $this->signature(
             'Did your character win the FIFA World Cup in 2022?',
             'Seu personagem ganhou a Copa do Mundo de 2022?'
@@ -654,6 +676,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2020s?' => 2,
         ], $this->signature(
             'Did your character score in a Champions League final before turning 22?',
             'Seu personagem marcou gol em final da Champions League antes dos 22 anos?'
@@ -686,6 +709,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character associated with public scandals?' => 1.5,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1980s?' => 2,
         ], $this->signature(
             'Does your character have a facial tattoo?',
             'Seu personagem tem tatuagem no rosto?'
@@ -711,6 +735,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Is your character associated with controversies?' => 1.5,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 2010s?' => 1.25,
+            'Did your character become famous in the 2020s?' => 1.5,
         ], $this->signature(
             'Was your character investigated for its involvement with bets?',
             'Seu personagem esteve envolvido na CPI das bets?'
@@ -742,6 +768,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character known by legend title?' => 1.5,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Did your character record the song Detalhes?',
             'Seu personagem gravou a música Detalhes?'
@@ -777,6 +805,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Was your character exiled during Brazil\'s military dictatorship?',
             'Seu personagem foi exilado durante a ditadura militar brasileira?'
@@ -807,6 +837,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have global impact?' => 2,
+            'Did your character become famous in the 1980s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Did your character release the album Thriller?',
             'Seu personagem lançou o álbum Thriller?'
@@ -836,6 +868,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2020s?' => 1.25,
         ], $this->signature(
             'Did your character perform at the 2022 FIFA World Cup opening ceremony?',
             'Seu personagem se apresentou na abertura da Copa do Mundo de 2022?'
@@ -873,6 +907,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Did your character write the song Construção?',
             'Seu personagem escreveu a música Construção?'
@@ -904,6 +940,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character gaúcho?' => 2,
+            'Did your character become famous in the 1930s?' => 2,
         ], $this->signature(
             'Did your character create the CLT labor laws in Brazil?',
             'Seu personagem criou a CLT no Brasil?'
@@ -936,6 +973,8 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character associated with controversies?' => 1.5,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Was your character stabbed during the 2018 presidential campaign?',
             'Seu personagem foi esfaqueado durante a campanha presidencial de 2018?'
@@ -970,6 +1009,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 1980s?' => 1.25,
         ], $this->signature(
             'Does your character have nine fingers?',
             'Seu personagem tem 9 dedos?'
@@ -1005,6 +1046,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Did your character implement the Real Plan as president of Brazil?',
             'Seu personagem implementou o Plano Real como presidente do Brasil?'
@@ -1265,6 +1307,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character gaúcho?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Did your character record the song Arrastão?',
             'Seu personagem gravou a música Arrastão?'
@@ -1293,6 +1337,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Was your character one of the main names of sertanejo music?',
             'Seu personagem foi um dos principais nomes do sertanejo?'
@@ -1323,6 +1368,7 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Was your character nominated for an Oscar for Central Station?',
             'Seu personagem foi indicada ao Oscar por Central do Brasil?'
@@ -1348,6 +1394,7 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have long-term historical impact?' => 2,
             'Is your character linked to France?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 1900s?' => 2,
         ], $this->signature(
             'Did your character win two Nobel Prizes?',
             'Seu personagem ganhou dois Prêmios Nobel?'
@@ -1376,6 +1423,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1960s?' => 2,
         ], $this->signature(
             'Did your character write The Passion According to G.H.?',
             'Seu personagem escreveu A Paixão Segundo G.H.?'
@@ -1406,6 +1454,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Was your character impeached as president of Brazil?',
             'Seu personagem sofreu impeachment como presidente do Brasil?'
@@ -1435,6 +1485,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character known by legend title?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 1950s?' => 2,
         ], $this->signature(
             'Did your character reign for more than 70 years?',
             'Seu personagem reinou por mais de 70 anos?'
@@ -1463,6 +1514,8 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character linked to Brazil?' => 2,
             'Is your character linked to United States?' => 2,
             'Is your character gaúcho?' => 2,
+            'Did your character become famous in the 1990s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Was your character one of the highest-paid models in the world?',
             'Seu personagem foi uma das modelos mais bem pagas do mundo?'
@@ -1494,6 +1547,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character baiano?' => 2,
+            'Did your character become famous in the 1990s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Is your character famous for performing in Carnival in Salvador?',
             'Seu personagem é famosa por se apresentar no Carnaval de Salvador?'
@@ -1519,6 +1574,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Was your character the lead in the novela Deus Salve o Rei?',
             'Seu personagem foi protagonista da novela Deus Salve o Rei?'
@@ -1548,6 +1604,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 2010s?' => 1.25,
         ], $this->signature(
             'Did your character host the TV show Esquenta?',
             'Seu personagem apresentou o programa Esquenta?'
@@ -1571,6 +1629,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known in tv series?' => 2,
             'Is your character known by a famous nickname?' => 2,
             'Is your character associated with South America?' => 1.5,
+            'Did your character become famous in the 1970s?' => 2,
         ], $this->signature(
             'Does your character live in a barrel?',
             'Seu personagem mora em um barril?'
@@ -1595,6 +1654,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known by a famous nickname?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 1960s?' => 2,
         ], $this->signature(
             'Does your character have super strength in her comics?',
             'Seu personagem tem superforça nos quadrinhos?'
@@ -1619,6 +1679,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known for memes?' => 2,
             'Is your character linked to United States?' => 2,
             'Is your character associated with North America?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Does your character work at a nuclear power plant?',
             'Seu personagem trabalha em uma usina nuclear?'
@@ -1645,6 +1706,7 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United States?' => 2,
             'Is your character associated with North America?' => 2,
+            'Did your character become famous in the 1920s?' => 2,
         ], $this->signature(
             'Is your character the mascot of Disney?',
             'Seu personagem é o mascote da Disney?'
@@ -1670,6 +1732,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known for memes?' => 2,
             'Did your character have global impact?' => 1.5,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Does your character work at the Krusty Krab?',
             'Seu personagem trabalha no Siri Cascudo?'
@@ -1696,6 +1759,7 @@ class CharacterAttributeSeeder extends Seeder
             'Does your character have formal military training?' => 1.5,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2000s?' => 2,
         ], $this->signature(
             'Did your character say "Operação acabou"?',
             'Seu personagem disse "Operação acabou"?'
@@ -1722,6 +1786,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known for award-winning performances?' => 1.5,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Did your character become famous in the 2000s?' => 2,
         ], $this->signature(
             'Is your character the villain of City of God?',
             'Seu personagem é o vilão de Cidade de Deus?'
@@ -1750,6 +1815,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Did your character have global impact?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1980s?' => 1.5,
+            'Did your character become famous in the 1990s?' => 1.25,
         ], $this->signature(
             'Did your character win six NBA championships?',
             'Seu personagem ganhou seis campeonatos da NBA?'
@@ -1777,6 +1844,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character associated with Europe?' => 2,
             'Is your character linked to United States?' => 1.5,
+            'Did your character become famous in the 1920s?' => 2,
         ], $this->signature(
             'Did your character develop the theory of relativity?',
             'Seu personagem desenvolveu a teoria da relatividade?'
@@ -1802,6 +1870,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 2000s?' => 2,
         ], $this->signature(
             'Has your character won seven Formula 1 world titles?',
             'Seu personagem ganhou sete títulos mundiais de Fórmula 1?'
@@ -1828,6 +1897,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 2000s?' => 2,
         ], $this->signature(
             'Has your character won the most French Open titles in history?',
             'Seu personagem venceu o maior número de Roland Garros na história?'
@@ -1855,6 +1925,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have global impact?' => 2,
             'Is your character known by legend title?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1970s?' => 1.5,
+            'Did your character become famous in the 1980s?' => 1.25,
         ], $this->signature(
             'Did your character direct Jurassic Park?',
             'Seu personagem dirigiu Jurassic Park?'
@@ -1883,6 +1955,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Did your character have global impact?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Is your character the CEO of Tesla?',
             'Seu personagem é CEO da Tesla?'
@@ -1909,6 +1983,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character known by legend title?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 1910s?' => 2,
         ], $this->signature(
             'Did your character co-found the Cubist movement?',
             'Seu personagem cofundou o movimento cubista?'
@@ -1935,6 +2010,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Has your character received public recognition?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Did your character hold UFC titles in two weight classes simultaneously?',
             'Seu personagem foi campeão simultâneo em duas categorias do UFC?'
@@ -1964,6 +2040,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1990s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Did your character win the Ballon d\'Or in 2002?',
             'Seu personagem ganhou a Bola de Ouro em 2002?'
@@ -1993,6 +2071,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known by world champion title?' => 1.5,
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 1980s?' => 2,
         ], $this->signature(
             'Did your character score 55 points in a single Olympic game?',
             'Seu personagem marcou 55 pontos em um jogo olímpico?'
@@ -2021,6 +2100,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Has your character won multiple world surfing titles?',
             'Seu personagem ganhou múltiplos títulos mundiais de surfe?'
@@ -2051,6 +2131,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known by legend title?' => 1.5,
             'Is your character linked to Brazil?' => 2,
             'Is your character baiano?' => 2,
+            'Did your character become famous in the 1930s?' => 2,
         ], $this->signature(
             'Did your character write Dona Flor and Her Two Husbands?',
             'Seu personagem escreveu Dona Flor e Seus Dois Maridos?'
@@ -2080,6 +2161,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character paulista?' => 2,
+            'Did your character become famous in the 2000s?' => 2,
         ], $this->signature(
             'Was your character the first Brazilian in space?',
             'Seu personagem foi o primeiro brasileiro no espaço?'
@@ -2107,6 +2189,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to United Kingdom?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 1940s?' => 2,
         ], $this->signature(
             'Did your character help break the Enigma code?',
             'Seu personagem ajudou a decifrar o código Enigma?'
@@ -2137,6 +2220,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United States?' => 2,
             'Is your character known by legend title?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1970s?' => 1.25,
         ], $this->signature(
             'Did your character win the Nobel Prize in Literature?',
             'Seu personagem ganhou o Prêmio Nobel de Literatura?'
@@ -2161,6 +2246,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character linked to chart-topping songs?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character linked to United Kingdom?' => 2,
+            'Did your character become famous in the 2020s?' => 2,
         ], $this->signature(
             'Did your character go viral with the song Break It Off?',
             'Seu personagem viralizou com a música Break It Off?'
@@ -2190,6 +2276,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1960s?' => 2,
         ], $this->signature(
             'Did your character perform at Woodstock?',
             'Seu personagem se apresentou no Woodstock?'
@@ -2218,6 +2305,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United Kingdom?' => 2,
+            'Did your character become famous in the 1970s?' => 1.5,
+            'Did your character become famous in the 1980s?' => 1.25,
         ], $this->signature(
             'Did your character release the song Running Up That Hill?',
             'Seu personagem lançou a música Running Up That Hill?'
@@ -2245,6 +2334,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2020s?' => 1.25,
         ], $this->signature(
             'Did your character release the album Channel Orange?',
             'Seu personagem lançou o álbum Channel Orange?'
@@ -2272,6 +2363,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United Kingdom?' => 2,
+            'Did your character become famous in the 1980s?' => 2,
         ], $this->signature(
             'Is your character the lead singer of The Cure?',
             'Seu personagem é o vocalista do The Cure?'
@@ -2300,6 +2392,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Did your character have cultural impact?' => 2,
             'Is your character linked to United Kingdom?' => 2,
+            'Did your character become famous in the 1990s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Is your character the lead singer of Radiohead?',
             'Seu personagem é o vocalista do Radiohead?'
@@ -2325,6 +2419,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received media recognition?' => 2,
             'Is your character linked to Canada?' => 2,
             'Is your character associated with North America?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Did your character release the album Visions?',
             'Seu personagem lançou o álbum Visions?'
@@ -2353,6 +2448,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Is your character linked to Iceland?' => 2,
             'Is your character associated with Europe?' => 2,
+            'Did your character become famous in the 1990s?' => 1.5,
+            'Did your character become famous in the 1980s?' => 1.25,
         ], $this->signature(
             'Did your character release the album Homogenic?',
             'Seu personagem lançou o álbum Homogenic?'
@@ -2378,6 +2475,7 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received international recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 2010s?' => 2,
         ], $this->signature(
             'Did your character release the album Born to Die?',
             'Seu personagem lançou o álbum Born to Die?'
@@ -2406,6 +2504,7 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have cultural impact?' => 2,
             'Has your character received a historic level of recognition?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1990s?' => 2,
         ], $this->signature(
             'Was your character the frontman of Nirvana?',
             'Seu personagem foi o vocalista do Nirvana?'
@@ -2433,6 +2532,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Did your character have cultural impact?' => 1.5,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 2010s?' => 1.25,
         ], $this->signature(
             'Was your character the lead singer of My Chemical Romance?',
             'Seu personagem foi o vocalista do My Chemical Romance?'
@@ -2459,6 +2560,8 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character book-smart?' => 1.5,
             'Did your character have global impact?' => 2,
             'Did your character have cultural impact?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 1990s?' => 1.25,
         ], $this->signature(
             'Does your character have a lightning-shaped scar on his forehead?',
             'Seu personagem tem uma cicatriz em forma de raio na testa?'
@@ -2514,6 +2617,7 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character linked to Argentina?' => 2,
             'Is your character linked to Cuba?' => 2,
             'Is your character associated with South America?' => 2,
+            'Did your character become famous in the 1960s?' => 2,
         ], $this->signature(
             'Is your character\'s face one of the most reproduced images in history?',
             'O rosto do seu personagem é uma das imagens mais reproduzidas da história?'
@@ -2543,6 +2647,8 @@ class CharacterAttributeSeeder extends Seeder
             'Did your character have global impact?' => 2,
             'Is your character linked to Japan?' => 2,
             'Is your character associated with Asia?' => 2,
+            'Did your character become famous in the 2000s?' => 1.5,
+            'Did your character become famous in the 2010s?' => 1.25,
         ], $this->signature(
             'Does your character dream of becoming Hokage?',
             'Seu personagem sonha em se tornar Hokage?'
@@ -2571,6 +2677,8 @@ class CharacterAttributeSeeder extends Seeder
             'Is your character known by a famous nickname?' => 2,
             'Did your character have global impact?' => 2,
             'Is your character linked to United States?' => 2,
+            'Did your character become famous in the 1960s?' => 1.5,
+            'Did your character become famous in the 1940s?' => 1.25,
         ], $this->signature(
             'Does your character protect Gotham City?',
             'Seu personagem protege Gotham City?'
@@ -2602,6 +2710,8 @@ class CharacterAttributeSeeder extends Seeder
             'Has your character received public recognition?' => 2,
             'Has your character received media recognition?' => 2,
             'Is your character linked to Brazil?' => 2,
+            'Did your character become famous in the 2010s?' => 1.5,
+            'Did your character become famous in the 2000s?' => 1.25,
         ], $this->signature(
             'Was your character an advisor to Jair Bolsonaro\'s presidential campaign?',
             'Seu personagem foi conselheiro da campanha presidencial de Jair Bolsonaro?'
