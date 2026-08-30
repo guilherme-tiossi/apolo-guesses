@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Core\Domain\Attributes\Enums\CategoryAttribute;
-use App\Core\Domain\Attributes\Enums\SubcategoryAttribute;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Core\Domain\Attributes\Enums\SecondaryAttribute;
 use App\Core\Domain\Shared\Enums\CharacterCategory;
@@ -17,6 +15,11 @@ class AttributeSeeder extends Seeder
     {
         $this->categoryAreas();
         $this->subcategoryAreas();
+
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT setval(pg_get_serial_sequence('attributes', 'id'), (SELECT MAX(id) FROM attributes))");
+        }
+
         $this->appearance();
         $this->identity();
         $this->personality();
@@ -38,6 +41,7 @@ class AttributeSeeder extends Seeder
 
         foreach (CharacterCategory::cases() as $category) {
             $attributes[] = [
+                'id' => $category->attributeId(),
                 'category_id' => $category->value,
                 'subcategory_id' => null,
                 'question' => $category->questionEn(),
@@ -54,13 +58,9 @@ class AttributeSeeder extends Seeder
     private function linkCategoryAttributes(): void
     {
         foreach (CharacterCategory::cases() as $category) {
-            $attributeId = DB::table('attributes')
-                ->where('internal_name', CategoryAttribute::fromCategory($category)->value)
-                ->value('id');
-
             DB::table('categories')
                 ->where('id', $category->value)
-                ->update(['attribute_id' => $attributeId]);
+                ->update(['attribute_id' => $category->attributeId()]);
         }
     }
 
@@ -72,6 +72,7 @@ class AttributeSeeder extends Seeder
             $isReligion = $subcategory === CharacterSubcategory::RELIGION;
 
             $attributes[] = [
+                'id' => $subcategory->attributeId(),
                 'category_id' => $subcategory->category()->value,
                 'subcategory_id' => $subcategory->value,
                 'question' => $subcategory->questionEn(),
@@ -88,24 +89,25 @@ class AttributeSeeder extends Seeder
     private function linkSubcategoryAttributes(): void
     {
         foreach (CharacterSubcategory::cases() as $subcategory) {
-            $attributeId = DB::table('attributes')
-                ->where('internal_name', SubcategoryAttribute::fromSubcategory($subcategory)->value)
-                ->value('id');
-
             DB::table('subcategories')
                 ->where('id', $subcategory->value)
-                ->update(['attribute_id' => $attributeId]);
+                ->update(['attribute_id' => $subcategory->attributeId()]);
         }
     }
 
     private function seed(array $attributes): void
     {
         foreach ($attributes as $attribute) {
+            $identity = isset($attribute['id'])
+                ? ['id' => $attribute['id']]
+                : ['question' => $attribute['question']];
+
             DB::table('attributes')->updateOrInsert(
-                ['question' => $attribute['question']],
+                $identity,
                 [
                     'category_id' => $attribute['category_id'],
                     'subcategory_id' => $attribute['subcategory_id'],
+                    'question' => $attribute['question'],
                     'portuguese_question' => $attribute['portuguese_question'],
                     'is_initial_question' => $attribute['is_initial_question'],
                     'is_secondary_question' => $attribute['is_secondary_question'],
@@ -350,6 +352,9 @@ class AttributeSeeder extends Seeder
                 ['morally upright', 'é moralmente correto'],
                 ['morally gray', 'é moralmente cinza'],
                 ['justice-driven', 'é movido por justiça'],
+                ['idealistic', 'é idealista'],
+                ['proud', 'é orgulhoso'],
+                ['brooding', 'é sombrio'],
             ]],
             [null, null, 'Does your character live a %s lifestyle?', 'Seu personagem vive um estilo de vida %s?', [
                 ['luxurious', 'luxuoso'],
@@ -581,13 +586,88 @@ class AttributeSeeder extends Seeder
             ]],
             [$fiction, CharacterSubcategory::FICTION, 'Is your character primarily a %s?', 'Seu personagem é principalmente %s?', [
                 ['protagonist', 'protagonista'],
-                ['antagonist', 'antagonista'],
                 ['mentor', 'mentor'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION, 'Is your character primarily an %s?', 'Seu personagem é principalmente %s?', [
+                ['antagonist', 'antagonista'],
             ]],
             [$fiction, CharacterSubcategory::FICTION, 'Is your character from %s?', 'Seu personagem é de %s?', [
                 ['a superhero universe', 'um universo de super-herois'],
                 ['an anime universe', 'um universo de anime'],
                 ['a fantasy universe', 'um universo de fantasia'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_SUPERHEROES, 'Is your character known for %s?', 'Seu personagem é conhecido por %s?', [
+                ['super strength', 'superforça'],
+                ['flying', 'voar'],
+                ['a secret identity', 'identidade secreta'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_SUPERHEROES, 'Is your character from %s?', 'Seu personagem é de %s?', [
+                ['the Marvel universe', 'o universo Marvel'],
+                ['the DC universe', 'o universo DC'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION, 'Is your character %s?', 'Seu personagem %s?', [
+                ['anthropomorphic', 'antropomórfico'],
+                ['associated with an animal', 'associado a um animal'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_ANIMATION, 'Is your character known in %s?', 'Seu personagem é conhecido na %s?', [
+                ['tv series', 'televisão'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_ANIME, 'Does your character have %s?', 'Seu personagem tem %s?', [
+                ['special powers', 'poderes especiais'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_VIDEO_GAMES, 'Does your character %s?', 'Seu personagem %s?', [
+                ['collect coins or items', 'coletar moedas ou itens'],
+                ['jump on platforms', 'pular em plataformas'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_LIVE_ACTION, 'Is your character known for %s?', 'Seu personagem é conhecido por %s?', [
+                ['action movies', 'filmes de ação'],
+                ['drama movies', 'filmes de drama'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_CHILDREN, 'Is your character popular with %s?', 'Seu personagem é popular entre %s?', [
+                ['young children', 'crianças pequenas'],
+                ['preschoolers', 'pré-escolares'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_YOUNG_ADULT, 'Is your character popular with %s?', 'Seu personagem é popular entre %s?', [
+                ['teenagers', 'adolescentes'],
+                ['young adults', 'jovens adultos'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_MYSTERY, 'Does your character %s?', 'Seu personagem %s?', [
+                ['solve mysteries', 'resolve mistérios'],
+                ['investigate crimes', 'investiga crimes'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_COMEDY, 'Does your character %s?', 'Seu personagem %s?', [
+                ['make jokes often', 'faz piadas com frequência'],
+                ['appear in slapstick humor', 'aparece em humor pastelão'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_FANTASY, 'Is your character linked to %s?', 'Seu personagem está ligado a %s?', [
+                ['magic', 'magia'],
+                ['mythical creatures', 'criaturas míticas'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_SCI_FI, 'Is your character linked to %s?', 'Seu personagem está ligado a %s?', [
+                ['space travel', 'viagens espaciais'],
+                ['advanced technology', 'tecnologia avançada'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION, 'Is your character from %s?', 'Seu personagem é de %s?', [
+                ['Disney', 'Disney'],
+                ['Turma da Mônica', 'Turma da Mônica'],
+                ['the Star Wars saga', 'saga Star Wars'],
+                ['Nintendo', 'Nintendo'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION, 'Does your character %s?', 'Seu personagem %s?', [
+                ['carry a signature weapon', 'carrega uma arma característica'],
+                ['wear armor', 'usa armadura'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_SUPERHEROES, 'Is your character %s?', 'Seu personagem %s?', [
+                ['part of a superhero team', 'parte de uma equipe de super-heróis'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_FANTASY, 'Is your character a %s?', 'Seu personagem é %s?', [
+                ['magic user', 'usuário de magia'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_SCI_FI, 'Is your character %s?', 'Seu personagem %s?', [
+                ['an alien or from another planet', 'alienígena ou de outro planeta'],
+            ]],
+            [$fiction, CharacterSubcategory::FICTION_HORROR, 'Is your character from %s?', 'Seu personagem é de %s?', [
+                ['a horror story', 'uma história de terror'],
             ]],
         ]);
     }

@@ -12,7 +12,8 @@ class CharacterAttribute extends Model
     // passar isso pra um service talvez
     public static function charactersByAnswers(
         array $answers,
-        ?bool $excludingNegativeAnswers = false
+        ?bool $excludingNegativeAnswers = false,
+        ?array $attributesIn = null
     ): Builder {
         $positiveAttributes = [];
         $negativeAttributes = [];
@@ -26,8 +27,11 @@ class CharacterAttribute extends Model
         }
 
         $query = DB::table('character_attributes')
-            ->select('character_id')
-            ->where(function($query) use ($positiveAttributes) {
+            ->select('character_id');
+        if ($attributesIn) {
+            $query->whereIn($attributesIn['column'], $attributesIn['values']);
+        }
+        $query->where(function($query) use ($positiveAttributes) {
                 foreach ($positiveAttributes as $positiveAttributeId) {
                     $query->orWhere(function($sub) use ($positiveAttributeId) {
                         $sub->where('attribute_id', $positiveAttributeId)
