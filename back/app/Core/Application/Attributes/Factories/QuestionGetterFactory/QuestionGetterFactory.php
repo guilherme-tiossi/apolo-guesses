@@ -9,7 +9,6 @@ use App\Core\Application\Attributes\Services\GetQuestion\QuestionGetter;
 use App\Core\Domain\Attributes\Enums\InitialAttribute;
 use App\Models\PlayerAnswer;
 use App\Models\PlayerAttributeBlacklist;
-use App\Core\Domain\Shared\Enums\CharacterCategory;
 
 class QuestionGetterFactory
 {
@@ -25,25 +24,25 @@ class QuestionGetterFactory
         $answeredQuestions = PlayerAnswer::where([
             'player_id' => $input->playerId
         ])->get(['attribute_id', 'answer_score'])->toArray();
-
         $skippedQuestions = PlayerAttributeBlacklist::where([
             'player_id' => $input->playerId
         ])->count();
+        $answeredQuestionsCount = count($answeredQuestions) + $skippedQuestions;
 
         $totalInitialAttributes = count(InitialAttribute::cases());
 
-        if ((count($answeredQuestions) + $skippedQuestions) < $totalInitialAttributes) {
+        if ($answeredQuestionsCount < $totalInitialAttributes) {
             return $this->initialQuestionGetter;
         }
 
-        $positiveAttributes = array_map(function ($attribute) {
-            if ($attribute['answer_score'] > 1) {
-                return $attribute['attribute_id'];
-            }
-            return null;
-        }, $answeredQuestions);
+        if ($answeredQuestionsCount == $totalInitialAttributes) {
+            return $this->categoryQuestionGetter;
+        }
 
-        if (!array_intersect($positiveAttributes, array_column(CharacterCategory::cases(), 'value'))) {
+        $randomNumber = rand(1, 3);
+        // busca de subcategoria - tem randomNumber pro jogo não ficar tão mecânico e o usuário
+        // ter a impressão que é só um filtro chato
+        if ($answeredQuestionsCount == ($totalInitialAttributes + $randomNumber)) {
             return $this->categoryQuestionGetter;
         }
 

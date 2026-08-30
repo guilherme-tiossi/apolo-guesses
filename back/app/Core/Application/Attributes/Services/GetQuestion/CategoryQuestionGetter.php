@@ -7,6 +7,7 @@ use App\Core\Application\Characters\Services\CandidateDataGetter\InputDto as Can
 use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
 use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 use App\Core\Domain\Shared\Enums\CharacterCategory;
+use App\Core\Domain\Shared\Enums\CharacterSubcategory;
 use App\Models\Attribute;
 use Exception;
 
@@ -28,9 +29,21 @@ class CategoryQuestionGetter implements QuestionGetter
             playerId: $dto->playerId
         ))->answers;
 
+        $positiveAttributes = array_map(function ($answer) {
+            $attribute = $answer->attribute;
+            if ($answer->value > 1) {
+                return $attribute->id;
+            }
+            return null;
+        }, $answers);
+
+        $mainCategoryFound = array_intersect($positiveAttributes, array_column(CharacterCategory::cases(), 'value'));
+        $attributesToSearch = array_column($mainCategoryFound ? CharacterSubcategory::attributeIds() : CharacterCategory::attributeIds(), 'attributeId');
+
         $characterAttributeData = $this->candidateDataGetter->execute(new CandidateDataGetterDto(
             playerId: $dto->playerId,
-            answers: $answers
+            answers: $answers,
+            attributesIn: $attributesToSearch
         ))->candidatesAttributes;
 
         if (empty($characterAttributeData)) {
@@ -62,7 +75,8 @@ class CategoryQuestionGetter implements QuestionGetter
                 continue;
             }
 
-            if (!in_array($attribute->attributeId, array_column(CharacterCategory::cases(), 'value'))) {
+            if (!in_array($attribute->attributeId, CharacterCategory::attributeIds())
+                && !in_array($attribute->attributeId, CharacterSubcategory::attributeIds())) {
                 continue;
             }
 

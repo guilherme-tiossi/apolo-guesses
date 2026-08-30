@@ -16,7 +16,8 @@ class CandidateDataGetter
     {
         $dto = new InputDto(
             playerId: $dto->playerId,
-            answers: $dto->answers
+            answers: $dto->answers,
+            attributesIn: $dto->attributesIn
         );
 
         return $this->filterGetter->execute($dto)

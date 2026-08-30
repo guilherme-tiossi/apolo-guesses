@@ -14,7 +14,7 @@ class NaiveBayesCandidateAttributeGetter
 
     public function execute(InputDto $dto): ?OutputDto
     {
-        $candidates = $this->getCandidates($dto->answers);
+        $candidates = $this->getCandidates($dto->answers, $dto->attributesIn);
 
         $highestBayes = $candidates[0]['bayes_value'] ?? null;
         if (!$highestBayes) {
@@ -52,7 +52,7 @@ class NaiveBayesCandidateAttributeGetter
         );
     }
 
-    private function getCandidates(array $answers): array
+    private function getCandidates(array $answers, ?array $attributesIn = null): array
     {
         
         $positiveAnswersByAttributeId = [];
@@ -67,8 +67,8 @@ class NaiveBayesCandidateAttributeGetter
                 : $negativeAnswersByAttributeId[$answer->attribute->id] = $answer;
         }
 
-        $baseCandidates = CharacterAttribute::charactersByAnswers($answers)->get()->toArray() ?: 
-            CharacterAttribute::charactersByAnswers($answers, true)->get()->toArray();
+        $baseCandidates = CharacterAttribute::charactersByAnswers(answers: $answers, attributesIn: $attributesIn)->get()->toArray() ?: 
+            CharacterAttribute::charactersByAnswers(answers: $answers, excludingNegativeAnswers: true, attributesIn: $attributesIn)->get()->toArray();
 
         // se não acha talvez pegar só com atributos iniciais
 

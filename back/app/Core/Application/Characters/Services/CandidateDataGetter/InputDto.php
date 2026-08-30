@@ -9,7 +9,9 @@ readonly class InputDto
     public function __construct(
         public int $playerId,
         /** @var Answer[] */
-        public array $answers
+        public array $answers,
+        /** @var int[] */
+        public ?array $attributesIn = null
     ) {
     }
 }

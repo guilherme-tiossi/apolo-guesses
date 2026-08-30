@@ -11,6 +11,19 @@ enum CharacterSubcategory: int
     case WRITING = 3;
     case POETRY = 4;
     case FICTION = 5;
+    case FICTION_SUPERHEROES = 80;
+    case FICTION_ANIMATION = 81;
+    case FICTION_ANIME = 82;
+    case FICTION_BRAZILIAN = 83;
+    case FICTION_VIDEO_GAMES = 84;
+    case FICTION_LIVE_ACTION = 85;
+    case FICTION_CHILDREN = 86;
+    case FICTION_YOUNG_ADULT = 87;
+    case FICTION_MYSTERY = 88;
+    case FICTION_COMEDY = 89;
+    case FICTION_FANTASY = 90;
+    case FICTION_SCI_FI = 91;
+    case FICTION_HORROR = 92;
 
     case FOOTBALL = 10;
     case COMBAT = 11;
@@ -31,6 +44,58 @@ enum CharacterSubcategory: int
 
     case RELIGION = 70;
 
+    public function attributeId(): int
+    {
+        return match ($this) {
+            self::MUSIC => 10,
+            self::TV_AND_FILMS => 11,
+            self::WRITING => 12,
+            self::POETRY => 13,
+            self::FICTION => 14,
+            self::FICTION_SUPERHEROES => 27,
+            self::FICTION_ANIMATION => 28,
+            self::FICTION_ANIME => 29,
+            self::FICTION_BRAZILIAN => 30,
+            self::FICTION_VIDEO_GAMES => 31,
+            self::FICTION_LIVE_ACTION => 32,
+            self::FICTION_CHILDREN => 33,
+            self::FICTION_YOUNG_ADULT => 34,
+            self::FICTION_MYSTERY => 35,
+            self::FICTION_COMEDY => 36,
+            self::FICTION_FANTASY => 37,
+            self::FICTION_SCI_FI => 38,
+            self::FICTION_HORROR => 39,
+            self::FOOTBALL => 15,
+            self::COMBAT => 16,
+            self::MOTORSPORTS => 17,
+            self::OTHER_SPORTS => 18,
+            self::POLITICS => 19,
+            self::MILITARY => 20,
+            self::SCIENCE => 21,
+            self::TECHNOLOGY => 22,
+            self::SOCIAL_MEDIA => 23,
+            self::TV_PRESENTATION => 24,
+            self::FINANCE => 25,
+            self::RELIGION => 26,
+        };
+    }
+
+    public static function attributeIds(): array
+    {
+        return array_map(fn (self $subcategory) => $subcategory->attributeId(), self::cases());
+    }
+
+    public static function tryFromAttributeId(int $attributeId): ?self
+    {
+        foreach (self::cases() as $subcategory) {
+            if ($subcategory->attributeId() === $attributeId) {
+                return $subcategory;
+            }
+        }
+
+        return null;
+    }
+
     public function category(): CharacterCategory
     {
         return match ($this) {
@@ -39,7 +104,20 @@ enum CharacterSubcategory: int
             self::WRITING,
             self::POETRY => CharacterCategory::ART,
 
-            self::FICTION => CharacterCategory::FICTION,
+            self::FICTION,
+            self::FICTION_SUPERHEROES,
+            self::FICTION_ANIMATION,
+            self::FICTION_ANIME,
+            self::FICTION_BRAZILIAN,
+            self::FICTION_VIDEO_GAMES,
+            self::FICTION_LIVE_ACTION,
+            self::FICTION_CHILDREN,
+            self::FICTION_YOUNG_ADULT,
+            self::FICTION_MYSTERY,
+            self::FICTION_COMEDY,
+            self::FICTION_FANTASY,
+            self::FICTION_SCI_FI,
+            self::FICTION_HORROR => CharacterCategory::FICTION,
 
             self::FOOTBALL,
             self::COMBAT,
@@ -70,6 +148,19 @@ enum CharacterSubcategory: int
             self::WRITING => 'Escrita',
             self::POETRY => 'Poesia',
             self::FICTION => 'Ficção',
+            self::FICTION_SUPERHEROES => 'Super-heróis e quadrinhos',
+            self::FICTION_ANIMATION => 'Animação',
+            self::FICTION_ANIME => 'Anime',
+            self::FICTION_BRAZILIAN => 'Ficção brasileira',
+            self::FICTION_VIDEO_GAMES => 'Games',
+            self::FICTION_LIVE_ACTION => 'Live-action',
+            self::FICTION_CHILDREN => 'Infantil',
+            self::FICTION_YOUNG_ADULT => 'Infanto-juvenil',
+            self::FICTION_MYSTERY => 'Mistério',
+            self::FICTION_COMEDY => 'Comédia',
+            self::FICTION_FANTASY => 'Fantasia',
+            self::FICTION_SCI_FI => 'Ficção científica',
+            self::FICTION_HORROR => 'Terror',
 
             self::FOOTBALL => 'Futebol',
             self::COMBAT => 'Luta',
@@ -105,6 +196,19 @@ enum CharacterSubcategory: int
             self::WRITING => 'Is your character active in literature?',
             self::POETRY => 'Is your character associated with poetry?',
             self::FICTION => 'Is your character from fiction?',
+            self::FICTION_SUPERHEROES => 'Is your character a superhero?',
+            self::FICTION_ANIMATION => 'Is your character from an animated show or movie?',
+            self::FICTION_ANIME => 'Is your character from an anime?',
+            self::FICTION_BRAZILIAN => 'Is your character from Brazilian comics or TV comedy?',
+            self::FICTION_VIDEO_GAMES => 'Is your character from a video game?',
+            self::FICTION_LIVE_ACTION => 'Is your character from a live-action film or series?',
+            self::FICTION_CHILDREN => 'Is your character aimed at a children\'s audience?',
+            self::FICTION_YOUNG_ADULT => 'Is your character popular with teenagers or young adults?',
+            self::FICTION_MYSTERY => 'Is your character associated with mysteries or investigations?',
+            self::FICTION_COMEDY => 'Is your character from a comedy?',
+            self::FICTION_FANTASY => 'Is your character from a fantasy setting?',
+            self::FICTION_SCI_FI => 'Is your character from a science fiction setting?',
+            self::FICTION_HORROR => 'Is your character from a horror story?',
 
             self::FOOTBALL => 'Does your character play football professionally?',
             self::COMBAT => 'Does your character compete in high-level combat tournaments?',
@@ -132,6 +236,19 @@ enum CharacterSubcategory: int
             self::WRITING => 'Seu personagem atua em literatura?',
             self::POETRY => 'Seu personagem está associado a poesia?',
             self::FICTION => 'Seu personagem é de ficção?',
+            self::FICTION_SUPERHEROES => 'Seu personagem é um super-herói?',
+            self::FICTION_ANIMATION => 'Seu personagem é de desenho animado ou filme de animação?',
+            self::FICTION_ANIME => 'Seu personagem é de anime?',
+            self::FICTION_BRAZILIAN => 'Seu personagem é de quadrinhos ou comédia de TV brasileira?',
+            self::FICTION_VIDEO_GAMES => 'Seu personagem é de videogame?',
+            self::FICTION_LIVE_ACTION => 'Seu personagem é de filme ou série live-action?',
+            self::FICTION_CHILDREN => 'Seu personagem é voltado ao público infantil?',
+            self::FICTION_YOUNG_ADULT => 'Seu personagem é popular entre adolescentes ou jovens adultos?',
+            self::FICTION_MYSTERY => 'Seu personagem está associado a mistérios ou investigações?',
+            self::FICTION_COMEDY => 'Seu personagem é de comédia?',
+            self::FICTION_FANTASY => 'Seu personagem é de um universo de fantasia?',
+            self::FICTION_SCI_FI => 'Seu personagem é de ficção científica?',
+            self::FICTION_HORROR => 'Seu personagem é de uma história de terror?',
 
             self::FOOTBALL => 'Seu personagem joga futebol profissionalmente?',
             self::COMBAT => 'Seu personagem compete em torneios de combate de alto nivel?',

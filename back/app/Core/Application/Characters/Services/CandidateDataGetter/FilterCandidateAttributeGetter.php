@@ -13,7 +13,7 @@ class FilterCandidateAttributeGetter
 
     public function execute(InputDto $dto): ?OutputDto
     {
-        $candidatesAttributes = $this->getCandidatesData($dto->answers);
+        $candidatesAttributes = $this->getCandidatesData($dto->answers, $dto->attributesIn);
 
         if (!empty($candidatesAttributes['characterAttributeData'])) {
             return new OutputDto(
@@ -30,14 +30,14 @@ class FilterCandidateAttributeGetter
         return null;
     }
 
-    private function getCandidatesData(array $answers): array
+    private function getCandidatesData(array $answers, ?array $attributesIn = null): array
     {
         $answeredAttributeIds = [];
         foreach ($answers as $answer) {
             $answeredAttributeIds[] = $answer->attribute->id;
         }
 
-        $subQueryCharacters = CharacterAttribute::charactersByAnswers($answers);
+        $subQueryCharacters = CharacterAttribute::charactersByAnswers(answers: $answers, attributesIn: $attributesIn);
         $qtyCandidates = $subQueryCharacters->count();
 
         $characterAttributeQuery = DB::table('characters')

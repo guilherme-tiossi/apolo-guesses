@@ -16,6 +16,37 @@ enum CharacterCategory: int
     case FINANCE = 8;
     case RELIGION = 9;
 
+    public function attributeId(): int
+    {
+        return match ($this) {
+            self::ART => 1,
+            self::SPORT => 2,
+            self::POLITICS_AND_MILITARY => 3,
+            self::SCIENCE_AND_TECHNOLOGY => 4,
+            self::SOCIAL_MEDIA => 5,
+            self::TELEVISION => 6,
+            self::FICTION => 7,
+            self::FINANCE => 8,
+            self::RELIGION => 9,
+        };
+    }
+
+    public static function attributeIds(): array
+    {
+        return array_map(fn (self $category) => $category->attributeId(), self::cases());
+    }
+
+    public static function tryFromAttributeId(int $attributeId): ?self
+    {
+        foreach (self::cases() as $category) {
+            if ($category->attributeId() === $attributeId) {
+                return $category;
+            }
+        }
+
+        return null;
+    }
+
     public function label(): string
     {
         return match ($this) {

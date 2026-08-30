@@ -20,6 +20,8 @@ class GetQuestion
             playerId: $dto->playerId
         ));
 
+        // dd($questionGetter);
+
         return $questionGetter->execute(new GetQuestionInputDto(
             playerId: $dto->playerId
         ));
