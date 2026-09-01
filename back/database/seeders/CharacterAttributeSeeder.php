@@ -2042,8 +2042,7 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
-            'Does your character have fair skin?' => 1,
-            'Does your character have dark skin?' => 1,
+            'Does your character have dark skin?' => 1.5,
             'Is your character American?' => 2,
             'Does your character speak English?' => 2,
             'Is your character active in music?' => 2,

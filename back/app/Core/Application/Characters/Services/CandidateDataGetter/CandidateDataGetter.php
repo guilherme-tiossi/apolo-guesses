@@ -7,7 +7,6 @@ use Exception;
 class CandidateDataGetter
 {
     public function __construct(
-        private FilterCandidateAttributeGetter $filterGetter,
         private NaiveBayesCandidateAttributeGetter $naiveBayesGetter
     ) {
     }
@@ -20,8 +19,7 @@ class CandidateDataGetter
             attributesIn: $dto->attributesIn
         );
 
-        return $this->filterGetter->execute($dto)
-            ?? $this->naiveBayesGetter->execute($dto)
+        return $this->naiveBayesGetter->execute($dto)
             ?? throw new Exception('Personagem não encontrado', 404);;
     }
 }

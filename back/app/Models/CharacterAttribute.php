@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class CharacterAttribute extends Model
 {
-    /** @var Answer[] */
-    // passar isso pra um service talvez
     public static function charactersByAnswers(
+        int $playerId,
         array $answers,
         ?bool $excludingNegativeAnswers = false,
         ?array $attributesIn = null
@@ -27,7 +26,12 @@ class CharacterAttribute extends Model
         }
 
         $query = DB::table('character_attributes')
-            ->select('character_id');
+            ->select('character_id')
+            ->whereNotIn('character_id', function ($query) use ($playerId) {
+                $query->select('character_id')
+                    ->from('player_character_blacklists')
+                    ->where('player_id', $playerId);
+            });
         if ($attributesIn) {
             $query->whereIn($attributesIn['column'], $attributesIn['values']);
         }
