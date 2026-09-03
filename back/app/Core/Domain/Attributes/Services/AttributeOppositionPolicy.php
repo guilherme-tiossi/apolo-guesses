@@ -15,8 +15,6 @@ class AttributeOppositionPolicy
         [SecondaryAttribute::ALIGNMENT_HEROIC, SecondaryAttribute::ALIGNMENT_VILLAINOUS],
         [InitialAttribute::AGE_ADULT, InitialAttribute::AGE_CHILD],
         [InitialAttribute::AGE_ADULT, InitialAttribute::AGE_TEENAGER],
-        [InitialAttribute::AGE_OVER_FORTY, InitialAttribute::AGE_CHILD],
-        [InitialAttribute::AGE_OVER_FORTY, InitialAttribute::AGE_TEENAGER],
         [InitialAttribute::AGE_ELDERLY, InitialAttribute::AGE_CHILD],
         [InitialAttribute::AGE_ELDERLY, InitialAttribute::AGE_TEENAGER],
     ];

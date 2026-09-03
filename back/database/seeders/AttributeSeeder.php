@@ -254,7 +254,7 @@ class AttributeSeeder extends Seeder
                 ['a child', 'é criança', InitialAttribute::AGE_CHILD],
                 ['a teenager', 'é adolescente', InitialAttribute::AGE_TEENAGER],
                 ['an adult', 'é adulto', InitialAttribute::AGE_ADULT],
-                ['over forty', 'está acima dos quarenta', InitialAttribute::AGE_OVER_FORTY],
+                ['over forty', 'está acima dos quarenta'],
                 ['elderly', 'é idoso', InitialAttribute::AGE_ELDERLY],
             ]],
             [null, null, 'Is your character %s?', 'Seu personagem %s?', [

@@ -16,7 +16,6 @@ class CharacterAttributeSeeder extends Seeder
             InitialAttribute::AGE_ADULT,
             InitialAttribute::AGE_CHILD,
             InitialAttribute::AGE_TEENAGER,
-            InitialAttribute::AGE_OVER_FORTY,
             InitialAttribute::AGE_ELDERLY,
         ],
         'gender' => [InitialAttribute::GENDER_MALE, InitialAttribute::GENDER_FEMALE],
@@ -548,7 +547,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Pelé', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -582,7 +581,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Muhammad Ali', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
@@ -683,7 +682,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ana Maria Braga', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -717,7 +716,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Faustão', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -753,7 +752,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Galvão Bueno', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -783,7 +782,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Luciano Huck', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -814,7 +813,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Xuxa', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -901,7 +900,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Felipe Neto', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -958,7 +957,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Silvio Santos', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1045,7 +1044,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ronaldinho Gaúcho', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1080,7 +1079,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Romário', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1111,7 +1110,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Cristiano Ronaldo', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1144,7 +1143,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Lionel Messi', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1237,7 +1236,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Zinedine Zidane', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1295,7 +1294,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ronaldo Fenômeno', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1327,7 +1326,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Kaká', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1356,7 +1355,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Zico', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1415,7 +1414,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Cafu', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1444,7 +1443,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Marta', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1476,7 +1475,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('David Beckham', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1504,7 +1503,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Tyson Fury', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1532,7 +1531,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('José Aldo', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1560,7 +1559,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Anderson Silva', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1589,7 +1588,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Khabib Nurmagomedov', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -1617,7 +1616,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Mike Tyson', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -1679,7 +1678,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Roberto Carlos', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1712,7 +1711,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Caetano Veloso', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1749,7 +1748,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Tom Jobim', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1782,7 +1781,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Gilberto Gil', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1880,7 +1879,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rita Lee', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -1914,7 +1913,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Gal Costa', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
@@ -1978,7 +1977,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Djavan', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2071,7 +2070,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('David Bowie', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
@@ -2134,7 +2133,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Beyoncé', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -2196,7 +2195,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Madonna', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -2228,7 +2227,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rihanna', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -2381,7 +2380,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Chico Buarque', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2420,7 +2419,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Getúlio Vargas', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2452,7 +2451,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Jair Bolsonaro', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2486,7 +2485,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Luiz Inácio Lula da Silva', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2522,7 +2521,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Fernando Henrique Cardoso', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2558,7 +2557,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Dom Pedro II', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2644,7 +2643,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Napoleão Bonaparte', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
@@ -2725,7 +2724,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Friedrich Nietzsche', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
@@ -2754,7 +2753,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Machado de Assis', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2849,7 +2848,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Fernanda Montenegro', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -2935,7 +2934,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Dilma Rousseff', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -2967,7 +2966,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rainha Elizabeth II', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
@@ -3027,7 +3026,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Ivete Sangalo', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3084,7 +3083,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Regina Casé', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3262,21 +3261,28 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
+            'Does your character speak Portuguese?' => 2,
             'Does your character have fair skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_HEROIC, 2],
 
-            'Is your character an actor?' => 2,
-            'Is your character active in cinema?' => 2,
+            'Is your character from a live-action film or series?' => 2,
             'Is your character primarily a protagonist?' => 2,
             'Is your character known for action movies?' => 2,
             'Is your character aggressive?' => 1.5,
+            'Is your character justice-driven?' => 1.5,
             'Does your character take command in crisis?' => 2,
-            'Does your character have formal military training?' => 1.5,
+            'Does your character have formal military training?' => 2,
+            'Did your character act as a military leader?' => 1.5,
+            'Does your character investigate crimes?' => 2,
+            'Does your character carry a signature weapon?' => 2,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Is your character associated with South America?' => 1.5,
             'Did your character become famous in the 2000s?' => 2,
+            'Did your character have cultural impact?' => 1.5,
         ], $this->signature(
             'Did your character say "Senta o dedo nessa porra"?',
             'Seu personagem disse "Senta o dedo nessa porra"?'
@@ -3289,21 +3295,25 @@ class CharacterAttributeSeeder extends Seeder
             [InitialAttribute::AGE_ADULT, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_FICTICIONAL, 2],
+            [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
+
+            'Does your character speak Portuguese?' => 2,
             'Does your character have dark skin?' => 2,
             [SecondaryAttribute::ALIGNMENT_VILLAINOUS, 2],
 
             'Is your character described as black?' => 2,
-            'Is your character an actor?' => 2,
-            'Is your character active in cinema?' => 2,
+            'Is your character from a live-action film or series?' => 2,
             'Is your character primarily an antagonist?' => 2,
+            'Is your character known for drama movies?' => 2,
             'Is your character morally gray?' => 2,
             'Is your character aggressive?' => 2,
-            'Is your character known for drama movies?' => 2,
-            'Is your character known for award-winning performances?' => 1.5,
+            'Is your character impulsive?' => 1.5,
             'Is your character linked to Brazil?' => 2,
             'Is your character carioca?' => 2,
+            'Is your character associated with South America?' => 1.5,
             'Did your character become famous in the 2000s?' => 2,
+            'Did your character have cultural impact?' => 1.5,
         ], $this->signature(
             'Is your character the villain of City of God?',
             'Seu personagem é o vilão de Cidade de Deus?'
@@ -3314,7 +3324,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Michael Jordan', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
             'Does your character have dark skin?' => 2,
@@ -3398,7 +3408,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rafael Nadal', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3425,7 +3435,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Steven Spielberg', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3454,7 +3464,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Elon Musk', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3484,7 +3494,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Pablo Picasso', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_DECEASED, 2],
 
@@ -3538,7 +3548,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Rivaldo', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3569,7 +3579,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Oscar Schmidt', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -3626,7 +3636,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Jorge Amado', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
@@ -3657,7 +3667,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Marcos Pontes', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3715,7 +3725,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Bob Dylan', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3771,7 +3781,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Joan Baez', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
@@ -3801,7 +3811,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Kate Bush', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3860,7 +3870,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Robert Smith', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3888,7 +3898,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Thom Yorke', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -3944,7 +3954,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Björk', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_FEMALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -4029,7 +4039,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Gerard Way', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::LIVING_ALIVE, 2],
 
@@ -4219,7 +4229,7 @@ class CharacterAttributeSeeder extends Seeder
     {
         $this->seedCharacter('Olavo de Carvalho', [
             [InitialAttribute::AGE_ADULT, 2],
-            [InitialAttribute::AGE_OVER_FORTY, 2],
+            'Is your character over forty?' => 2,
             [InitialAttribute::AGE_ELDERLY, 2],
             [InitialAttribute::GENDER_MALE, 2],
             [InitialAttribute::NATIONALITY_BRAZILIAN, 2],

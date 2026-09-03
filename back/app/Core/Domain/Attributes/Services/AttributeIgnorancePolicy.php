@@ -12,16 +12,11 @@ class AttributeIgnorancePolicy
             InitialAttribute::AGE_ADULT,
             InitialAttribute::AGE_CHILD,
             InitialAttribute::AGE_TEENAGER,
-            InitialAttribute::AGE_OVER_FORTY,
             InitialAttribute::AGE_ELDERLY
         ],
         InitialAttribute::AGE_ADULT->value => [
-            InitialAttribute::AGE_OVER_FORTY,
             InitialAttribute::AGE_ELDERLY
         ],
-        InitialAttribute::AGE_OVER_FORTY->value => [
-            InitialAttribute::AGE_ELDERLY
-        ]
     ];
 
     private const SHOULD_IGNORE_WHEN_POSITIVE = [
@@ -29,7 +24,6 @@ class AttributeIgnorancePolicy
             InitialAttribute::AGE_ADULT,
             InitialAttribute::AGE_CHILD,
             InitialAttribute::AGE_TEENAGER,
-            InitialAttribute::AGE_OVER_FORTY,
             InitialAttribute::AGE_ELDERLY
         ]
     ];

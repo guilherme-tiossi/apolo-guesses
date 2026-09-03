@@ -11,7 +11,6 @@ enum InitialAttribute: string implements Attribute
     case AGE_ADULT = 'age_adult';
     case AGE_CHILD = 'age_child';
     case AGE_TEENAGER = 'age_teenager';
-    case AGE_OVER_FORTY = 'age_over_forty';
     case AGE_ELDERLY = 'age_elderly';
     case GENDER_MALE = 'gender_male';
     case GENDER_FEMALE = 'gender_female';
