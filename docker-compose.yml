@@ -11,6 +11,7 @@ services:
     volumes:
       - ./front:/app
       - /app/node_modules
+      - front-next-cache:/app/.next
 
   back:
     build:
@@ -54,3 +55,4 @@ services:
 
 volumes:
   database-data:
+  front-next-cache:
