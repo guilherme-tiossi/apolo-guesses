@@ -105,7 +105,7 @@ export function AnswerButtons({
               setSelectedIndex(index);
               selectedIndexRef.current = index;
             }}
-            className={`menu-item px-6 py-5 text-3xl uppercase tracking-wide transition-colors md:text-4xl ${
+            className={`menu-item px-3 py-2 text-xl uppercase tracking-wide transition-colors md:text-2xl ${
               disabled ? "cursor-not-allowed opacity-50" : ""
             } ${
               isSelected

@@ -8,7 +8,7 @@ type CrtPanelProps = {
 export function CrtPanel({ children, className = "" }: CrtPanelProps) {
   return (
     <div
-      className={`pixel-border bg-card text-card-foreground p-6 md:p-8 ${className}`}
+      className={`pixel-border bg-card text-card-foreground p-4 md:p-6 ${className}`}
     >
       {children}
     </div>

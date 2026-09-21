@@ -15,6 +15,7 @@ use App\Core\Application\Answers\UseCases\GetAnswers\GetAnswers;
 use App\Core\Application\Answers\UseCases\GetAnswers\InputDto as GetAnswersDto;
 use App\Core\Domain\Attributes\Services\AttributeIgnorancePolicy;
 use App\Models\PlayerAttributeBlacklist;
+use App\Models\PlayerCharacterBlacklist;
 
 class PutAnswer
 {
@@ -54,11 +55,42 @@ class PutAnswer
                 characterId: $characterId) : null;
         }
 
+        $this->applySideEffects($input->playerId, $attribute, $answerScore);
+
+        $characterId = $this->tryToGetCharacter($input->playerId);
+        return $characterId ? new OutputDto(
+            characterId: $characterId) : null;
+    }
+
+    public function revert(int $playerId, int $attributeId): void
+    {
+        $answer = PlayerAnswer::where([
+            'player_id' => $playerId,
+            'attribute_id' => $attributeId,
+        ])->first();
+
+        if (!$answer) {
+            return;
+        }
+
+        $attribute = Attribute::find($attributeId);
+
+        if ($attribute?->internal_name) {
+            $this->revertSideEffects($playerId, $attribute, $answer->answer_score);
+        }
+
+        PlayerCharacterBlacklist::where('player_id', $playerId)->delete();
+
+        $answer->delete();
+    }
+
+    private function applySideEffects(int $playerId, Attribute $attribute, float $answerScore): void
+    {
         $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
             ?? SecondaryAttribute::tryFrom($attribute->internal_name);
 
         if (!$attributeEnum) {
-            return null;
+            return;
         }
 
         $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum, $answerScore);
@@ -66,7 +98,7 @@ class PutAnswer
         foreach ($opposites as $oppositeEnum) {
             $oppositeAttribute = Attribute::where(['internal_name' => $oppositeEnum->value])->first();
             $existingOppositeAnswer = PlayerAnswer::where([
-                'player_id' => $input->playerId,
+                'player_id' => $playerId,
                 'attribute_id' => $oppositeAttribute->id,
             ])->exists();
 
@@ -75,9 +107,9 @@ class PutAnswer
             }
 
             PlayerAnswer::create([
-                'player_id' => $input->playerId,
+                'player_id' => $playerId,
                 'attribute_id' => $oppositeAttribute->id,
-                'answer_score' => self::MAX_ANSWER_SCORE - $answerScore // if is_blonde = 1.75, is_redhead must equal 0.25
+                'answer_score' => self::MAX_ANSWER_SCORE - $answerScore
             ]);
         }
 
@@ -87,14 +119,51 @@ class PutAnswer
             $redundantAttribute = Attribute::where(['internal_name' => $redundantEnum->value])->first();
 
             PlayerAttributeBlacklist::create([
-                'player_id' => $input->playerId,
+                'player_id' => $playerId,
                 'attribute_id' => $redundantAttribute->id,
             ]);
         }
+    }
 
-        $characterId = $this->tryToGetCharacter($input->playerId);
-        return $characterId ? new OutputDto(
-            characterId: $characterId) : null;
+    private function revertSideEffects(int $playerId, Attribute $attribute, float $answerScore): void
+    {
+        $attributeEnum = InitialAttribute::tryFrom($attribute->internal_name)
+            ?? SecondaryAttribute::tryFrom($attribute->internal_name);
+
+        if (!$attributeEnum) {
+            return;
+        }
+
+        $opposites = AttributeOppositionPolicy::oppositesOf($attributeEnum, $answerScore);
+
+        foreach ($opposites as $oppositeEnum) {
+            $oppositeAttribute = Attribute::where(['internal_name' => $oppositeEnum->value])->first();
+
+            if (!$oppositeAttribute) {
+                continue;
+            }
+
+            PlayerAnswer::where([
+                'player_id' => $playerId,
+                'attribute_id' => $oppositeAttribute->id,
+                'answer_score' => self::MAX_ANSWER_SCORE - $answerScore,
+            ])->delete();
+        }
+
+        $redundantAttributes = AttributeIgnorancePolicy::shouldIgnore($attributeEnum, $answerScore);
+
+        foreach ($redundantAttributes as $redundantEnum) {
+            $redundantAttribute = Attribute::where(['internal_name' => $redundantEnum->value])->first();
+
+            if (!$redundantAttribute) {
+                continue;
+            }
+
+            PlayerAttributeBlacklist::where([
+                'player_id' => $playerId,
+                'attribute_id' => $redundantAttribute->id,
+            ])->delete();
+        }
     }
 
     private function tryToGetCharacter(int $playerId): ?string

@@ -5,6 +5,7 @@ import {
   isGameApiError,
   startGame as apiStartGame,
   submitAnswer as apiSubmitAnswer,
+  undoAnswer as apiUndoAnswer,
 } from "@/lib/game-api";
 
 export type GamePhase = "booting" | "playing" | "won" | "lost";
@@ -30,6 +31,8 @@ export function useGame() {
   const [characterName, setCharacterName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [answeredAttributeIds, setAnsweredAttributeIds] = useState<number[]>([]);
+  const canGoBack = answeredAttributeIds.length > 0;
 
   const startGame = useCallback(async () => {
     setPhase("booting");
@@ -38,6 +41,7 @@ export function useGame() {
     setAttributeId(null);
     setCharacterName(null);
     setErrorMessage(null);
+    setAnsweredAttributeIds([]);
     setIsSubmitting(true);
 
     try {
@@ -78,6 +82,7 @@ export function useGame() {
         setPlayerId(data.player);
         setQuestion(data.question ?? null);
         setAttributeId(data.attribute_id ?? null);
+        setAnsweredAttributeIds((ids) => [...ids, answeredAttributeId]);
         setPhase("playing");
       } catch (error) {
         setErrorMessage(
@@ -93,6 +98,34 @@ export function useGame() {
     [attributeId, isSubmitting, playerId],
   );
 
+  const goBack = useCallback(async () => {
+    if (playerId === null || !canGoBack || isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const attributeToUndo = answeredAttributeIds[answeredAttributeIds.length - 1];
+
+    try {
+      const data = await apiUndoAnswer(playerId, attributeToUndo);
+      setPlayerId(data.player);
+      setQuestion(data.question ?? null);
+      setAttributeId(data.attribute_id ?? null);
+      setAnsweredAttributeIds((ids) => ids.slice(0, -1));
+      setPhase("playing");
+    } catch (error) {
+      setErrorMessage(
+        isGameApiError(error)
+          ? error.message
+          : "Falha ao voltar.",
+      );
+      setPhase("lost");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [answeredAttributeIds, canGoBack, isSubmitting, playerId]);
+
   const restart = useCallback(() => {
     void startGame();
   }, [startGame]);
@@ -107,7 +140,9 @@ export function useGame() {
     characterName,
     errorMessage,
     isSubmitting,
+    canGoBack,
     submitAnswer,
+    goBack,
     restart,
   };
 }

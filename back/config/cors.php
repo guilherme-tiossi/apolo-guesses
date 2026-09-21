@@ -2,7 +2,7 @@
 
 return [
 
-    'paths' => ['game', 'up'],
+    'paths' => ['game', 'game/back', 'up'],
 
     'allowed_methods' => ['*'],
 

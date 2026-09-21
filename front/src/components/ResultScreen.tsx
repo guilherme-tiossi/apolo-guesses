@@ -38,21 +38,21 @@ export function ResultScreen({
   return (
     <div className="text-center">
       <p
-        className={`mb-6 text-xl uppercase tracking-widest md:text-2xl ${isWin ? "text-amber" : "text-destructive"}`}
+        className={`mb-4 text-lg uppercase tracking-widest md:text-xl ${isWin ? "text-amber" : "text-destructive"}`}
       >
         {isWin ? "&gt; RESULTADO: SUCESSO" : "&gt; RESULTADO: FALHA"}
       </p>
 
       {isWin ? (
-        <p className="text-glow mb-10 text-3xl leading-relaxed text-phosphor md:text-4xl">
+        <p className="text-glow mb-6 text-2xl leading-relaxed text-phosphor md:text-3xl">
           EU ACHO QUE É:
           <br />
-          <span className="mt-3 inline-block text-4xl text-amber md:text-5xl">
+          <span className="mt-2 inline-block text-3xl text-amber md:text-4xl">
             {characterName}
           </span>
         </p>
       ) : (
-        <p className="mb-10 text-3xl leading-relaxed text-destructive md:text-4xl">
+        <p className="mb-6 text-2xl leading-relaxed text-destructive md:text-3xl">
           {errorMessage ?? "Personagem não encontrado!"}
         </p>
       )}
@@ -61,7 +61,7 @@ export function ResultScreen({
         type="button"
         onClick={handleRestart}
         onMouseEnter={() => setSelected(true)}
-        className={`px-8 py-5 text-2xl uppercase tracking-wide transition-colors md:text-3xl ${
+        className={`px-6 py-3 text-xl uppercase tracking-wide transition-colors md:text-2xl ${
           selected
             ? "pixel-border-accent bg-amber text-black"
             : "pixel-border-accent bg-primary text-primary-foreground"

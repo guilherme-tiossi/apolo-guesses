@@ -15,12 +15,14 @@ export default function HomePage() {
     characterName,
     errorMessage,
     isSubmitting,
+    canGoBack,
     submitAnswer,
+    goBack,
     restart,
   } = useGame();
 
   return (
-    <main className="relative z-10 mx-auto flex min-h-dvh max-w-4xl items-center px-4 py-10">
+    <main className="relative z-10 mx-auto flex min-h-dvh max-w-4xl items-start overflow-y-auto px-4 py-4 md:py-6">
       <CrtPanel className="w-full">
         <GameHeader />
 
@@ -30,7 +32,12 @@ export default function HomePage() {
 
         {phase === "playing" && (
           <>
-            <QuestionView question={question} />
+            <QuestionView
+              question={question}
+              canGoBack={canGoBack}
+              isSubmitting={isSubmitting}
+              onBack={() => void goBack()}
+            />
             {isSubmitting ? (
               <LoadingState message="PROCESSANDO..." />
             ) : (

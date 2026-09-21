@@ -42,6 +42,24 @@ export async function startGame(): Promise<GameResponse> {
   return body.data as GameResponse;
 }
 
+export async function undoAnswer(
+  playerId: number,
+  attributeId: number,
+): Promise<GameResponse> {
+  const response = await fetch(`${API_URL}/game/back`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ player_id: playerId, attribute_id: attributeId }),
+  });
+
+  if (!response.ok) {
+    throw { message: await parseErrorMessage(response) } satisfies GameApiError;
+  }
+
+  const body = await response.json();
+  return body.data as GameResponse;
+}
+
 export async function submitAnswer(
   playerId: number,
   attributeId: number,
