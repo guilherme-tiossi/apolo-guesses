@@ -32,9 +32,24 @@ services:
       DB_DATABASE: apolo
       DB_USERNAME: apolo
       DB_PASSWORD: apolo
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       database:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:7-alpine
+    container_name: apolo-guesses-redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   database:
     image: postgres:16-alpine
