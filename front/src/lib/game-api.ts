@@ -7,24 +7,34 @@ export type GameResponse = {
 
 export type GameApiError = {
   message: string;
+  errorKey?: string;
+  status?: number;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
 
-async function parseErrorMessage(response: Response): Promise<string> {
+async function parseApiError(response: Response): Promise<GameApiError> {
   try {
     const body = await response.json();
-    if (typeof body?.message === "string") {
-      return body.message;
-    }
-    if (typeof body?.error === "string") {
-      return body.error;
-    }
+
+    return {
+      message:
+        typeof body?.message === "string"
+          ? body.message
+          : typeof body?.error === "string"
+            ? body.error
+            : `Erro ${response.status}: falha na comunicação com o terminal.`,
+      errorKey: typeof body?.error_key === "string" ? body.error_key : undefined,
+      status: response.status,
+    };
   } catch {
     // ignore parse errors
   }
 
-  return `Erro ${response.status}: falha na comunicação com o terminal.`;
+  return {
+    message: `Erro ${response.status}: falha na comunicação com o terminal.`,
+    status: response.status,
+  };
 }
 
 export async function startGame(): Promise<GameResponse> {
@@ -35,7 +45,7 @@ export async function startGame(): Promise<GameResponse> {
   });
 
   if (!response.ok) {
-    throw { message: await parseErrorMessage(response) } satisfies GameApiError;
+    throw await parseApiError(response);
   }
 
   const body = await response.json();
@@ -53,7 +63,7 @@ export async function undoAnswer(
   });
 
   if (!response.ok) {
-    throw { message: await parseErrorMessage(response) } satisfies GameApiError;
+    throw await parseApiError(response);
   }
 
   const body = await response.json();
@@ -76,7 +86,7 @@ export async function submitAnswer(
   });
 
   if (!response.ok) {
-    throw { message: await parseErrorMessage(response) } satisfies GameApiError;
+    throw await parseApiError(response);
   }
 
   const body = await response.json();

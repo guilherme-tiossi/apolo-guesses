@@ -35,7 +35,9 @@ class CharacterAttribute extends Model
         if ($attributesIn) {
             $query->whereIn($attributesIn['column'], $attributesIn['values']);
         }
-        $query->where(function($query) use ($positiveAttributes) {
+
+        if ($positiveAttributes) {
+            $query->where(function($query) use ($positiveAttributes) {
                 foreach ($positiveAttributes as $positiveAttributeId) {
                     $query->orWhere(function($sub) use ($positiveAttributeId) {
                         $sub->where('attribute_id', $positiveAttributeId)
@@ -43,18 +45,23 @@ class CharacterAttribute extends Model
                     });
                 }
             });
-        
-        if (!$excludingNegativeAnswers) {
-            $query->whereNotIn('character_id', function ($query2) use ($negativeAttributes) {
-                foreach ($negativeAttributes as $negativeAttributeId) {
-                    $query2->select('character_id')
-                        ->from('character_attributes')
-                        ->orWhere('attribute_id', $negativeAttributeId);
-                }
-            });
         }
 
-        return $query->groupBy('character_id')
-            ->havingRaw('COUNT(DISTINCT attribute_id) = ?', [count($positiveAttributes)]);
+        if (!$excludingNegativeAnswers) {
+            if ($negativeAttributes) {
+                $query->whereNotIn('character_id', function ($query2) use ($negativeAttributes) {
+                    $query2->select('character_id')
+                        ->from('character_attributes')
+                        ->whereIn('attribute_id', $negativeAttributes);
+                });
+            }
+        }
+
+        $query->groupBy('character_id');
+        if ($positiveAttributes) {
+            $query->havingRaw('COUNT(DISTINCT attribute_id) = ?', [count($positiveAttributes)]);
+        }
+
+        return $query;
     }
 }

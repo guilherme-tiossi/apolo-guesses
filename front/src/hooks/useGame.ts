@@ -23,6 +23,21 @@ export const ANSWER_OPTIONS: AnswerOption[] = [
   { label: "NÃO", score: 0 },
 ];
 
+function getUserFacingErrorMessage(
+  error: unknown,
+  fallbackMessage: string,
+): string {
+  if (!isGameApiError(error)) {
+    return fallbackMessage;
+  }
+
+  if (error.status === 500) {
+    return "Não foi possível processar sua solicitação, tente novamente mais tarde";
+  }
+
+  return error.message;
+}
+
 export function useGame() {
   const [phase, setPhase] = useState<GamePhase>("booting");
   const [playerId, setPlayerId] = useState<number | null>(null);
@@ -51,11 +66,7 @@ export function useGame() {
       setAttributeId(data.attribute_id ?? null);
       setPhase("playing");
     } catch (error) {
-      setErrorMessage(
-        isGameApiError(error)
-          ? error.message
-          : "Falha ao iniciar o terminal.",
-      );
+      setErrorMessage(getUserFacingErrorMessage(error, "Falha ao iniciar o terminal."));
       setPhase("lost");
     } finally {
       setIsSubmitting(false);
@@ -67,6 +78,8 @@ export function useGame() {
       if (playerId === null || attributeId === null || isSubmitting) {
         return;
       }
+
+      const answeredAttributeId = attributeId;
 
       setIsSubmitting(true);
 
@@ -86,9 +99,7 @@ export function useGame() {
         setPhase("playing");
       } catch (error) {
         setErrorMessage(
-          isGameApiError(error)
-            ? error.message
-            : "Personagem não encontrado!",
+          getUserFacingErrorMessage(error, "Personagem não encontrado!"),
         );
         setPhase("lost");
       } finally {
@@ -115,11 +126,7 @@ export function useGame() {
       setAnsweredAttributeIds((ids) => ids.slice(0, -1));
       setPhase("playing");
     } catch (error) {
-      setErrorMessage(
-        isGameApiError(error)
-          ? error.message
-          : "Falha ao voltar.",
-      );
+      setErrorMessage(getUserFacingErrorMessage(error, "Falha ao voltar."));
       setPhase("lost");
     } finally {
       setIsSubmitting(false);

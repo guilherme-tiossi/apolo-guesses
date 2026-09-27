@@ -21,7 +21,7 @@ class NaiveBayesCandidateAttributeGetter
             return null;
         }
 
-        $minimumBayes = $highestBayes * 0.75;
+        $minimumBayes = $highestBayes * 0.50;
         foreach ($candidates as $index => $candidate) {
             if ($candidate['bayes_value'] < $minimumBayes) {
                 unset($candidates[$index]);
@@ -100,7 +100,11 @@ class NaiveBayesCandidateAttributeGetter
             // adicionar popularidade nessa conta!!-----------
             foreach ($characterAttributes as $attribute) {
                 if (in_array($attribute['attribute_id'], array_keys($negativeAnswersByAttributeId))) {
-                    $naiveBayes *= max($alpha, $attribute['score'] * -1);
+                    // uma resposta negativa deve reduzir, mas não zerar, o candidato.
+                    // score 2 (forte incompatibilidade) => fator 0.5
+                    // score 1.25 (incompatibilidade parcial) => fator 0.8
+                    $negativeFactor = 1 / max($alpha, (float) $attribute['score']);
+                    $naiveBayes *= $negativeFactor;
                 } else {
                     $naiveBayes *= $attribute['score'];
                 }

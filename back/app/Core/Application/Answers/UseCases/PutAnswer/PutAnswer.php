@@ -177,7 +177,7 @@ class PutAnswer
             answers: $answers
         ));
 
-        if ($characterAttributeData->candidatesCount == 1) {
+        if ($characterAttributeData->candidatesCount == 1 && count($answers) >= 25) {
             $character = Character::find($characterAttributeData->candidatesAttributes[0]->characterId);
             return $character->id;
         }
