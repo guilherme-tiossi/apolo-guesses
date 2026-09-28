@@ -12,5 +12,15 @@ jobs:
     steps:
       - name: Deploy
         run: |
+          set -euo pipefail
           cd /var/www/apolo-guesses
-          git pull origin main
+          git pull --ff-only origin main
+          cd back
+          composer install --no-dev --optimize-autoloader --no-interaction
+          php artisan migrate --force
+          php artisan optimize
+          cd ../front
+          npm ci
+          npm run build
+          sudo nginx -t
+          sudo nginx -s reload
