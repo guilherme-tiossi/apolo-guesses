@@ -42,7 +42,7 @@ class PutAnswerTest extends TestCase
         $result = $useCase->execute(new InputDto(
             playerId: $player->id,
             attributeId: $alive->id,
-            answerScore: 0.5,
+            answerScore: 0.5
         ));
 
         self::assertNull($result);
